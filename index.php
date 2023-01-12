@@ -1,33 +1,31 @@
 <?php
-echo '<body class="bg-gray-200 m-4"></body>';
-echo '<script src="https://cdn.tailwindcss.com"></script>';
 
 require_once "service/DBApi.php";
 include_once "classes/Department.php";
+include_once "classes/views/MainPage.php";
+include_once "classes/views/UpdatePage.php";
 
 $api = new DBApi();
 
-$action = $_REQUEST['action'] ?? 'showMain';
+$action = $_REQUEST['action'] ?? '';
 $departmentId = $_REQUEST['id'] ?? '';
 $name= $_POST['name'] ?? '';
 
-$view = $action;
 $department = new Department($api);
 
-if ($action === 'create') {
-    $department->create($name);
-
-    $html = $department->getTable();
-    $view = 'showMain';
+if ($action === 'showUpdate'){
+    $content = new UpdatePage($api, $departmentId);
 } elseif ($action === 'delete') {
     $department->delete($departmentId);
-    $html = $department->getTable();
-    $view = 'showMain';
-} elseif ($action === 'showUpdate') {
-    $department = $department->getById($departmentId);
+    $content = new MainPage($api);
 } elseif ($action === 'update') {
     $department->update($name, $departmentId);
-    $view = 'showMain';
+    $content = new MainPage($api);
+} elseif ($action === 'create') {
+    $department->create($name);
+    $content = new MainPage($api);
+} else {
+    $content = new MainPage($api);
 }
 
-include 'views/' . $view . '.php';
+echo $content->getContent();
