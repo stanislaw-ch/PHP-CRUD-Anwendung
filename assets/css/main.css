@@ -1,0 +1,188 @@
+body {
+    padding: 10px;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    background-color: #e4e4e4;
+}
+
+form{
+    box-sizing: border-box;
+    margin: 0 auto 20px;
+    width: 300px;
+    padding: 25px 20px 10px  !important;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+form .input-field, form .row:first-of-type{
+    margin-bottom: 0;
+}
+
+.shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.collection {
+    border-bottom: none;
+}
+
+.bg {
+    background-color: white;
+}
+
+.flex .collection, .flex  .collection-item {
+    border-bottom: none;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*margin: 0 5px;*/
+
+    background-color: #ffffff;
+    border-bottom: 1px dashed #ababab;
+}
+
+.flex:last-of-type {
+    border-bottom: none;
+}
+
+.flex li:last-of-type {
+    width: 100%;
+}
+
+.flex .btn {
+    width: 170px;
+    height: 25px;
+    margin-right: 10px;
+
+    font-size: 14px;
+    text-transform: none;
+    color: black;
+    line-height: 20px;
+    box-shadow: none;
+    border: 1px solid #ababab;
+    border-radius: 5px;
+}
+
+.flex .btn:hover {
+    font-weight: bold;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+/*form label {*/
+/*    display: inline-block;*/
+/*    margin-bottom: 10px;*/
+
+/*    font-weight: bold;*/
+/*}*/
+
+/*form label:hover {*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*form input[type="text"] {*/
+/*    display: inline-block;*/
+/*    box-sizing: border-box;*/
+/*    width: 100%;*/
+/*    height: 30px;*/
+/*    margin-top: 5px;*/
+/*    padding: 10px;*/
+
+/*    border: 1px solid #ababab;*/
+/*    border-radius: 5px;*/
+
+/*    font-size: 15px;*/
+/*}*/
+
+/*form input[type="radio"] {*/
+/*    display: inline-block;*/
+/*    margin: 0;*/
+/*}*/
+
+/*form input[type="radio"]+label {*/
+/*    display: inline-block;*/
+/*    margin-left: 5px;*/
+/*}*/
+
+/*form input[type="radio"]:first-of-type +label {*/
+/*    display: inline-block;*/
+/*    margin-right: 15px;*/
+/*}*/
+
+/*form input[type="checkbox"] {*/
+/*    display: inline-block;*/
+/*    margin: 0 5px 0 0;*/
+/*}*/
+
+/*form button {*/
+/*    width: 100%;*/
+/*    height: 35px;*/
+/*    margin-top: 15px;*/
+
+/*    font-weight: bold;*/
+/*    font-size: 15px;*/
+/*    border: 1px solid #ababab;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*form button:hover {*/
+/*    color: #ffffff;*/
+/*    background-color: #ababab;*/
+/*}*/
+
+/*table {*/
+/*    !*width: 100%;*!*/
+/*    padding: 20px;*/
+/*    margin: 0 auto 20px;*/
+/*    !*border-collapse: collapse;*!*/
+/*    background-color: #ffffff;*/
+/*    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;*/
+/*    border: 1px solid #e4e4e4;*/
+/*}*/
+
+/*table tr {*/
+/*    height: 30px;*/
+/*}*/
+
+/*table td {*/
+/*    padding: 2px 10px;*/
+/*    border-bottom: 1px dashed #c9c9c9;*/
+/*}*/
+
+/*table td:nth-last-child(2), table td:nth-last-child(1){*/
+/*    padding: 2px 0;*/
+/*}*/
+
+/*table td:nth-last-child(2){*/
+/*    padding-right: 5px;*/
+/*}*/
+
+/*table td button{*/
+/*    width: 80px;*/
+/*    height: 25px;*/
+/*    background-color: #ffffff;*/
+/*    border: 1px solid #ababab;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*table td button:hover{*/
+/*    color: #ffffff;*/
+/*    background-color: #ababab;*/
+/*}*/
+
+/*table td {*/
+/*    border: 1px solid #e4e4e4;*/
+/*}*/
+
+/*table tr:nth-child(even) {*/
+/*    background-color: #e4e4e4;*/
+/*}*/
