@@ -1,5 +1,4 @@
 <?php
-//echo '<link href="assets/css/main.css" rel="stylesheet">';
 echo '<body class="bg-gray-200 m-4"></body>';
 echo '<script src="https://cdn.tailwindcss.com"></script>';
 

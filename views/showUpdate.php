@@ -8,19 +8,6 @@
     <title>Neuer Mitarbeiter</title>
 </head>
 <body>
-<!--<form action="index.php" method="post">-->
-<!--    <label for="name">Abteilungsname-->
-<!--        <input-->
-<!--            type="text"-->
-<!--            id="name"-->
-<!--            name="name"-->
-<!--            value="--><?php //echo $department['name'] ?><!--"-->
-<!--        >-->
-<!--    </label>-->
-<!--    <input type="hidden" name="id" value="--><?php //echo $department['id'] ?><!--">-->
-<!--    <button type="submit" name="action" value="update">Update</button>-->
-<!--</form>-->
-
 <div class="container mx-auto">
     <form class="box-border w-64 p-6 border-1 mx-auto shadow-lg shadow-black-500/50 flex flex-col bg-white" action="index.php" method="post">
         <label for="name" class="block text-md my-1 font-medium">Abteilungsname</label>
