@@ -4,6 +4,9 @@ require_once "classes/views/Modules.php";
 class DepartmentPage extends Modules{
     public function __construct($api){
         parent::__construct($api);
+        $this->isActiveMain = '';
+        $this->isActiveEmployee = '';
+        $this->isActiveDepartment = $this->activeClass;
     }
 
     public function getTitle(): string
@@ -30,6 +33,55 @@ class DepartmentPage extends Modules{
 
     protected function getMiddle(): string
     {
-        return $this->department->getTable();
+        return $this->showDepartments();
+    }
+
+    private function showDepartments(): string
+    {
+        $data = $this->department->getDepartments();
+
+        $html = '
+            <div class="container mx-auto">
+                <ul class="
+                        container mx-auto shadow-lg
+                        shadow-black-500/50 p-6
+                        w-4/5 md:w-3/6 bg-white
+                    "
+                >';
+
+        foreach ($data as $i=>$item) {
+            $html .= '
+                    <li class="flex mx-auto h-8 items-center">
+                        <span class="w-8">' . ++$i . '</span>
+                        <span class="flex-1">' . $item['name'] .  '</span>
+                        <button
+                            id="showUpdateDep"
+                            class="
+                                w-16 mr-1 border rounded
+                                border-slate-600 bg-white
+                                hover:bg-gray-300 text-sm
+                            "
+                            type="button"
+                            name="action"
+                            data-id="' . $item['id'] . '"
+                        >Update
+                        </button>
+                        <button
+                            id="deleteDep"
+                            class="
+                                w-16 border rounded
+                                border-slate-600 bg-white
+                                hover:bg-gray-300 text-sm
+                            "
+                            type="button"
+                            name="action"
+                            data-id="' . $item['id'] . '"
+                        >Delete
+                        </button>
+                    </li>';
+        }
+
+        $html .= '</ul></div>';
+        return $html;
     }
 }

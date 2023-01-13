@@ -21,11 +21,6 @@ abstract class GlobalClass
         $this->api->update($this->tableName, $id, $values);
     }
 
-    public function updateEmp($id, $upd_fields): void
-    {
-        $this->api->updateEmp($this->tableName, $id, $upd_fields);
-    }
-
     public function delete($id): void
     {
         $this->api->delete($this->tableName, $id);

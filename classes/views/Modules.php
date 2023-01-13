@@ -5,10 +5,21 @@ require_once "classes/Employee.php";
 abstract class Modules {
     protected Department $department;
     protected Employee $employee;
+    protected string $isActiveMain;
+    protected string $isActiveEmployee;
+    protected string $isActiveDepartment;
+    protected string $activeClass;
 
     public function __construct($api){
         $this->department = new Department($api);
         $this->employee = new Employee($api);
+
+        $this->activeClass = 'border-b-2 border-black';
+
+        $this->isActiveMain = $this->activeClass;
+        $this->isActiveEmployee = '';
+        $this->isActiveDepartment = '';
+
     }
 
     public function getContent(): string
@@ -62,26 +73,41 @@ abstract class Modules {
             <nav class="bg-white mb-5">
                 <div class="">
                   <ul class="flex justify-center">
-                     <li class="
-                            py-3.5 px-6 self-center 
-                            hover:bg-gray-300 font-medium 
-                        "
-                     >
-                            <a href="?action">Home</a>
+                     <li>
+                        <a 
+                            href="?action"
+                            class="
+                                py-3.5 px-6 inline-block
+                                hover:bg-gray-300 font-medium 
+                                ' . $this->isActiveMain . '
+                            "
+                        >
+                        Home
+                        </a>
                     </li>
-                    <li class="
-                            py-3.5 px-6 self-center 
-                            hover:bg-gray-300 font-medium 
-                        "
-                    >
-                        <a href="?action=employees">Mitarbeiter</a>
+                    <li>
+                        <a 
+                            href="?action=employees"
+                            class="
+                                py-3.5 px-6 inline-block
+                                hover:bg-gray-300 font-medium 
+                                ' . $this->isActiveEmployee . '
+                            "
+                        >
+                        Mitarbeiter
+                        </a>
                     </li>
-                    <li class="
-                        py-3.5 px-6 self-center 
-                        hover:bg-gray-300 font-medium 
-                        "
-                    >
-                        <a href="?action=departments">Abteilungen</a>
+                    <li>
+                        <a 
+                            href="?action=departments"
+                            class="
+                                py-3.5 px-6 inline-block
+                                hover:bg-gray-300 font-medium 
+                                    ' . $this->isActiveDepartment . '
+                            "
+                        >
+                        Abteilungen
+                        </a>
                     </li>
                   </ul>
                 </div>

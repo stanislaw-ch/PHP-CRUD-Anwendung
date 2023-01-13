@@ -14,7 +14,7 @@ $action = $_REQUEST['action'] ?? '';
 $id = $_REQUEST['id'] ?? '';
 
 if (count($_POST) > 1) array_pop($_POST);
-$values =$_POST;
+$values = $_POST;
 
 $department = new Department($api);
 $employee = new Employee($api);
