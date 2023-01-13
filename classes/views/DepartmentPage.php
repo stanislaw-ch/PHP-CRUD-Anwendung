@@ -1,17 +1,14 @@
 <?php
 require_once "classes/views/Modules.php";
 
-class UpdatePage extends Modules{
-    private string $id;
-
-    public function __construct($api, $id){
+class DepartmentPage extends Modules{
+    public function __construct($api){
         parent::__construct($api);
-        $this->id = $id;
     }
 
     public function getTitle(): string
     {
-        return "CRUD-Anwendung update";
+        return "CRUD-Anwendung";
     }
 
     protected function getTop(): string
@@ -23,11 +20,8 @@ class UpdatePage extends Modules{
                     <input
                             id="name" type="text"
                             name="name"
-                            class="border rounded border-slate-400 px-2 h-8"
-                            value="'. $this->department->getById($this->id)['name'] . '"
-                    >
-                    <input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">
-                    <button class="border w-20 h-7 rounded border-slate-600 bg-gray-200 mt-4 self-end hover:bg-gray-300" type="submit" name="action" value="update">Update
+                            class="border rounded border-slate-400 px-2 h-8">
+                    <button class="border w-20 h-7 rounded border-slate-600 bg-gray-200 mt-4 self-end hover:bg-gray-300" type="submit" name="action" value="createDep">Create
                     </button>
                 </form>
             </div>

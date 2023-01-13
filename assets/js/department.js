@@ -1,12 +1,22 @@
 function addEventToButtons() {
-    const updateButtons = document.querySelectorAll('#showUpdate');
-    const deleteButtons = document.querySelectorAll('#delete');
+    const updateButtonsDep = document.querySelectorAll('#showUpdateDep');
+    const deleteButtonsDep = document.querySelectorAll('#deleteDep');
+    const updateButtonsEmp = document.querySelectorAll('#showUpdateEmp');
+    const deleteButtonsEmp = document.querySelectorAll('#deleteEmp');
 
-    updateButtons.forEach((button) => {
+    updateButtonsDep.forEach((button) => {
         button.addEventListener('click', actionHandler);
     })
 
-    deleteButtons.forEach((button) => {
+    deleteButtonsDep.forEach((button) => {
+        button.addEventListener('click', actionHandler);
+    })
+
+    updateButtonsEmp.forEach((button) => {
+        button.addEventListener('click', actionHandler);
+    })
+
+    deleteButtonsEmp.forEach((button) => {
         button.addEventListener('click', actionHandler);
     })
 }

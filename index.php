@@ -1,29 +1,61 @@
 <?php
 
 require_once "service/DBApi.php";
-include_once "classes/Department.php";
-include_once "classes/views/MainPage.php";
-include_once "classes/views/UpdatePage.php";
+require_once "classes/Department.php";
+require_once "classes/views/MainPage.php";
+require_once "classes/views/DepartmentUpdatePage.php";
+require_once "classes/views/EmployeeUpdatePage.php";
+require_once "classes/views/EmployeePage.php";
+require_once "classes/views/DepartmentPage.php";
 
 $api = new DBApi();
 
 $action = $_REQUEST['action'] ?? '';
-$departmentId = $_REQUEST['id'] ?? '';
+$id = $_REQUEST['id'] ?? '';
 $name= $_POST['name'] ?? '';
 
-$department = new Department($api);
+$employeeValues = [];
+$employeeValues[] = $_POST['firstname'] ?? '';
+$employeeValues[] = $_POST['lastname'] ?? '';
+$employeeValues[] = $_POST['salary'] ?? '';
+$employeeValues[] = $_POST['gender'] ?? '';
+$employeeValues[] = $_POST['department_id'] ?? '';
 
-if ($action === 'showUpdate'){
-    $content = new UpdatePage($api, $departmentId);
-} elseif ($action === 'delete') {
-    $department->delete($departmentId);
-    $content = new MainPage($api);
-} elseif ($action === 'update') {
-    $department->update($name, $departmentId);
-    $content = new MainPage($api);
-} elseif ($action === 'create') {
+//$firstname= $_POST['firstname'] ?? '';
+//$lastname= $_POST['lastname'] ?? '';
+//$gender= $_POST['gender'] ?? '';
+//$salary= $_POST['salary'] ?? '';
+//echo $department= $_POST['department_id'] ?? '';
+
+$department = new Department($api);
+$employee = new Employee($api);
+
+if ($action === 'showUpdateDep'){
+    $content = new DepartmentUpdatePage($api, $id);
+} elseif ($action === 'deleteDep') {
+    $department->delete($id);
+    $content = new DepartmentPage($api);
+} elseif ($action === 'updateDep') {
+    $department->update($name, $id);
+    $content = new DepartmentPage($api);
+} elseif ($action === 'createDep') {
     $department->create($name);
-    $content = new MainPage($api);
+    $content = new DepartmentPage($api);
+} elseif ($action === 'departments') {
+    $content = new DepartmentPage($api);
+} elseif ($action === 'showUpdateEmp'){
+    $content = new EmployeeUpdatePage($api, $id);
+} elseif ($action === 'deleteEmp') {
+    $employee->delete($id);
+    $content = new EmployeePage($api);
+} elseif ($action === 'updateEmp') {
+    $employee->updateEmp($employeeValues, $id);
+    $content = new EmployeePage($api);
+} elseif ($action === 'createEmp') {
+    $employee->createEmp($employeeValues);
+    $content = new EmployeePage($api);
+} elseif ($action === 'employees') {
+    $content = new EmployeePage($api);
 } else {
     $content = new MainPage($api);
 }

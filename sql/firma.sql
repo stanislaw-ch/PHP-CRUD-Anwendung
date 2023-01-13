@@ -1,48 +1,36 @@
 drop database if exists firma;
+create database firma;
 use firma;
-# create table employee (
-#                           id int primary key auto_increment,
-#                           firstname varchar(45) not null,
-#                           surname varchar(45) not null,
-#                           salary  double not null,
-#                           isIntern bool not null
-# );
-#
-#
-# insert into employee(id, firstname, surname, salary, isIntern)
-# values (null, 'Peter', 'Panne', 3500, true);
-#
-# insert into employee(id, firstname, surname, salary, isIntern)
-# values (null, 'Alex', 'Panne', 5500, false);
-#
-# update employee set firstname = 'Patrizia' where id = 1;
-#
-# DELETE FROM employee WHERE id = 2;
-#
-# select * from employee;
-# describe employee;
-
 create table departments (
- id int primary key auto_increment,
- name varchar(45) not null
+                             id int primary key auto_increment,
+                             name varchar(45) not null
+
 );
 
 insert into departments(id, name)
-values (null, 'Berlin-Brandenburg');
+values (null, 'Hamburg');
+
+insert into departments(id, name)
+values (null, 'Berlin');
 
 select * from departments;
 
-# create table employee (
-#                           id int primary key auto_increment,
-#                           firstname varchar(45) not null,
-#                           surname varchar(45) not null,
-#                           salary  double not null,
-#                           isIntern bool not null
-# );
-#
-#
-# insert into employee(id, firstname, surname, salary, isIntern)
-# values (null, 'Peter', 'Panne', 3500, true);
-#
-# insert into employee(id, firstname, surname, salary, isIntern)
-# values (null, 'Alex', 'Panne', 5500, false);
+create table employees (
+                           id int primary key auto_increment,
+                           firstname varchar(45) not null,
+                           lastname varchar(45) not null,
+                           salary  double not null,
+                           gender varchar(10) not null,
+                           department_id int
+);
+
+
+insert into employees(id, firstname, lastname, salary, gender, department_id)
+values (null, 'Peter', 'Panne', 3500, 'male', 1);
+
+insert into employees(id, firstname, lastname, salary, gender, department_id)
+values (null, 'Alina', 'Panne', 5500, 'female',2);
+
+select * from employees;
+
+ALTER TABLE employees ADD FOREIGN KEY(department_id) REFERENCES departments(id);

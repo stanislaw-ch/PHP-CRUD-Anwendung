@@ -1,9 +1,9 @@
 <?php
 require_once "GlobalClass.php";
 
-class Department extends GlobalClass {
+class Employee extends GlobalClass {
     public function __construct($api){
-        parent::__construct("departments", $api);
+        parent::__construct("employees", $api);
     }
 
     /**
@@ -11,24 +11,29 @@ class Department extends GlobalClass {
      */
     public function getTable(): string
     {
-        $data = $this->getAllDepartments();
+        $data = $this->getAllEmployees();
 
         $html = '
-            <div class="container mx-auto">
+            <div class="container mx-auto w-auto mt-5">
                 <ul class="
                         container mx-auto shadow-lg
                         shadow-black-500/50 p-6
-                        w-4/5 md:w-3/6 bg-white
+                        w-6/7 md:w-4/5 bg-white
                     "
                 >';
 
         foreach ($data as $i=>$item) {
+//            print_r($item);
             $html .= '
-                    <li class="flex mx-auto h-8 items-center">
+                    <li class="flex mx-auto h-8 items-center justify-between">
                         <span class="w-8">' . ++$i . '</span>
+                        <span class="flex-1">' . $item['firstname'] .  '</span>
+                        <span class="flex-1">' . $item['lastname'] .  '</span>
+                        <span class="flex-1">' . $item['gender'] .  '</span>
+                        <span class="flex-1">' . $item['salary'] .  '</span>
                         <span class="flex-1">' . $item['name'] .  '</span>
                         <button
-                            id="showUpdateDep"
+                            id="showUpdateEmp"
                             class="
                                 w-16 mr-1 border rounded
                                 border-slate-600 bg-white
@@ -40,7 +45,7 @@ class Department extends GlobalClass {
                         >Update
                         </button>
                         <button
-                            id="deleteDep"
+                            id="deleteEmp"
                             class="
                                 w-16 border rounded
                                 border-slate-600 bg-white
@@ -60,21 +65,25 @@ class Department extends GlobalClass {
 
     public function getTablePreView(): string
     {
-        $data = $this->getAllDepartments();
+        $data = $this->getAllEmployees();
 
         $html = '
-            <div class="container mx-auto w-auto ">
+            <div class="container mx-auto w-auto mt-5">
                 <ul class="
                         container mx-auto shadow-lg
                         shadow-black-500/50 p-6
-                        w-3/5 md:w-2/6 bg-white
+                        w-6/7 md:w-3/5 bg-white
                     "
                 >';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex mx-auto h-8 items-center">
+                    <li class="flex mx-auto h-8 items-center justify-between">
                         <span class="w-8">' . ++$i . '</span>
+                        <span class="flex-1">' . $item['firstname'] .  '</span>
+                        <span class="flex-1">' . $item['lastname'] .  '</span>
+                        <span class="flex-1">' . $item['salary'] .  '</span>
+                        <span class="flex-1">' . $item['gender'] .  '</span>
                         <span class="flex-1">' . $item['name'] .  '</span>
                     </li>';
         }
