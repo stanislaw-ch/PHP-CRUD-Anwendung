@@ -11,12 +11,14 @@ class EmployeePage extends Modules{
 
     public function getTitle(): string
     {
-        return "CRUD-Anwendung";
+        return "CRUD-Anwendung Employee page";
     }
 
     protected function getTop(): string
     {
-        return '
+        $departments = $this->department->getDepartments();
+
+        $html =  '
             <div class="container mx-auto mb-5">
                 <form class="box-border w-64 p-6 border-1 mx-auto shadow-lg shadow-black-500/50 flex flex-col bg-white" action="index.php" method="post">
                     <label for="firstname" class="block text-md my-1 font-medium">Vorname</label>
@@ -40,15 +42,24 @@ class EmployeePage extends Modules{
                             name="salary"
                             class="border rounded border-slate-400 px-2 h-8">
                     <label for="department" class="block text-md my-1 font-medium">Abteilung</label>
-                    <input
-                            id="department" type="text"
-                            name="department_id"
-                            class="border rounded border-slate-400 px-2 h-8">
+                    <select 
+                            name="department_id" 
+                            class="border rounded border-slate-400 px-2 h-8"
+                    >
+        ';
+
+        foreach ($departments as $department) {
+            $html .= '<option value="'. $department['id'] . '">'. $department['name'] . '</option>';
+        }
+
+        $html .=    '</select>
                     <button class="border w-20 h-7 rounded border-slate-600 bg-gray-200 mt-4 self-end hover:bg-gray-300" type="submit" name="action" value="createEmp">Create
                     </button>
                 </form>
             </div>
         ';
+
+        return $html;
     }
 
     protected function getMiddle(): string
@@ -58,7 +69,7 @@ class EmployeePage extends Modules{
 
     public function showEmployees(): string
     {
-        $data = $this->employee->getAllEmployees();
+        $employees = $this->employee->getAllEmployees();
 
         $html = '
             <div class="container mx-auto w-auto mt-5">
@@ -69,15 +80,15 @@ class EmployeePage extends Modules{
                     "
                 >';
 
-        foreach ($data as $i=>$item) {
+        foreach ($employees as $i=>$employee) {
             $html .= '
                     <li class="flex mx-auto h-8 items-center justify-between">
                         <span class="w-8">' . ++$i . '</span>
-                        <span class="flex-1">' . $item['firstname'] .  '</span>
-                        <span class="flex-1">' . $item['lastname'] .  '</span>
-                        <span class="flex-1">' . $item['gender'] .  '</span>
-                        <span class="flex-1">' . $item['salary'] .  '</span>
-                        <span class="flex-1">' . $item['name'] .  '</span>
+                        <span class="flex-1">' . $employee['firstname'] .  '</span>
+                        <span class="flex-1">' . $employee['lastname'] .  '</span>
+                        <span class="flex-1">' . $employee['gender'] .  '</span>
+                        <span class="flex-1">' . $employee['salary'] .  '</span>
+                        <span class="flex-1">' . $employee['name'] .  '</span>
                         <button
                             id="showUpdateEmp"
                             class="
@@ -87,7 +98,7 @@ class EmployeePage extends Modules{
                             "
                             type="button"
                             name="action"
-                            data-id="' . $item['id'] . '"
+                            data-id="' . $employee['id'] . '"
                         >Update
                         </button>
                         <button
@@ -99,7 +110,7 @@ class EmployeePage extends Modules{
                             "
                             type="button"
                             name="action"
-                            data-id="' . $item['id'] . '"
+                            data-id="' . $employee['id'] . '"
                         >Delete
                         </button>
                     </li>';

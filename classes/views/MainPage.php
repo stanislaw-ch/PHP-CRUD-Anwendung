@@ -8,7 +8,7 @@ class MainPage extends Modules{
 
     public function getTitle(): string
     {
-        return "CRUD-Anwendung";
+        return "CRUD-Anwendung Main page";
     }
 
     protected function getTop(){}

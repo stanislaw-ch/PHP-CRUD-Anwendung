@@ -11,7 +11,7 @@ class DepartmentUpdatePage extends Modules{
 
     public function getTitle(): string
     {
-        return "CRUD-Anwendung update";
+        return "CRUD-Anwendung Department update page";
     }
 
     protected function getTop(): string

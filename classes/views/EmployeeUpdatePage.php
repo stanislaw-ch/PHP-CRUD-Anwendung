@@ -11,7 +11,7 @@ class EmployeeUpdatePage extends Modules{
 
     public function getTitle(): string
     {
-        return "CRUD-Anwendung update";
+        return "CRUD-Anwendung Employee update page";
     }
 
     protected function getTop(): string
