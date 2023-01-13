@@ -3,8 +3,6 @@
 require_once "service/DBApi.php";
 require_once "classes/Department.php";
 require_once "classes/views/MainPage.php";
-require_once "classes/views/DepartmentUpdatePage.php";
-require_once "classes/views/EmployeeUpdatePage.php";
 require_once "classes/views/EmployeePage.php";
 require_once "classes/views/DepartmentPage.php";
 
@@ -20,7 +18,7 @@ $department = new Department($api);
 $employee = new Employee($api);
 
 if ($action === 'showUpdateDep'){
-    $content = new DepartmentUpdatePage($api, $id);
+    $content = new DepartmentPage($api, $id);
 } elseif ($action === 'deleteDep') {
     $department->delete($id);
     $content = new DepartmentPage($api);
@@ -33,7 +31,7 @@ if ($action === 'showUpdateDep'){
 } elseif ($action === 'departments') {
     $content = new DepartmentPage($api);
 } elseif ($action === 'showUpdateEmp'){
-    $content = new EmployeeUpdatePage($api, $id);
+    $content = new EmployeePage($api, $id);
 } elseif ($action === 'deleteEmp') {
     $employee->delete($id);
     $content = new EmployeePage($api);

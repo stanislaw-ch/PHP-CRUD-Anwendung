@@ -15,7 +15,7 @@ class DBApi
 
     public function getAllWithPK($table): array
     {
-        $query = "SELECT $table.id, firstname, lastname, salary, gender, name FROM $table JOIN departments d on d.id = $table.department_id";
+        $query = "SELECT $table.id, firstname, lastname, salary, gender, name FROM $table JOIN departments d on d.id = $table.department_id GROUP BY $table.id";
         $result = DBConfig::connect()->query($query);
 
         for ($results = array (); $row = $result->fetch_assoc(); $results[] = $row);

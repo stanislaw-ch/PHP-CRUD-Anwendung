@@ -25,20 +25,20 @@ class MainPage extends Modules{
         $data = $this->department->getDepartments();
 
         $html = '
-            <div class="container mx-auto w-auto">
-                <h2 class="text-center font-bold bg-white mx-auto w-3/5 md:w-2/6 pt-5">Abteilungen</h2>
-                <ul class="
-                        container mx-auto shadow-lg
-                        shadow-black-500/50 p-6
-                        w-3/5 md:w-2/6 bg-white
-                    "
-                >';
+            <div class="w-80 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+                <h2 class="mb-5 text-center font-bold">Abteilungen</h2>
+                <ul class="">
+                    <li class="flex h-7 border-b border-black">
+                        <span class="w-8 text-center border-r border-black">Nr.</span>
+                        <span class="flex-1 text-center">Abteilung</span>
+                    </li>
+        ';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex mx-auto h-8 items-center">
-                        <span class="w-8">' . ++$i . '</span>
-                        <span class="flex-1">' . $item['name'] .  '</span>
+                    <li class="flex h-7 border-b border-gray-400 border-dashed">
+                        <span class="w-8 text-center border-r border-black">' . ++$i . '</span>
+                        <span class="pl-2">' . $item['name'] .  '</span>
                     </li>';
         }
 
@@ -51,24 +51,28 @@ class MainPage extends Modules{
         $data = $this->employee->getEmployees();
 
         $html = '
-            <div class="container mx-auto w-auto mt-5">
-                <h2 class="text-center font-bold bg-white mx-auto w-6/7 md:w-3/5 pt-5">Mitarbeiter</h2>
-                <ul class="
-                        container mx-auto shadow-lg
-                        shadow-black-500/50 p-6
-                        w-6/7 md:w-3/5 bg-white
-                    "
-                >';
+            <div class="w-3/5 mx-auto p-7 bg-white shadow-lg shadow-black-500/50">
+                <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
+                <ul class="">
+                    <li class="flex h-7 border-b border-black">
+                        <span class="w-8 text-center border-r border-black ">Nr.</span>
+                        <span class="w-32 text-center border-r border-black">Vorname</span>
+                        <span class="w-32 text-center border-r border-black">Nachname</span>
+                        <span class="w-32 text-center border-r border-black">Geschlecht</span>
+                        <span class="w-32 text-center border-r border-black">Gehalt</span>
+                        <span class="w-32 text-center">Abteilung</span>
+                    </li>
+        ';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex mx-auto h-8 items-center justify-between">
-                        <span class="w-8">' . ++$i . '</span>
-                        <span class="flex-1">' . $item['firstname'] .  '</span>
-                        <span class="flex-1">' . $item['lastname'] .  '</span>
-                        <span class="flex-1">' . $item['salary'] .  '</span>
-                        <span class="flex-1">' . $item['gender'] .  '</span>
-                        <span class="flex-1">' . $item['name'] .  '</span>
+                    <li class="flex h-7 border-b border-gray-400 border-dashed">
+                        <span class="w-8 min-w-8 text-center border-r border-black">' . ++$i . '</span>
+                        <span class="w-32 pl-2 border-r border-black">' . $item['firstname'] .  '</span>
+                        <span class="w-32 pl-2 border-r border-black">' . $item['lastname'] .  '</span>
+                        <span class="w-32 pl-2 border-r border-black">' . $item['salary'] .  '</span>
+                        <span class="w-32 pl-2 border-r border-black">' . $item['gender'] .  '</span>
+                        <span class="w-32 pl-2">' . $item['name'] .  '</span>
                     </li>';
         }
 
