@@ -19,8 +19,8 @@ create table employees (
                            id int primary key auto_increment,
                            firstname varchar(45) not null,
                            lastname varchar(45) not null,
-                           salary  double not null,
                            gender varchar(10) not null,
+                           salary  double not null,
                            department_id int
 );
 

@@ -23,17 +23,22 @@ class DBApi
         return $results;
     }
 
-    public function create($table, $data): void
+    public function create($table, $values): void
     {
+        $query = "INSERT INTO $table (";
 
-        $query = "INSERT INTO $table(id, name) values (null, '$data')";
-        DBConfig::connect()->query($query);
-    }
+        foreach ($values as $field => $value) $query .= $field.", ";
+        $query = substr($query, 0, -2);
+        $query .= ") VALUES (";
 
-    public function createEmp($table, $data): void
-    {
+        foreach ($values as $value) {
+            $query .= is_numeric($value)
+            ? addslashes($value) . ","
+            : "'" . addslashes($value) . "',";
+        };
+        $query = substr($query, 0, -1);
+        $query .= ")";
 
-        $query = "INSERT INTO $table(id, firstname, lastname, salary, gender, department_id) values (null, $data)";
         DBConfig::connect()->query($query);
     }
 
@@ -43,22 +48,17 @@ class DBApi
         DBConfig::connect()->query($query);
     }
 
-    public function update($table, $name, $id): void
+    public function update($table, $values, $id): void
     {
-        $query = "UPDATE $table SET name='$name' WHERE id = $id";
-        DBConfig::connect()->query($query);
-    }
+        $query = "UPDATE $table SET ";
+        foreach ($values as $field => $value) {
+            $query .= $field === 'id'
+                ?  ""
+                : "$field = '" . addslashes($value) . "', ";
+        };
+        $query = substr($query, 0, -2);
+        $query .= " WHERE id = $id";
 
-    public function updateEmp($table, $data, $id): void
-    {
-        $query = "UPDATE $table 
-                SET 
-                    firstname='$data[0]', 
-                    lastname='$data[1]', 
-                    salary='$data[2]', 
-                    gender='$data[3]', 
-                    department_id='$data[4]'
-                WHERE id = $id";
         DBConfig::connect()->query($query);
     }
 

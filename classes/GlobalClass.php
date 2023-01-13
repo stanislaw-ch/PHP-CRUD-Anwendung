@@ -11,38 +11,14 @@ abstract class GlobalClass
         $this->tableName = $tableName;
     }
 
-    public function create(string $newValues): void
+    public function create(array $newValues): void
     {
-//        $sql_condition = '';
-//        foreach($newValues as $value) {
-//            $sql_condition .= is_numeric($value)
-//                ? $value . ", "
-//                : "'" . $value . "'" . ", ";
-//        }
-//
-//        $sql_condition = rtrim($sql_condition, ', ');
-//
-//        echo $sql_condition;
         $this->api->create($this->tableName, $newValues);
     }
 
-    public function createEmp(array $newValues): void
+    public function update($id, $values): void
     {
-        $sql_condition = '';
-        foreach($newValues as $value) {
-            $sql_condition .= is_numeric($value)
-                ? $value . ", "
-                : "'" . $value . "'" . ", ";
-        }
-
-        $sql_condition = rtrim($sql_condition, ', ');
-
-        $this->api->createEmp($this->tableName, $sql_condition);
-    }
-
-    public function update($id, $upd_fields): void
-    {
-        $this->api->update($this->tableName, $id, $upd_fields);
+        $this->api->update($this->tableName, $id, $values);
     }
 
     public function updateEmp($id, $upd_fields): void

@@ -12,20 +12,9 @@ $api = new DBApi();
 
 $action = $_REQUEST['action'] ?? '';
 $id = $_REQUEST['id'] ?? '';
-$name= $_POST['name'] ?? '';
 
-$employeeValues = [];
-$employeeValues[] = $_POST['firstname'] ?? '';
-$employeeValues[] = $_POST['lastname'] ?? '';
-$employeeValues[] = $_POST['salary'] ?? '';
-$employeeValues[] = $_POST['gender'] ?? '';
-$employeeValues[] = $_POST['department_id'] ?? '';
-
-//$firstname= $_POST['firstname'] ?? '';
-//$lastname= $_POST['lastname'] ?? '';
-//$gender= $_POST['gender'] ?? '';
-//$salary= $_POST['salary'] ?? '';
-//echo $department= $_POST['department_id'] ?? '';
+if (count($_POST) > 1) array_pop($_POST);
+$values =$_POST;
 
 $department = new Department($api);
 $employee = new Employee($api);
@@ -36,10 +25,10 @@ if ($action === 'showUpdateDep'){
     $department->delete($id);
     $content = new DepartmentPage($api);
 } elseif ($action === 'updateDep') {
-    $department->update($name, $id);
+    $department->update($values, $id);
     $content = new DepartmentPage($api);
 } elseif ($action === 'createDep') {
-    $department->create($name);
+    $department->create($values);
     $content = new DepartmentPage($api);
 } elseif ($action === 'departments') {
     $content = new DepartmentPage($api);
@@ -49,10 +38,10 @@ if ($action === 'showUpdateDep'){
     $employee->delete($id);
     $content = new EmployeePage($api);
 } elseif ($action === 'updateEmp') {
-    $employee->updateEmp($employeeValues, $id);
+    $employee->update($values, $id);
     $content = new EmployeePage($api);
 } elseif ($action === 'createEmp') {
-    $employee->createEmp($employeeValues);
+    $employee->create($values);
     $content = new EmployeePage($api);
 } elseif ($action === 'employees') {
     $content = new EmployeePage($api);
@@ -61,3 +50,4 @@ if ($action === 'showUpdateDep'){
 }
 
 echo $content->getContent();
+
