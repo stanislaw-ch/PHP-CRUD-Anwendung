@@ -8,10 +8,10 @@ create table departments (
 );
 
 insert into departments(id, name)
-values (null, 'Hamburg');
-
-insert into departments(id, name)
-values (null, 'Berlin');
+values (null, 'Produktion'),
+       (null, 'Personalwesen'),
+       (null, 'Marketing'),
+       (null, 'Kundendienst');
 
 select * from departments;
 
@@ -26,10 +26,14 @@ create table employees (
 
 
 insert into employees(id, firstname, lastname, salary, gender, department_id)
-values (null, 'Peter', 'Panne', 3500, 'male', 1);
-
-insert into employees(id, firstname, lastname, salary, gender, department_id)
-values (null, 'Alina', 'Panne', 5500, 'female',2);
+values (null, 'Peter', 'Panne', 3500, 'männlich', 1),
+       (null, 'Freya', 'Riding', 2450.3, 'weiblich', 2),
+       (null, 'Michael', 'Lawson', 3550.00, 'männlich', 3),
+       (null, 'Lindsay', 'Ferguson', 4700.00, 'weiblich', 4),
+       (null, 'Tobias', 'Funke', 2350.00, 'männlich', 2),
+       (null, 'Byron', 'Fields', 5000.00, 'männlich', 1),
+       (null, 'George', 'Edwards', 9050.00, 'männlich', 4),
+       (null, 'Rachel', 'Howell', 2750.00, 'weiblich', 3);
 
 select * from employees;
 
