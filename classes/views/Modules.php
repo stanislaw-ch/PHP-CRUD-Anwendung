@@ -46,7 +46,7 @@ abstract class Modules {
                 <title>'. $this->getTitle() .'</title>
                 <script src="https://cdn.tailwindcss.com"></script>
             </head>
-            <body class="bg-gray-200">
+            <body class="bg-gray-200 flex flex-col min-h-screen">
         ';
     }
 
@@ -57,8 +57,9 @@ abstract class Modules {
     protected function getFooter(): string
     {
         return '
-            <footer>
-            
+            <footer class="flex flex-col bg-white h-24 mt-auto justify-center">
+                <h2 class="self-center">CRUD-Anwendung</h2>
+                <a href="#" class="self-center hover:underline hover:underline-offset-4">Github</a>
             </footer>
             <script src="/assets/js/department.js"></script>
             </body>
