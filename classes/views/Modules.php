@@ -19,7 +19,6 @@ abstract class Modules {
         $this->isActiveMain = $this->activeClass;
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = '';
-
     }
 
     public function getContent(): string
@@ -114,6 +113,17 @@ abstract class Modules {
                 </div>
           </nav>
         ';
+    }
+
+    protected function isError($errors, $errorName): string
+    {
+        $html = '';
+
+        if (isset($errors[$errorName])){
+            $html .= '<span class="text-red-600 mt-1">'. $errors[$errorName] .'</span>';
+        }
+
+        return $html;
     }
 }
 
