@@ -60,7 +60,7 @@ abstract class Modules {
                 <h2 class="self-center">CRUD-Anwendung</h2>
                 <a href="https://github.com/stanislaw-ch/PHP-CRUD-Anwendung" target=”_blank” class="self-center hover:underline hover:underline-offset-4">GitHub</a>
             </footer>
-            <script src="/assets/js/department.js"></script>
+            <script src="/assets/js/main.js"></script>
             </body>
             </html>
         ';
