@@ -13,9 +13,25 @@ class DBApi
         return $results;
     }
 
-    public function getAllWithPK($table): array
+    public function getEmployeesWithPK($table): array
     {
-        $query = "SELECT $table.id, firstname, lastname, salary, gender, name FROM $table LEFT JOIN departments d on d.id = $table.department_id GROUP BY $table.id";
+        $query = "SELECT $table.id, firstname, lastname, salary, gender, name 
+                    FROM $table 
+                    LEFT JOIN departments d on d.id = $table.department_id 
+                    LEFT JOIN genders g on g.id = $table.gender_id 
+                    GROUP BY $table.id";
+        $result = DBConfig::connect()->query($query);
+
+        for ($results = array (); $row = $result->fetch_assoc(); $results[] = $row);
+
+        return $results;
+    }
+
+    public function getGendersWithPK($table): array
+    {
+        $query = "SELECT $table.id, gender FROM $table 
+                    LEFT JOIN employees e on e.gender_id = $table.id 
+                    GROUP BY $table.id";
         $result = DBConfig::connect()->query($query);
 
         for ($results = array (); $row = $result->fetch_assoc(); $results[] = $row);
@@ -65,6 +81,16 @@ class DBApi
     public function getById($table, $id): bool|array|null
     {
         $query = "SELECT * FROM $table WHERE id = $id";
+
+        return DBConfig::connect()->query($query)->fetch_assoc();
+    }
+
+    public function getEmployeeById($table, $id): bool|array|null
+    {
+        $query = "SELECT $table.id, firstname, lastname, salary, gender, department_id FROM $table 
+                    JOIN genders g on g.id = $table.gender_id                  
+                    AND $table.id = $id
+                    GROUP BY $table.id";
 
         return DBConfig::connect()->query($query)->fetch_assoc();
     }

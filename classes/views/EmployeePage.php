@@ -15,6 +15,13 @@ class EmployeePage extends Modules{
         $this->isActiveMain = '';
         $this->isActiveEmployee = $this->activeClass;
         $this->isActiveDepartment = '';
+
+//        echo '<br>';
+//        print_r($this->id);
+//        echo '<br>';
+//        print_r($this->values);
+//        echo '<br>';
+//        print_r($this->employee->getEmployeeById($this->id));
     }
 
     public function getTitle(): string
@@ -47,7 +54,7 @@ class EmployeePage extends Modules{
                             placeholder="Vorname"';
 
         if (strlen($this->id) !== 0 && count($this->values) === 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['firstname'] . '">';
+            $html .= 'value="'. $this->employee->getEmployeeById($this->id)['firstname'] . '">';
         } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
             $html .= 'value="'. $this->values['firstname'] . '">';
         } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
@@ -66,7 +73,7 @@ class EmployeePage extends Modules{
                             placeholder="Nachname"';
 
         if (strlen($this->id) !== 0 && count($this->values) === 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['lastname'] . '">';
+            $html .= 'value="'. $this->employee->getEmployeeById($this->id)['lastname'] . '">';
         } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
             $html .= 'value="'. $this->values['lastname'] . '">';
         } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
@@ -76,21 +83,27 @@ class EmployeePage extends Modules{
         }
         $html .= $this->isError($this->errors,'lastname');
 
-        $html .='<label for="gender" class="block text-md mt-5 font-medium">Geschlecht</label>
-                    <input
-                            id="gender" type="text"
-                            name="gender"
-                            class="border-b-2 border-black px-1 h-8 focus:outline-none"
-                            placeholder="Geschlecht"';
+//        $html .= $this->getGenderRadio($this->values);
+
+        $html .='<label for="gender" class="block text-md mt-5 font-medium">Geschlecht</label>';
+//                    <input
+//                            id="gender" type="text"
+//                            name="gender"
+//                            class="border-b-2 border-black px-1 h-8 focus:outline-none"
+//                            placeholder="Geschlecht"';
 
         if (strlen($this->id) !== 0 && count($this->values) === 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['gender'] . '">';
+//            $html .= 'value="'. $this->employee->getEmployeeById($this->id)['gender'] . '">';
+            $html .= $this->getGenderRadio($this->employee->getEmployeeById($this->id)['gender']);
         } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
-            $html .= 'value="'. $this->values['gender'] . '">';
+//            $html .= 'value="'. $this->values['gender'] . '">';
+            $html .= $this->getGenderRadio(isset($this->values['gender']) && $this->values['gender']);
         } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
-            $html .= 'value="' . $this->values['gender'] . '">';
+//            $html .= 'value="' . $this->values['gender'] . '">';
+            $html .= $this->getGenderRadio(isset($this->values['gender']) && $this->values['gender']);
         } else {
-            $html .=   '>';
+//            $html .=   '>';
+            $html .= $this->getGenderRadio(isset($this->values['gender']) && $this->values['gender']);
         }
         $html .= $this->isError($this->errors,'gender');
 
@@ -102,7 +115,7 @@ class EmployeePage extends Modules{
                             placeholder="Gehalt"';
 
         if (strlen($this->id) !== 0 && count($this->values) === 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['salary'] . '">';
+            $html .= 'value="'. $this->employee->getEmployeeById($this->id)['salary'] . '">';
         } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
             $html .= 'value="'. $this->values['salary'] . '">';
         } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
@@ -122,7 +135,7 @@ class EmployeePage extends Modules{
         foreach ($departments as $department) {
             $html .= '<option value="'. $department['id'] . '"';
 
-            if (strlen($this->id) !== 0 && $department['id'] === $this->employee->getById($this->id)['department_id']) {
+            if (strlen($this->id) !== 0 && $department['id'] === $this->employee->getEmployeeById($this->id)['department_id']) {
                 $html .= 'selected>';
             } else $html .= '>';
 
@@ -131,7 +144,7 @@ class EmployeePage extends Modules{
 
         if (strlen($this->id) !== 0){
             $html .= '</select>
-                    <input type="hidden" name="id" value="' . $this->employee->getById($this->id)['id'] . '">
+                    <input type="hidden" name="id" value="' . $this->employee->getEmployeeById($this->id)['id'] . '">
                     <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateEmp">Update
                     </button>';
         } else $html .= '</select>
@@ -150,7 +163,7 @@ class EmployeePage extends Modules{
         $employees = $this->employee->getAllEmployees();
 
         $html = '
-            <div class="w-2/3 mx-auto p-7 bg-white shadow-lg shadow-black-500/50">
+            <div class="w-2/3 mx-auto mb-5 p-7 bg-white shadow-lg shadow-black-500/50">
                 <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
                 <ul>
                     <li class="flex h-7 border-b border-black">
@@ -198,6 +211,36 @@ class EmployeePage extends Modules{
         }
 
         $html .= '</ul></div>';
+        return $html;
+    }
+
+    private function getGenderRadio($value): string
+    {
+        $html = '';
+
+        $genders = $this->gender->getGenders();
+
+        $html .= "<div class='flex mt-2 justify-between'>";
+        foreach ($genders as $gender) {
+            $selected = '';
+
+            $html .= "<div class='flex items-center'>";
+            $html .= "<input id='" . $gender['gender'] . "' type='radio' name='gender_id' value='$gender[id]'";
+            $html .= " class='mr-2'";
+            if (isset($value) && $value == $gender['gender']) {
+                $html .= "checked";
+            }
+
+            $html .= ">";
+            $html .= "<label for='" . $gender['gender'] . "'>" . $gender['gender'] . "</label>";
+            $html .= "</div>";
+        }
+
+//        echo ($value);
+//        if (!isset($value)) {
+//            $html .= "<input type='hidden' name='gender'>";
+//        }
+        $html .= "</div>";
         return $html;
     }
 }

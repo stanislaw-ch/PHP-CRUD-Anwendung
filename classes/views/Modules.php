@@ -1,10 +1,12 @@
 <?php
 require_once "classes/Department.php";
 require_once "classes/Employee.php";
+require_once "classes/Gender.php";
 
 abstract class Modules {
     protected Department $department;
     protected Employee $employee;
+    protected Gender $gender;
     protected string $isActiveMain;
     protected string $isActiveEmployee;
     protected string $isActiveDepartment;
@@ -13,6 +15,7 @@ abstract class Modules {
     public function __construct($api){
         $this->department = new Department($api);
         $this->employee = new Employee($api);
+        $this->gender = new Gender($api);
 
         $this->activeClass = 'border-b-2 border-black';
 

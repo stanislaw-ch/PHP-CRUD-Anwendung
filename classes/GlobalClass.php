@@ -33,11 +33,21 @@ abstract class GlobalClass
 
     public function getAllEmployees(): array
     {
-        return $this->api->getAllWithPK($this->tableName);
+        return $this->api->getEmployeesWithPK($this->tableName);
+    }
+
+    public function getAllGenders(): array
+    {
+        return $this->api->getGendersWithPK($this->tableName);
     }
 
     public function getById(string $id): array|bool
     {
         return $this->api->getById($this->tableName, $id);
+    }
+
+    public function getEmployeeById(string $id): array|bool
+    {
+        return $this->api->getEmployeeById($this->tableName, $id);
     }
 }

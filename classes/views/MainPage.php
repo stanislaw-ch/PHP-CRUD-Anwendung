@@ -70,8 +70,8 @@ class MainPage extends Modules{
                         <span class="w-8 min-w-8 text-center border-r border-black">' . ++$i . '</span>
                         <span class="w-32 pl-2 border-r border-black">' . $item['firstname'] .  '</span>
                         <span class="w-32 pl-2 border-r border-black">' . $item['lastname'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $item['salary'] .  '</span>
                         <span class="w-32 pl-2 border-r border-black">' . $item['gender'] .  '</span>
+                        <span class="w-32 pl-2 border-r border-black">' . $item['salary'] .  '</span>
                         <span class="w-32 pl-2">' . $item['name'] .  '</span>
                     </li>';
         }
