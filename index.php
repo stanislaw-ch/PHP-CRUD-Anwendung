@@ -17,8 +17,6 @@ $errors = [];
 if (count($_POST) > 1) array_pop($_POST);
 $values = $_POST;
 
-//print_r($values);
-
 $department = new Department($api);
 $employee = new Employee($api);
 
@@ -34,15 +32,15 @@ if ($action === 'showUpdateDep'){
             $errors[$field] = $nameErr;
         } else {
             $value = getSanitized($value);
-//            if (!preg_match("/^[a-zA-Z-' ]*$/",$value)) {
-//                $nameErr = "Only letters and white space allowed";
-//                $errors[$field] = $nameErr;
-//            }
-
         }
     }
-    if (empty($errors)) $department->update($values, $id);
-    $content = new DepartmentPage($api, $errors, $id, $values);
+
+    if (empty($errors)) {
+        $department->update($values, $id);
+        $content = new DepartmentPage($api);
+    } else {
+        $content = new DepartmentPage($api, $errors, $id, $values);
+    }
 } elseif ($action === 'createDep') {
     foreach ($values as $field=>$value) {
         if (empty($value)) {
@@ -50,13 +48,17 @@ if ($action === 'showUpdateDep'){
             $errors[$field] = $nameErr;
         } else {
             $value = getSanitized($value);
-
         }
     }
-    if (empty($errors)) $department->create($values);
-    $content = new DepartmentPage($api, $errors, $id, $values);
+
+    if (empty($errors)) {
+        $department->create($values);
+        $content = new DepartmentPage($api);
+    } else {
+        $content = new DepartmentPage($api, $errors, $id, $values);
+    }
 } elseif ($action === 'departments') {
-    $content = new DepartmentPage($api);
+    $content = new DepartmentPage($api, $errors, $id, $values);
 } elseif ($action === 'showUpdateEmp'){
     $content = new EmployeePage($api, $errors, $id);
 } elseif ($action === 'deleteEmp') {
@@ -72,8 +74,13 @@ if ($action === 'showUpdateDep'){
 
         }
     }
-    if (empty($errors)) $employee->update($values, $id);
-    $content = new EmployeePage($api, $errors, $id, $values);
+
+    if (empty($errors)) {
+        $employee->update($values, $id);
+        $content = new EmployeePage($api);
+    } else {
+        $content = new EmployeePage($api, $errors, $id, $values);
+    }
 } elseif ($action === 'createEmp') {
     foreach ($values as $field=>$value) {
         if (empty($value)) {
@@ -81,13 +88,15 @@ if ($action === 'showUpdateDep'){
             $errors[$field] = $nameErr;
         } else {
             $value = getSanitized($value);
-
         }
     }
 
-    if (empty($errors)) $employee->create($values);
-
-    $content = new EmployeePage($api, $errors, $id, $values);
+    if (empty($errors)) {
+        $employee->create($values);
+        $content = new EmployeePage($api);
+    } else {
+        $content = new EmployeePage($api, $errors, $id, $values);
+    }
 } elseif ($action === 'employees') {
     $content = new EmployeePage($api);
 } else {

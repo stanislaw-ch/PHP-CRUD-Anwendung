@@ -45,36 +45,36 @@ class DepartmentPage extends Modules{
                             placeholder="Abteilungsname"';
 
         if (strlen($this->id) !== 0 && count($this->values) === 0) {
+            echo '1';
             $html .= 'value="'. $this->department->getById($this->id)['name'] . '">';
 
             $html .= $this->isError($this->errors, 'name');
 
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">
-                <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
-                    </button>';
+            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">';
         } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
+            echo '2';
             $html .= 'value="'. $this->values['name'] . '">';
 
             $html .= $this->isError($this->errors, 'name');
-
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">
-                <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
-                    </button>';
         } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
+            echo '3';
             $html .= 'value="'. $this->department->getById($this->id)['name'] . '">';
 
             $html .= $this->isError($this->errors, 'name');
 
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">
-                <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
-                    </button>';
+            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">';
         } else {
             $html .= '>';
 
             $html .= $this->isError($this->errors,'name');
+        }
 
+        if (strlen($this->id) !== 0) {
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
+                        </button>';
+        } else {
             $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDep">Create
-                    </button>';
+                        </button>';
         }
 
         $html .= '      </form>
