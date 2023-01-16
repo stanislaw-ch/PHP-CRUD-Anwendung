@@ -21,7 +21,10 @@ create table employees (
                            lastname varchar(45) not null,
                            gender varchar(10) not null,
                            salary  double not null,
-                           department_id int
+                           department_id int,
+                           FOREIGN KEY(department_id) REFERENCES departments(id)
+                            ON DELETE SET NULL
+                            ON UPDATE SET NULL
 );
 
 
@@ -36,5 +39,3 @@ values (null, 'Peter', 'Panne', 3500, 'männlich', 1),
        (null, 'Rachel', 'Howell', 2750.00, 'weiblich', 3);
 
 select * from employees;
-
-ALTER TABLE employees ADD FOREIGN KEY(department_id) REFERENCES departments(id);

@@ -3,10 +3,14 @@ require_once "classes/views/Modules.php";
 
 class EmployeePage extends Modules{
     private string $id;
+    protected array $errors;
+    protected array $values;
 
-    public function __construct($api, $id = ''){
+    public function __construct($api, $errors=[], $id = '', $values=[]){
         parent::__construct($api);
         $this->id = $id;
+        $this->errors = $errors;
+        $this->values = $values;
 
         $this->isActiveMain = '';
         $this->isActiveEmployee = $this->activeClass;
@@ -42,48 +46,73 @@ class EmployeePage extends Modules{
                             class="border-b-2 border-black px-1 h-8 focus:outline-none"
                             placeholder="Vorname"';
 
-        if (strlen($this->id) !== 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['firstname'] . '"';
+        if (strlen($this->id) !== 0 && count($this->values) === 0){
+            $html .= 'value="'. $this->employee->getById($this->id)['firstname'] . '">';
+        } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
+            $html .= 'value="'. $this->values['firstname'] . '">';
+        } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
+            $html .= 'value="' . $this->values['firstname'] . '">';
+        } else {
+            $html .=   '>';
         }
+        $html .= $this->isError($this->errors,'firstname');
 
-        $html .=   '>
-                    <label for="lastname" class="block text-md mt-5 font-medium">Nachname</label>
+
+        $html .='<label for="lastname" class="block text-md mt-5 font-medium">Nachname</label>
                     <input
                             id="lastname" type="text"
                             name="lastname"
                             class="border-b-2 border-black px-1 h-8 focus:outline-none"
                             placeholder="Nachname"';
 
-        if (strlen($this->id) !== 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['lastname'] . '"';
+        if (strlen($this->id) !== 0 && count($this->values) === 0){
+            $html .= 'value="'. $this->employee->getById($this->id)['lastname'] . '">';
+        } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
+            $html .= 'value="'. $this->values['lastname'] . '">';
+        } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
+            $html .= 'value="' . $this->values['lastname'] . '">';
+        } else {
+            $html .=   '>';
         }
+        $html .= $this->isError($this->errors,'lastname');
 
-        $html .=   '>
-                    <label for="gender" class="block text-md mt-5 font-medium">Geschlecht</label>
+        $html .='<label for="gender" class="block text-md mt-5 font-medium">Geschlecht</label>
                     <input
                             id="gender" type="text"
                             name="gender"
                             class="border-b-2 border-black px-1 h-8 focus:outline-none"
                             placeholder="Geschlecht"';
 
-        if (strlen($this->id) !== 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['gender'] . '"';
+        if (strlen($this->id) !== 0 && count($this->values) === 0){
+            $html .= 'value="'. $this->employee->getById($this->id)['gender'] . '">';
+        } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
+            $html .= 'value="'. $this->values['gender'] . '">';
+        } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
+            $html .= 'value="' . $this->values['gender'] . '">';
+        } else {
+            $html .=   '>';
         }
+        $html .= $this->isError($this->errors,'gender');
 
-        $html .=   '>
-                    <label for="salary" class="block text-md mt-5 font-medium">Gehalt</label>
+        $html .='<label for="salary" class="block text-md mt-5 font-medium">Gehalt</label>
                     <input
                             id="salary" type="text"
                             name="salary"
                             class="border-b-2 border-black px-1 h-8 focus:outline-none"
                             placeholder="Gehalt"';
 
-        if (strlen($this->id) !== 0){
-            $html .= 'value="'. $this->employee->getById($this->id)['salary'] . '"';
+        if (strlen($this->id) !== 0 && count($this->values) === 0){
+            $html .= 'value="'. $this->employee->getById($this->id)['salary'] . '">';
+        } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
+            $html .= 'value="'. $this->values['salary'] . '">';
+        } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
+            $html .= 'value="' . $this->values['salary'] . '">';
+        } else {
+            $html .=   '>';
         }
+        $html .= $this->isError($this->errors,'salary');
 
-        $html .=   '>
-                    <label for="department" class="block text-md mt-5 font-medium">Abteilung</label>
+        $html .='<label for="department" class="block text-md mt-5 font-medium">Abteilung</label>
                     <select 
                             name="department_id" 
                             class="border-b-2 border-black h-8 focus:outline-none"
