@@ -3,3 +3,4 @@ config.php
 task.txt
 
 /.idea
+/log

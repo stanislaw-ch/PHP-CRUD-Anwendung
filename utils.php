@@ -17,3 +17,13 @@ function getTextError($typeError): string
         'salary' => 'Gehalt ist erforderlich',
     };
 }
+
+function setErrorLog($error): void
+{
+    error_log(
+        "Error: "
+        . date("Y-m-d H:i:s")
+        . " "
+        . $error->getMessage()
+        ."\n", 3, "log/errors.log");
+}

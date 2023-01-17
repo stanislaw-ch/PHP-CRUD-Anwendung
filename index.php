@@ -71,7 +71,6 @@ if ($action === 'showUpdateDep'){
             $errors[$field] = $nameErr;
         } else {
             $value = getSanitized($value);
-
         }
     }
 

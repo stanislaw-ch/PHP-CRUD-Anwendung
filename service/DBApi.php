@@ -87,7 +87,7 @@ class DBApi
 
     public function getEmployeeById($table, $id): bool|array|null
     {
-        $query = "SELECT $table.id, firstname, lastname, salary, gender, department_id FROM $table 
+        $query = "SELECT $table.id, firstname, lastname, salary, gender, gender_id, department_id FROM $table 
                     JOIN genders g on g.id = $table.gender_id                  
                     AND $table.id = $id
                     GROUP BY $table.id";
