@@ -35,7 +35,7 @@ class DepartmentPage extends Modules{
     private function showDepartmentForm(): string
     {
         $html = '
-            <div class="w-96 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <form class="flex flex-col box-border" action="index.php" method="post">';
 
         $html .= $this->getInput($this->id, $this->values);
@@ -53,7 +53,7 @@ class DepartmentPage extends Modules{
         $data = $this->department->getDepartments();
 
         $html = '
-            <div class="w-96 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <h2 class="mb-5 text-center font-bold">Abteilungen</h2>
                 <ul>
                     <li class="flex h-7 border-b border-black">
@@ -102,7 +102,7 @@ class DepartmentPage extends Modules{
                     <input
                             id="name" type="text"
                             name="name"
-                            class="border-b-2 border-black px-2 h-8 focus:outline-none appearance-none"
+                            class="[appearance:textfield] border-b-2 border-black px-2 h-8 focus:outline-none appearance-none"
                             placeholder="Abteilungsname"';
 
         if (strlen($id) !== 0 && count($values) === 0) {
