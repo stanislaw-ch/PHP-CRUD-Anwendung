@@ -23,7 +23,26 @@ function setErrorLog($error): void
     error_log(
         "Error: "
         . date("Y-m-d H:i:s")
-        . " "
+        ."\n"
+        . "     "
+        . "message: "
         . $error->getMessage()
-        ."\n", 3, "log/errors.log");
+        ."\n"
+        . "     "
+        . "on line: "
+        . $error->getLine()
+        ."\n"
+        . "     "
+        . "file: "
+        . $error->getFile()
+        ."\n"
+        . "     "
+        . "code: "
+        . $error->getCode()
+        ."\n"
+        . "     "
+        . "string: "
+        . $error->getTraceAsString()
+        ."\n"
+        , 3, "log/errors.log");
 }
