@@ -123,7 +123,7 @@ abstract class Modules {
         $html = '';
 
         if (isset($errors[$errorName])){
-            $html .= '<span class="text-red-600 mt-1">'. $errors[$errorName] .'</span>';
+            $html .= '<span class="text-red-600 -mt-4 mb-3">'. $errors[$errorName] .'</span>';
         }
 
         return $html;

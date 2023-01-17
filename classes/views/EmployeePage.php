@@ -216,7 +216,7 @@ class EmployeePage extends Modules{
         $html ='<label for="department" class="block text-md mb-5 font-medium">Abteilung</label>
                     <select 
                             name="department_id" 
-                            class="border-b-2 border-black h-8 focus:outline-none"
+                            class="border-b-2 border-black mb-5 h-8 focus:outline-none"
                     >
         ';
 
