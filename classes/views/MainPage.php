@@ -25,7 +25,7 @@ class MainPage extends Modules{
         $data = $this->department->getDepartments();
 
         $html = '
-            <div class="w-80 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <h2 class="mb-5 text-center font-bold">Abteilungen</h2>
                 <ul class="">
                     <li class="flex h-7 border-b border-black">
@@ -51,28 +51,42 @@ class MainPage extends Modules{
         $data = $this->employee->getEmployees();
 
         $html = '
-            <div class="w-3/5 mx-auto p-7 bg-white shadow-lg shadow-black-500/50">
+            <div class="
+                    w-full xl:w-4/6 
+                    mx-auto 
+                    mb-5 
+                    p-7 sm:p-5
+                    bg-white 
+                    shadow-lg shadow-black-500/50
+                    ">
                 <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
                 <ul class="">
                     <li class="flex h-7 border-b border-black">
-                        <span class="w-8 text-center border-r border-black ">Nr.</span>
-                        <span class="w-32 text-center border-r border-black">Vorname</span>
-                        <span class="w-32 text-center border-r border-black">Nachname</span>
-                        <span class="w-32 text-center border-r border-black">Geschlecht</span>
-                        <span class="w-32 text-center border-r border-black">Gehalt</span>
-                        <span class="w-32 text-center">Abteilung</span>
+                        <span class="basis-10 flex-2 text-center border-r border-black ">Nr.</span>
+                        <span class="basis-20 flex-1 text-center border-r border-black">Vorname</span>
+                        <span class="
+                            basis-20 flex-1 
+                            text-center border-r-none 
+                            sm:border-r sm:border-black
+                            ">Nachname</span>
+                        <span class="basis-20 flex-1 hidden sm:inline-block text-center border-r border-black">Geschlecht</span>
+                        <span class="basis-20 flex-1 hidden sm:inline-block text-center border-r border-black">Gehalt</span>
+                        <span class="basis-20 flex-1 hidden sm:inline-block text-center">Abteilung</span>
                     </li>
         ';
 
         foreach ($data as $i=>$item) {
             $html .= '
                     <li class="flex h-7 border-b border-gray-400 border-dashed">
-                        <span class="w-8 min-w-8 text-center border-r border-black">' . ++$i . '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $item['firstname'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $item['lastname'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $item['gender'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $item['salary'] .  '</span>
-                        <span class="w-32 pl-2">' . $item['name'] .  '</span>
+                        <span class="basis-10 flex-2 text-center border-r border-black">' . ++$i . '</span>
+                        <span class="basis-20 flex-1 pl-2 border-r border-black">' . $item['firstname'] .  '</span>
+                        <span class="basis-20 flex-1 
+                            pl-2 border-r-none 
+                            sm:border-r sm:border-black
+                            ">' . $item['lastname'] .  '</span>
+                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden border-r border-black">' . $item['gender'] .  '</span>
+                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden border-r border-black">' . $item['salary'] .  '</span>
+                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden ">' . $item['name'] .  '</span>
                     </li>';
         }
 

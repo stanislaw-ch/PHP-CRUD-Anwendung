@@ -35,7 +35,7 @@ class EmployeePage extends Modules{
     private function showEmployeeForm(): string
     {
         $html =  '
-            <div class="w-96 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <form class="flex flex-col box-border" action="index.php" method="post">';
 
         $html .= $this->getInput('Vorname', 'firstname');
@@ -57,50 +57,116 @@ class EmployeePage extends Modules{
         $employees = $this->employee->getAllEmployees();
 
         $html = '
-            <div class="w-2/3 mx-auto mb-5 p-7 bg-white shadow-lg shadow-black-500/50">
+            <div class="
+                    w-full  
+                    mx-auto 
+                    mb-5 
+                    p-7 sm:p-5
+                    bg-white 
+                    shadow-lg shadow-black-500/50
+                ">
                 <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
                 <ul>
                     <li class="flex h-7 border-b border-black">
-                        <span class="w-8 text-center border-r border-black ">Nr.</span>
-                        <span class="w-32 text-center border-r border-black">Vorname</span>
-                        <span class="w-32 text-center border-r border-black">Nachname</span>
-                        <span class="w-32 text-center border-r border-black">Geschlecht</span>
-                        <span class="w-32 text-center border-r border-black">Gehalt</span>
-                        <span class="w-32 text-center">Abteilung</span>
+                        <span class="
+                            flex justify-center 
+                            w-8 
+                            border-r border-black">Nr.</span>
+                        <span class="
+                            flex justify-center
+                            basis-40 
+                            border-r border-black 
+                            hidden md:flex
+                        ">Vorname</span>
+                        <span class="
+                            flex justify-center 
+                            basis-40  
+                            border-r border-black
+                        ">Nachname</span>
+                        <span class="
+                            flex justify-center 
+                            basis-40  
+                            border-r border-black
+                            hidden lg:flex
+                        ">Geschlecht</span>
+                        <span class=" 
+                            flex justify-center 
+                            basis-40  
+                            border-r border-black
+                            hidden sm:flex
+                        ">Gehalt</span>
+                        <span class="
+                            flex justify-center 
+                            grow
+                            text-transparent sm:text-black
+                            basis-40 md:basis-80 
+                        ">Abteilung</span>
                     </li>
         ';
 
         foreach ($employees as $i=>$employee) {
             $html .= '
                     <li class="flex h-7 border-b border-gray-400 border-dashed">
-                        <span class="w-8 min-w-8 text-center border-r border-black">' . ++$i . '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $employee['firstname'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $employee['lastname'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $employee['gender'] .  '</span>
-                        <span class="w-32 pl-2 border-r border-black">' . $employee['salary'] .  '</span>
-                        <span class="w-32 pl-2">' . $employee['name'] .  '</span>
-                        <button
-                            id="showUpdateEmp"
-                            class="
-                                w-12 mr-1 ml-auto
-                                bg-white hover:underline text-sm
-                            "
-                            type="button"
-                            name="action"
-                            data-id="' . $employee['id'] . '"
-                        >Update
-                        </button>
-                        <button
-                            id="deleteEmp"
-                            class="
-                                w-12 mr-1 
-                                bg-white hover:underline text-sm
-                            "
-                            type="button"
-                            name="action"
-                            data-id="' . $employee['id'] . '"
-                        >Delete
-                        </button>
+                        <span class="
+                            flex justify-center 
+                            w-8 
+                            border-r border-black
+                        ">' . ++$i . '</span>
+                        <span class="
+                            flex pl-2 
+                            basis-40 
+                            border-r border-black
+                            hidden md:flex
+                        ">' . $employee['firstname'] .  '</span>
+                        <span class="
+                            flex pl-2 
+                            basis-40 
+                            border-r border-black
+                        ">' . $employee['lastname'] .  '</span>
+                        <span class="
+                            flex pl-2 
+                            basis-40 
+                            border-r border-black
+                            hidden lg:flex
+                        ">' . $employee['gender'] .  '</span>
+                        <span class=" 
+                            flex pl-2  
+                            basis-40  
+                            border-r border-black
+                            hidden sm:flex
+                        ">' . $employee['salary'] .  '</span>
+                        <div class="
+                            flex 
+                            justify-center
+                            sm:justify-start
+                            grow
+                            basis-40 md:basis-80
+                            pl-2
+                        ">
+                            <span class="mr-auto hidden sm:flex">' . $employee['name'] .  '</span>
+                            <button
+                                id="showUpdateEmp"
+                                class="
+                                    w-12 mr-1 sm:ml-auto mr-auto
+                                    bg-white hover:underline text-sm
+                                "
+                                type="button"
+                                name="action"
+                                data-id="' . $employee['id'] . '"
+                            >Update
+                            </button>
+                            <button
+                                id="deleteEmp"
+                                class="
+                                    w-12 mr-1 
+                                    bg-white hover:underline text-sm
+                                "
+                                type="button"
+                                name="action"
+                                data-id="' . $employee['id'] . '"
+                            >Delete
+                            </button>
+                        </div>
                     </li>';
         }
 
