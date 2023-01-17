@@ -102,7 +102,7 @@ class DepartmentPage extends Modules{
                     <input
                             id="name" type="text"
                             name="name"
-                            class="[appearance:textfield] border-b-2 border-black px-2 h-8 focus:outline-none appearance-none"
+                            class="[appearance:textfield] border-b-2 border-black px-2 mb-5 h-8 focus:outline-none appearance-none"
                             placeholder="Abteilungsname"';
 
         if (strlen($id) !== 0 && count($values) === 0) {
