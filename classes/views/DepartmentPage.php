@@ -24,55 +24,22 @@ class DepartmentPage extends Modules{
 
     protected function getTop(): string
     {
-        return $this->showCreate();
+        return $this->showDepartmentForm();
     }
 
     protected function getMiddle(): string
     {
-        return $this->showDepartments();
+        return $this->showDepartmentsTable();
     }
 
-    private function showCreate(): string
+    private function showDepartmentForm(): string
     {
         $html = '
             <div class="w-96 mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="index.php" method="post">
-                    <label for="name" class="block text-md my-1 font-medium">Abteilungsname</label>
-                    <input
-                            id="name" type="text"
-                            name="name"
-                            class="border-b-2 border-black px-2 h-8 focus:outline-none appearance-none"
-                            placeholder="Abteilungsname"';
+                <form class="flex flex-col box-border" action="index.php" method="post">';
 
-        if (strlen($this->id) !== 0 && count($this->values) === 0) {
-            $html .= 'value="'. $this->department->getById($this->id)['name'] . '">';
-
-            $html .= $this->isError($this->errors, 'name');
-
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">';
-        } elseif (strlen($this->id) === 0 && count($this->values) !== 0) {
-            $html .= 'value="'. $this->values['name'] . '">';
-
-            $html .= $this->isError($this->errors, 'name');
-        } elseif (strlen($this->id) !== 0 && count($this->values) !== 0) {
-            $html .= 'value="'. $this->department->getById($this->id)['name'] . '">';
-
-            $html .= $this->isError($this->errors, 'name');
-
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($this->id)['id'] . '">';
-        } else {
-            $html .= '>';
-
-            $html .= $this->isError($this->errors,'name');
-        }
-
-        if (strlen($this->id) !== 0) {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
-                        </button>';
-        } else {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDep">Create
-                        </button>';
-        }
+        $html .= $this->getInput($this->id, $this->values);
+        $html .= $this->getButtons($this->id);
 
         $html .= '      </form>
             </div>
@@ -81,7 +48,7 @@ class DepartmentPage extends Modules{
         return $html;
     }
 
-    public function showDepartments(): string
+    public function showDepartmentsTable(): string
     {
         $data = $this->department->getDepartments();
 
@@ -126,6 +93,46 @@ class DepartmentPage extends Modules{
         }
 
         $html .= '</ul></div>';
+        return $html;
+    }
+
+    private function getInput($id, $values): string
+    {
+        $html = '  <label for="name" class="block text-md my-1 font-medium">Abteilungsname</label>
+                    <input
+                            id="name" type="text"
+                            name="name"
+                            class="border-b-2 border-black px-2 h-8 focus:outline-none appearance-none"
+                            placeholder="Abteilungsname"';
+
+        if (strlen($id) !== 0 && count($values) === 0) {
+            $html .= 'value="'. $this->department->getById($id)['name'] . '">';
+            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($id)['id'] . '">';
+        } elseif (strlen($id) === 0 && count($values) !== 0) {
+            $html .= 'value="'. $values['name'] . '">';
+        } elseif (strlen($id) !== 0 && count($values) !== 0) {
+            $html .= 'value="'. $this->department->getById($id)['name'] . '">';
+            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($id)['id'] . '">';
+        } else {
+            $html .= '>';
+        }
+
+        $html .= $this->isError($this->errors,'name');
+
+        return $html;
+    }
+
+    private function getButtons($id): string
+    {
+        $html = '';
+
+        if (strlen($id) !== 0) {
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
+                        </button>';
+        } else {
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDep">Create
+                        </button>';
+        }
         return $html;
     }
 }

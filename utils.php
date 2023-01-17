@@ -13,7 +13,7 @@ function getTextError($typeError): string
         'name' => 'Abteilungsname ist erforderlich',
         'firstname' => 'Vorname ist erforderlich',
         'lastname' => 'Nachname ist erforderlich',
-        'gender' => 'Geschlecht ist erforderlich',
+        'gender_id' => 'Geschlecht ist erforderlich',
         'salary' => 'Gehalt ist erforderlich',
     };
 }
