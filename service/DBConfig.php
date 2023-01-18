@@ -1,6 +1,5 @@
 <?php
 require_once "config.php";
-require_once "classes/views/ErrorPage.php";
 require_once "utils.php";
 
 class DBConfig
@@ -20,11 +19,8 @@ class DBConfig
                     DB_PASSWORD,
                     DB_NAME);
             } catch (Exception $error) {
-                setErrorLog($error);
-
-                $errorMessage = 'Fehler bei der Datenbankverbindung!';
-                $errorPage = new ErrorPage($errorMessage);
-                die($errorPage->getContent());
+                onError($error);
+                die();
             }
 
         }

@@ -19,6 +19,24 @@ function getTextError($typeError): string
     };
 }
 
+function isValid($values, $errors): array
+{
+    foreach ($values as $field=>$value) {
+        if (empty($value)) {
+            $nameErr = getTextError($field);
+            $errors[$field] = $nameErr;
+        } else {
+            $values[$field] = getSanitized($value);
+        }
+    }
+
+    if (!is_numeric($values['salary']) && !empty($values['salary'])) {
+        $errors['salary'] = 'nur Zahlen sind erforderlich';
+    }
+
+    return array($values, $errors);
+}
+
 function setErrorLog($error): void
 {
     error_log(
@@ -48,11 +66,10 @@ function setErrorLog($error): void
         , 3, "log/errors.log");
 }
 
-function onError($error): void
+function onError($error, $errorMessage = 'Fehler bei der Datenbankverbindung!'): void
 {
     setErrorLog($error);
 
-    $errorMessage = 'Fehler bei der Datenbankverbindung!';
     $errorPage = new ErrorPopup($errorMessage);
     echo $errorPage->getContent();
 }

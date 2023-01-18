@@ -26,14 +26,7 @@ if ($action === 'showUpdateDep'){
     $department->delete($id);
     $content = new DepartmentPage($api);
 } elseif ($action === 'updateDep') {
-    foreach ($values as $field=>$value) {
-        if (empty($value)) {
-            $nameErr = getTextError($field);
-            $errors[$field] = $nameErr;
-        } else {
-            $value = getSanitized($value);
-        }
-    }
+    [$values, $errors] = isValid($values, $errors);
 
     if (empty($errors)) {
         $department->update($values, $id);
@@ -42,14 +35,7 @@ if ($action === 'showUpdateDep'){
         $content = new DepartmentPage($api, $errors, $id, $values);
     }
 } elseif ($action === 'createDep') {
-    foreach ($values as $field=>$value) {
-        if (empty($value)) {
-            $nameErr = getTextError($field);
-            $errors[$field] = $nameErr;
-        } else {
-            $value = getSanitized($value);
-        }
-    }
+    [$values, $errors] = isValid($values, $errors);
 
     if (empty($errors)) {
         $department->create($values);
@@ -58,21 +44,14 @@ if ($action === 'showUpdateDep'){
         $content = new DepartmentPage($api, $errors, $id, $values);
     }
 } elseif ($action === 'departments') {
-    $content = new DepartmentPage($api, $errors, $id, $values);
+    $content = new DepartmentPage($api);
 } elseif ($action === 'showUpdateEmp'){
     $content = new EmployeePage($api, $errors, $id);
 } elseif ($action === 'deleteEmp') {
     $employee->delete($id);
     $content = new EmployeePage($api);
 } elseif ($action === 'updateEmp') {
-    foreach ($values as $field=>$value) {
-        if (empty($value)) {
-            $nameErr = getTextError($field);
-            $errors[$field] = $nameErr;
-        } else {
-            $value = getSanitized($value);
-        }
-    }
+    [$values, $errors] = isValid($values, $errors);
 
     if (empty($errors)) {
         $employee->update($values, $id);
@@ -81,14 +60,7 @@ if ($action === 'showUpdateDep'){
         $content = new EmployeePage($api, $errors, $id, $values);
     }
 } elseif ($action === 'createEmp') {
-    foreach ($values as $field=>$value) {
-        if (empty($value)) {
-            $nameErr = getTextError($field);
-            $errors[$field] = $nameErr;
-        } else {
-            $value = getSanitized($value);
-        }
-    }
+    [$values, $errors] = isValid($values, $errors);
 
     if (empty($errors)) {
         $employee->create($values);
