@@ -26,19 +26,19 @@ class MainPage extends Modules{
 
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <h2 class="mb-5 text-center font-bold">Abteilungen</h2>
+                <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
                 <ul class="">
-                    <li class="flex h-7 border-b border-black">
-                        <span class="w-8 text-center border-r border-black">Nr.</span>
-                        <span class="flex-1 text-center">Abteilung</span>
+                    <li class="flex content-center h-10 text-white bg-slate-700">
+                        <span class="flex self-center justify-center w-8">#</span>
+                        <span class="flex self-center justify-center flex-1">Abteilung</span>
                     </li>
         ';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex h-7 border-b border-gray-400 border-dashed">
-                        <span class="w-8 text-center border-r border-black">' . ++$i . '</span>
-                        <span class="pl-2">' . $item['name'] .  '</span>
+                    <li class="flex h-10 border-b border-gray-400 border-dashed">
+                        <span class="flex self-center justify-center w-8">' . ++$i . '</span>
+                        <span class="flex self-center pl-2">' . $item['name'] .  '</span>
                     </li>';
         }
 
@@ -59,34 +59,35 @@ class MainPage extends Modules{
                     bg-white 
                     shadow-lg shadow-black-500/50
                     ">
-                <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
+                <h2 class="mb-5 text-center text-lg">Mitarbeiter</h2>
                 <ul class="">
-                    <li class="flex h-7 border-b border-black">
-                        <span class="basis-10 flex-2 text-center border-r border-black ">Nr.</span>
-                        <span class="basis-20 flex-1 text-center border-r border-black">Vorname</span>
+                    <li class="flex content-center h-10 text-white bg-slate-700">
+                        <span class="flex self-center justify-center w-8 basis-10 flex-2">#</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2">Vorname</span>
                         <span class="
+                            flex self-center 
+                            pl-2 
                             basis-20 flex-1 
-                            text-center border-r-none 
-                            sm:border-r sm:border-black
                             ">Nachname</span>
-                        <span class="basis-20 flex-1 hidden sm:inline-block text-center border-r border-black">Geschlecht</span>
-                        <span class="basis-20 flex-1 hidden sm:inline-block text-center border-r border-black">Gehalt</span>
-                        <span class="basis-20 flex-1 hidden sm:inline-block text-center">Abteilung</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 hidden sm:flex">Geschlecht</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 hidden sm:flex">Gehalt</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 hidden sm:flex">Abteilung</span>
                     </li>
         ';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex h-7 border-b border-gray-400 border-dashed">
-                        <span class="basis-10 flex-2 text-center border-r border-black">' . ++$i . '</span>
-                        <span class="basis-20 flex-1 pl-2 border-r border-black">' . $item['firstname'] .  '</span>
-                        <span class="basis-20 flex-1 
-                            pl-2 border-r-none 
-                            sm:border-r sm:border-black
+                    <li class="flex h-10 border-b border-gray-400 border-dashed">
+                        <span class="flex self-center justify-center basis-10 flex-2">' . ++$i . '</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2">' . $item['firstname'] .  '</span>
+                        <span class="
+                            flex self-center 
+                            basis-20 flex-1 
+                            pl-2 
                             ">' . $item['lastname'] .  '</span>
-                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden border-r border-black">' . $item['gender'] .  '</span>
-                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden border-r border-black">' . $item['salary'] .  '</span>
-                        <span class="basis-20 flex-1 pl-2 sm:inline-block hidden ">' . $item['name'] .  '</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 sm:flex hidden">' . $item['gender'] .  '</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 sm:flex hidden">' . $item['salary'] .  '</span>
+                        <span class="flex self-center basis-20 flex-1 pl-2 sm:flex hidden ">' . $item['name'] .  '</span>
                     </li>';
         }
 
