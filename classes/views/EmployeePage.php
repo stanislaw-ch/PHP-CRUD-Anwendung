@@ -6,7 +6,7 @@ class EmployeePage extends Modules{
     protected array $errors;
     protected array $values;
 
-    public function __construct($api, $errors=[], $id = '', $values=[]){
+    public function __construct($api, $errors=[], $id = false, $values=[]){
         parent::__construct($api);
         $this->id = $id;
         $this->errors = $errors;
@@ -187,15 +187,20 @@ class EmployeePage extends Modules{
     {
         $type = 'gender_id';
         $html ='<label for="gender" class="block text-md font-medium">Geschlecht</label>';
+        $genders = '';
+
+        if ($this->employee->getEmployeeById($id)) {
+            $genders = $this->employee->getEmployeeById($id)[$type];
+        }
 
         if (strlen($id) !== 0 && count($values) === 0){
-            $html .= $this->getGendersRadio($this->employee->getEmployeeById($id)['gender_id']);
+            $html .= $this->getGendersRadio($genders);
         } elseif (strlen($id) === 0 && count($values) !== 0) {
-            $html .= $this->getGendersRadio($values['gender_id']);
+            $html .= $this->getGendersRadio($values[$type]);
         } elseif (strlen($id) !== 0 && count($values) !== 0) {
-            $html .= $this->getGendersRadio($values['gender_id']);
+            $html .= $this->getGendersRadio($values[$type]);
         } else {
-            $html .= $values['gender_id'] ?? "<input type='hidden' name='gender_id'>";
+            $html .= $values[$type] ?? "<input type='hidden' name='gender_id'>";
             $html .= $this->getGendersRadio();
         }
 
@@ -216,8 +221,13 @@ class EmployeePage extends Modules{
 
         foreach ($departments as $department) {
             $html .= '<option value="'. $department['id'] . '"';
+            $departmentId = '';
 
-            if (strlen($this->id) !== 0 && $department['id'] === $this->employee->getEmployeeById($this->id)['department_id']) {
+            if ($this->employee->getEmployeeById($this->id)) {
+                $departmentId = $this->employee->getEmployeeById($this->id)['department_id'];
+            }
+
+            if (strlen($this->id) !== 0 && $department['id'] === $departmentId) {
                 $html .= 'selected>';
             } else $html .= '>';
 
@@ -230,10 +240,15 @@ class EmployeePage extends Modules{
     private function getButtons($id): string
     {
         $html = '';
+        $employeeId = '';
+
+        if ($this->employee->getEmployeeById($id)) {
+            $employeeId = $this->employee->getEmployeeById($id)['id'];
+        }
 
         if (strlen($id) !== 0){
             $html .= '</select>
-                    <input type="hidden" name="id" value="' . $this->employee->getEmployeeById($id)['id'] . '">
+                    <input type="hidden" name="id" value="' . $employeeId . '">
                     <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateEmp">Update
                     </button>';
         } else $html .= '</select>
@@ -245,8 +260,14 @@ class EmployeePage extends Modules{
     private function getInputValue($id, $values, $type): string
     {
         $html = '';
+        $value = '';
+
+        if ($this->employee->getEmployeeById($id)) {
+            $value = $this->employee->getEmployeeById($id)[$type];
+        }
+
         if (strlen($id) !== 0 && count($values) === 0){
-            $html .= 'value="'. $this->employee->getEmployeeById($id)[$type] . '">';
+            $html .= 'value="'. $value . '">';
         } elseif (strlen($id) === 0 && count($values) !== 0) {
             $html .= 'value="'. $values[$type] . '">';
         } elseif (strlen($id) !== 0 && count($values) !== 0) {
