@@ -1,4 +1,5 @@
 <?php
+require_once "classes/views/ErrorPopup.php";
 
 function getSanitized($data): string
 {
@@ -45,4 +46,13 @@ function setErrorLog($error): void
         . $error->getTraceAsString()
         ."\n"
         , 3, "log/errors.log");
+}
+
+function onError($error): void
+{
+    setErrorLog($error);
+
+    $errorMessage = 'Fehler bei der Datenbankverbindung!';
+    $errorPage = new ErrorPopup($errorMessage);
+    echo $errorPage->getContent();
 }

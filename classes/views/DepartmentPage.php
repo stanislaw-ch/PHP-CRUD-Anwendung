@@ -106,8 +106,15 @@ class DepartmentPage extends Modules{
                             placeholder="Abteilungsname"';
 
         if (strlen($id) !== 0 && count($values) === 0) {
-            $html .= 'value="'. $this->department->getById($id)['name'] . '">';
-            $html .= '<input type="hidden" name="id" value="' . $this->department->getById($id)['id'] . '">';
+            $name = '';
+            $idDep = '';
+
+            if ($this->department->getById($id)) {
+                $name = $this->department->getById($id)['name'];
+                $idDep = $this->department->getById($id)['id'];
+            }
+            $html .= 'value="'. $name . '">';
+            $html .= '<input type="hidden" name="id" value="' . $idDep . '">';
         } elseif (strlen($id) === 0 && count($values) !== 0) {
             $html .= 'value="'. $values['name'] . '">';
         } elseif (strlen($id) !== 0 && count($values) !== 0) {

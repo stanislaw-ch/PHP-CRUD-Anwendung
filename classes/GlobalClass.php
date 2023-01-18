@@ -43,11 +43,13 @@ abstract class GlobalClass
 
     public function getById(string $id): array|bool
     {
+        if (strlen($id) === 0) return false;
         return $this->api->getById($this->tableName, $id);
     }
 
     public function getEmployeeById(string $id): array|bool
     {
+        if (strlen($id) === 0) return false;
         return $this->api->getEmployeeById($this->tableName, $id);
     }
 }
