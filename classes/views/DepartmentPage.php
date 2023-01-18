@@ -54,19 +54,19 @@ class DepartmentPage extends Modules{
 
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <h2 class="mb-5 text-center font-bold">Abteilungen</h2>
+                <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
                 <ul>
-                    <li class="flex h-7 border-b border-black">
-                        <span class="w-8 text-center border-r border-black">Nr.</span>
-                        <span class="flex-1 text-center">Abteilung</span>
+                    <li class="flex content-center h-10 text-white bg-slate-700">
+                        <span class="flex self-center justify-center w-8">#</span>
+                        <span class="flex self-center justify-center flex-1">Abteilung</span>
                     </li>
         ';
 
         foreach ($data as $i=>$item) {
             $html .= '
-                    <li class="flex h-7 border-b border-gray-400 border-dashed">
-                        <span class="w-8 text-center border-r border-black">' . ++$i . '</span>
-                        <span class="pl-2">' . $item['name'] .  '</span>
+                    <li class="flex h-10 border-b border-gray-400 border-dashed">
+                        <span class="flex self-center justify-center w-8">' . ++$i . '</span>
+                        <span class="flex self-center ppl-2">' . $item['name'] .  '</span>
                         <button
                             id="showUpdateDep"
                             class="

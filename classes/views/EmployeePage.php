@@ -58,47 +58,43 @@ class EmployeePage extends Modules{
 
         $html = '
             <div class="
-                    w-full  
+                    w-full xl:w-4/6  
                     mx-auto 
                     mb-5 
                     p-7 sm:p-5
                     bg-white 
                     shadow-lg shadow-black-500/50
                 ">
-                <h2 class="mb-5 text-center font-bold">Mitarbeiter</h2>
+                <h2 class="mb-5 text-center text-lg">Mitarbeiter</h2>
                 <ul>
-                    <li class="flex h-7 border-b border-black">
+                    <li class="flex content-center h-10 text-white bg-slate-700">
                         <span class="
-                            flex justify-center 
-                            w-8 
-                            border-r border-black">Nr.</span>
+                            flex self-center justify-center
+                            w-8
+                            ">#</span>
                         <span class="
-                            flex justify-center
-                            basis-40 
-                            border-r border-black 
+                            flex self-center 
+                            basis-40 pl-2 
                             hidden md:flex
                         ">Vorname</span>
                         <span class="
-                            flex justify-center 
-                            basis-40  
-                            border-r border-black
+                            flex self-center  
+                            basis-40 pl-2
                         ">Nachname</span>
                         <span class="
-                            flex justify-center 
-                            basis-40  
-                            border-r border-black
+                            flex self-center  
+                            basis-40 pl-2
                             hidden lg:flex
                         ">Geschlecht</span>
                         <span class=" 
-                            flex justify-center 
-                            basis-40  
-                            border-r border-black
+                            flex self-center  
+                            basis-40 pl-2
                             hidden sm:flex
                         ">Gehalt</span>
                         <span class="
-                            flex justify-center 
-                            grow
-                            text-transparent sm:text-black
+                            flex self-center  
+                            grow pl-2
+                            text-transparent sm:text-white
                             basis-40 md:basis-80 
                         ">Abteilung</span>
                     </li>
@@ -106,38 +102,36 @@ class EmployeePage extends Modules{
 
         foreach ($employees as $i=>$employee) {
             $html .= '
-                    <li class="flex h-7 border-b border-gray-400 border-dashed">
+                    <li class="flex h-10 border-b border-gray-400 border-dashed">
                         <span class="
-                            flex justify-center 
-                            w-8 
-                            border-r border-black
+                            flex self-center justify-center  
+                            w-8
                         ">' . ++$i . '</span>
                         <span class="
-                            flex pl-2 
+                            flex self-center 
+                            pl-2 
                             basis-40 
-                            border-r border-black
                             hidden md:flex
                         ">' . $employee['firstname'] .  '</span>
                         <span class="
-                            flex pl-2 
-                            basis-40 
-                            border-r border-black
+                            flex self-center 
+                            pl-2 
+                            basis-40
                         ">' . $employee['lastname'] .  '</span>
                         <span class="
-                            flex pl-2 
+                            flex self-center 
+                            pl-2 
                             basis-40 
-                            border-r border-black
                             hidden lg:flex
                         ">' . $employee['gender'] .  '</span>
                         <span class=" 
-                            flex pl-2  
+                            flex self-center 
+                            pl-2  
                             basis-40  
-                            border-r border-black
                             hidden sm:flex
                         ">' . $employee['salary'] .  '</span>
                         <div class="
-                            flex 
-                            justify-center
+                            flex self-center 
                             sm:justify-start
                             grow
                             basis-40 md:basis-80
