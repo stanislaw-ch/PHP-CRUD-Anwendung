@@ -1,15 +1,24 @@
 <?php
 require_once "DBConfig.php";
+require_once "classes/views/ErrorPopup.php";
 
 class DBApi
 {
     public function getAll($table): array
     {
-        $query = "SELECT * FROM $table ORDER BY id ASC";
-        $result = DBConfig::connect()->query($query);
+        $results = [];
+        try {
+            $query = "SELECT * FROM $table ORDER BY id ASC";
+            $result = DBConfig::connect()->query($query);
 
-        for ($results = array (); $row = $result->fetch_assoc(); $results[] = $row);
+            for ($results = array (); $row = $result->fetch_assoc(); $results[] = $row);
+        } catch (Exception $error) {
+            setErrorLog($error);
 
+            $errorMessage = 'Fehler bei der Datenbankverbindung!';
+            $errorPage = new ErrorPopup($errorMessage);
+            echo $errorPage->getContent();
+        }
         return $results;
     }
 
