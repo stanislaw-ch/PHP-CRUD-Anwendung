@@ -30,9 +30,7 @@ addEventToButtons();
 
 const errorMessage = document.querySelector('#error-message');
 
-setTimeout(function(){
-    // errorMessage.classList.add('opacity-0');
-    // errorMessage.classList.add('hidden');
+errorMessage && setTimeout(function(){
     errorMessage.remove();
 }, 2000);
 
