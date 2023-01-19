@@ -73,10 +73,9 @@ class DBApi
 
             DBConfig::connect()->query($query);
         } catch (Exception $error) {
-            $messageEmployee = 'Kombination Vor- und Nachname muss Unique (einzigartig) sein';
-            $messageDepartment= 'Abteilungsname muss Unique (einzigartig) sein';
-
-            $message = $table === 'employee' ? $messageEmployee : $messageDepartment;
+            $message = $table === 'employees'
+                ? $values['firstname'] . ' ' . $values['lastname'] .' ist schon vorhanden'
+                : $values['name'] . ' ist schon vorhanden';
             onError($error, $message);
         }
     }
@@ -105,7 +104,10 @@ class DBApi
 
             DBConfig::connect()->query($query);
         } catch (Exception $error) {
-            onError($error);
+            $message = $table === 'employees'
+                ? $values['firstname'] . ' ' . $values['lastname'] .' ist schon vorhanden'
+                : $values['name'] . ' ist schon vorhanden';
+            onError($error, $message);
         }
     }
 
@@ -117,6 +119,8 @@ class DBApi
         } catch (Exception $error) {
             onError($error);
         }
+
+        print_r(DBConfig::connect()->query($query)->fetch_assoc());
 
         return false;
     }

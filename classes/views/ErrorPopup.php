@@ -41,7 +41,7 @@ class ErrorPopup {
     private function getMiddle($error): string
     {
         return "
-                <h2 class='flex items-center justify-center w-full h-10 text-white bg-red-500'>$error</h2>
+                <h2 id='error-message' class='flex items-center justify-center w-full h-10 text-white bg-red-500 transition-opacity duration-2000 ease-in-out'>$error</h2>
                 ";
     }
 }
