@@ -5,6 +5,7 @@ function getSanitized($data): string
 {
     $data = trim($data);
     $data = stripslashes($data);
+    (int) $data && $data = preg_replace('/\,/', '.', $data);;
     return htmlspecialchars($data);
 }
 
