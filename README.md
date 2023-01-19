@@ -24,6 +24,24 @@ name firstName lastName salary, department_id Klassennamen: Employee, Department
 Ferner soll eine Navigation eingebaut werden, damit man alle Funktionalitäten erreichen kann,  
 es ist showRead 2 mal, und create 2 mal gemeint.
 
+Zwischenaufgaben:
+1. Kombination Vor- und Nachname muss Unique (einzigartig) sein
+2. Monatslohn soll nur Zeichen enthalten, die als Zahl interpretiert werden können
+3. SQL-Injection muss verhindert werden
+4. Alle Felder dürfen nicht leer sein
+5. Cross Site Scripting XSS z.B. <script>alert('123'); </script> in input-text-Feld
+
+- ad 1: wenn Kombi vom user eingegeben wird : Warnmeldung: "gibts schon" auf showCreate bzw. showUpdate
+        -> spaltenkombi firstName-lastName auf UNIQUE setzen
+        -> Möglichkeit a: SQL-Fehlermeldung aus lesen: wenn UNIQUE drin steht, dann: $view showCreateUser
+            plus Fehlermeldung
+           Möglichkeit b: Abfrage db: gibt es schon firstname= and lastName= in der Tabelle employee,
+           dann: $view showCreateUser plus Fehlermeldung
+        -> was muss ich bei showUpdateEmployee beachten?
+- ad 2, 5: es gibt in php sanitizer
+- ad 3: (es gibt sanitizer und) prepared statements bei sql
+- ad 4: Übergabeparameter überprüfen, wenn leer, muss user in showCreateEmployee neu eingeben plus Warnmeldung
+
 ## Technologien
 The stack used for this project was:
 - PHP
