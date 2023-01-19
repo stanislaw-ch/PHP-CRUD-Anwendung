@@ -36,7 +36,7 @@ class EmployeePage extends Modules{
     {
         $html =  '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="index.php" method="post">';
+                <form class="flex flex-col box-border" action="index.php?view=employees" method="post">';
 
         $html .= $this->getInput('Vorname', 'firstname');
         $html .= $this->getInput('Nachname', 'lastname');
@@ -139,7 +139,7 @@ class EmployeePage extends Modules{
                         ">
                             <span class="mr-auto hidden sm:flex">' . $employee['name'] .  '</span>
                             <button
-                                id="showUpdateEmp"
+                                id="showUpdateEmployee"
                                 class="
                                     w-12 mr-1 sm:ml-auto mr-auto
                                     bg-white hover:underline text-sm
@@ -147,10 +147,11 @@ class EmployeePage extends Modules{
                                 type="button"
                                 name="action"
                                 data-id="' . $employee['id'] . '"
+                                data-view="employees"
                             >Update
                             </button>
                             <button
-                                id="deleteEmp"
+                                id="deleteEmployee"
                                 class="
                                     w-12 mr-1 
                                     bg-white hover:underline text-sm
@@ -158,6 +159,7 @@ class EmployeePage extends Modules{
                                 type="button"
                                 name="action"
                                 data-id="' . $employee['id'] . '"
+                                data-view="employees"
                             >Delete
                             </button>
                         </div>
@@ -249,10 +251,10 @@ class EmployeePage extends Modules{
         if (strlen($id) !== 0){
             $html .= '</select>
                     <input type="hidden" name="id" value="' . $employeeId . '">
-                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateEmp">Update
+                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateEmployee">Update
                     </button>';
         } else $html .= '</select>
-                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createEmp">Create
+                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createEmployee">Create
                     </button>';
         return $html;
     }

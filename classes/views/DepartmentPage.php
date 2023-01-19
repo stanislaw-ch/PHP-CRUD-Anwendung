@@ -36,7 +36,7 @@ class DepartmentPage extends Modules{
     {
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="index.php" method="post">';
+                <form class="flex flex-col box-border" action="index.php?view=departments" method="post">';
 
         $html .= $this->getInput($this->id, $this->values);
         $html .= $this->getButtons($this->id);
@@ -68,7 +68,7 @@ class DepartmentPage extends Modules{
                         <span class="flex self-center justify-center w-8">' . ++$i . '</span>
                         <span class="flex self-center ppl-2">' . $item['name'] .  '</span>
                         <button
-                            id="showUpdateDep"
+                            id="showUpdateDepartment"
                             class="
                                 w-12 mr-1 ml-auto
                                 bg-white hover:underline text-sm
@@ -76,10 +76,11 @@ class DepartmentPage extends Modules{
                             type="button"
                             name="action"
                             data-id="' . $item['id'] . '"
+                            data-view="departments"
                         >Update
                         </button>
                         <button
-                            id="deleteDep"
+                            id="deleteDepartment"
                             class="
                                 w-12 mr-1
                                 bg-white hover:underline text-sm
@@ -87,6 +88,7 @@ class DepartmentPage extends Modules{
                             type="button"
                             name="action"
                             data-id="' . $item['id'] . '"
+                            data-view="departments"
                         >Delete
                         </button>
                     </li>';
@@ -134,10 +136,10 @@ class DepartmentPage extends Modules{
         $html = '';
 
         if (strlen($id) !== 0) {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDep">Update
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDepartment">Update
                         </button>';
         } else {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDep">Create
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDepartment">Create
                         </button>';
         }
         return $html;

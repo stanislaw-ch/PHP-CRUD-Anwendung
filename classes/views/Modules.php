@@ -78,7 +78,7 @@ abstract class Modules {
                   <ul class="flex justify-center">
                      <li>
                         <a 
-                            href="?action"
+                            href="?view=home"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -90,7 +90,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?action=employees"
+                            href="?view=employees&action=employees"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -102,7 +102,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?action=departments"
+                            href="?view=departments&action=departments"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 

@@ -1,8 +1,8 @@
 function addEventToButtons() {
-    const updateButtonsDep = document.querySelectorAll('#showUpdateDep');
-    const deleteButtonsDep = document.querySelectorAll('#deleteDep');
-    const updateButtonsEmp = document.querySelectorAll('#showUpdateEmp');
-    const deleteButtonsEmp = document.querySelectorAll('#deleteEmp');
+    const updateButtonsDep = document.querySelectorAll('#showUpdateDepartment');
+    const deleteButtonsDep = document.querySelectorAll('#deleteDepartment');
+    const updateButtonsEmp = document.querySelectorAll('#showUpdateEmployee');
+    const deleteButtonsEmp = document.querySelectorAll('#deleteEmployee');
 
     updateButtonsDep.forEach((button) => {
         button.addEventListener('click', actionHandler);
@@ -23,7 +23,9 @@ function addEventToButtons() {
 
 function actionHandler(e) {
     const id = e.target.dataset.id;
-    window.location.href = 'index.php?action=' + e.target.id + '&id=' + id;
+    const view = e.target.dataset.view;
+    console.log(e.target.id)
+    window.location.href = 'index.php?view=' + view + '&action=' + e.target.id + '&id=' + id;
 }
 
 addEventToButtons();
