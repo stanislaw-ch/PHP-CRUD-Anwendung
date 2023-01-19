@@ -73,7 +73,11 @@ class DBApi
 
             DBConfig::connect()->query($query);
         } catch (Exception $error) {
-            onError($error);
+            $messageEmployee = 'Kombination Vor- und Nachname muss Unique (einzigartig) sein';
+            $messageDepartment= 'Abteilungsname muss Unique (einzigartig) sein';
+
+            $message = $table === 'employee' ? $messageEmployee : $messageDepartment;
+            onError($error, $message);
         }
     }
 

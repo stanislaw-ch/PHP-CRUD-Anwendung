@@ -1,10 +1,13 @@
 drop database if exists firma;
 create database firma;
 use firma;
+drop table employees;
+drop table departments;
+drop table genders;
 create table departments (
                              id int primary key auto_increment,
-                             name varchar(45) not null
-
+                             name varchar(45) not null,
+                             UNIQUE (name)
 );
 
 insert into departments(id, name)
@@ -12,8 +15,6 @@ values (null, 'Produktion'),
        (null, 'Personalwesen'),
        (null, 'Marketing'),
        (null, 'Kundendienst');
-
-select * from departments;
 
 create table genders (
                          id int primary key auto_increment,
@@ -25,8 +26,6 @@ values (null, 'weiblich'),
        (null, 'männlich'),
        (null, 'diverse');
 
-select * from genders;
-
 create table employees (
                            id int primary key auto_increment,
                            firstname varchar(45) not null,
@@ -35,13 +34,13 @@ create table employees (
                            salary  double not null,
                            department_id int,
                            FOREIGN KEY(department_id) REFERENCES departments(id)
-                            ON DELETE SET NULL
-                            ON UPDATE SET NULL,
+                               ON DELETE SET NULL
+                               ON UPDATE SET NULL,
                            FOREIGN KEY(gender_id) REFERENCES genders(id)
                                ON DELETE SET NULL
-                               ON UPDATE SET NULL
+                               ON UPDATE SET NULL,
+                           CONSTRAINT UC_Employee UNIQUE (firstname,lastname)
 );
-
 
 insert into employees(id, firstname, lastname, salary, gender_id, department_id)
 values (null, 'Peter', 'Panne', 3500, 2, 1),
@@ -52,8 +51,6 @@ values (null, 'Peter', 'Panne', 3500, 2, 1),
        (null, 'Byron', 'Fields', 5000.00, 2, 1),
        (null, 'George', 'Edwards', 9050.00, 2, 4),
        (null, 'Rachel', 'Howell', 2750.00, 1, 3);
-
-select * from employees;
 
 SELECT employees.id, gender FROM employees LEFT JOIN genders g on g.id = employees.gender_id
                             GROUP BY g.id;

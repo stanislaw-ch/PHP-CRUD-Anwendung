@@ -30,8 +30,10 @@ function isValid($values, $errors): array
         }
     }
 
-    if (!is_numeric($values['salary']) && !empty($values['salary'])) {
-        $errors['salary'] = 'nur Zahlen sind erforderlich';
+    if (isset($values['salary'])) {
+        if (!is_numeric($values['salary']) && !empty($values['salary'])) {
+            $errors['salary'] = 'Nur Zahlen sind erforderlich';
+        }
     }
 
     return array($values, $errors);
