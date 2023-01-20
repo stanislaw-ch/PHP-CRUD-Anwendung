@@ -10,7 +10,7 @@ class DBApi
         try {
             $query = "SELECT $table.id, name, COUNT(e.department_id) AS 'count' FROM $table 
                             LEFT JOIN employees e ON e.department_id = $table.id
-                            GROUP BY $table.name
+                            GROUP BY $table.id
             ";
             $result = DBConfig::connect()->query($query);
 
@@ -85,6 +85,7 @@ class DBApi
 
     public function delete($table, $id): void
     {
+        $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
         try {
             $query = "DELETE FROM $table WHERE id = $id";
             DBConfig::connect()->query($query);
@@ -95,6 +96,8 @@ class DBApi
 
     public function update($table, $values, $id): void
     {
+        $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
+        $id = (int) $id;
         try {
             $query = "UPDATE $table SET ";
             foreach ($values as $field => $value) {
@@ -116,6 +119,7 @@ class DBApi
 
     public function getById($table, $id): bool|array|null
     {
+        $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
         try {
             $query = "SELECT * FROM $table WHERE id = $id";
             return DBConfig::connect()->query($query)->fetch_assoc();
@@ -123,13 +127,12 @@ class DBApi
             onError($error);
         }
 
-        print_r(DBConfig::connect()->query($query)->fetch_assoc());
-
         return false;
     }
 
     public function getEmployeeById($table, $id): bool|array|null
     {
+        $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
         try {
             $query = "SELECT $table.id, firstname, lastname, salary, gender, gender_id, department_id FROM $table 
                         JOIN genders g ON g.id = $table.gender_id                  

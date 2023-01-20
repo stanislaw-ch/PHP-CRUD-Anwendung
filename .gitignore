@@ -1,6 +1,9 @@
 # configuration file
 config.php
 task.txt
+composer.phar
+.phpunit.result.cache
 
-/.idea
-/log
+/.idea/
+/log/
+/vendor/

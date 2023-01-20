@@ -98,6 +98,8 @@ function getContent(
         case 'create' . ucfirst(rtrim($viewType, 's')):
             [$values, $errors] = isValid($values, $errors);
 
+            print_r($values);
+
             if (empty($errors)) {// TODO: check if exists
                 $object->create($values);
                 return new $objectPage($api);
