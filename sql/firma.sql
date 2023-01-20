@@ -14,6 +14,10 @@ insert into departments(id, name)
 values (null, 'Produktion'),
        (null, 'Personalwesen'),
        (null, 'Marketing'),
+       (null, 'Buchhaltung '),
+       (null, 'Forschung'),
+       (null, 'Geschäftsleitung'),
+       (null, 'IT und EDV'),
        (null, 'Kundendienst');
 
 create table genders (
@@ -50,7 +54,11 @@ values (null, 'Peter', 'Panne', 3500, 2, 1),
        (null, 'Tobias', 'Funke', 2350.00, 2, 2),
        (null, 'Byron', 'Fields', 5000.00, 2, 1),
        (null, 'George', 'Edwards', 9050.00, 2, 4),
-       (null, 'Rachel', 'Howell', 2750.00, 1, 3);
+       (null, 'Rachel', 'Howell', 2750.00, 1, 3),
+       (null, 'Celia', 'Hunter', 5650.00, 1, 7),
+       (null, 'Samara', 'Garrett', 4600.00, 1, 7),
+       (null, 'Carlos', 'Cain', 6600.00, 2, 7),
+       (null, 'Lia', 'Walls', 3750.00, 1, 8);
 
 SELECT employees.id, gender FROM employees LEFT JOIN genders g on g.id = employees.gender_id
                             GROUP BY g.id;

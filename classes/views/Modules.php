@@ -59,9 +59,8 @@ abstract class Modules {
     protected function getFooter(): string
     {
         return '
-            <footer class="flex flex-col bg-white h-24 mt-auto justify-center">
-                <h2 class="self-center">CRUD-Anwendung</h2>
-                <a href="https://github.com/stanislaw-ch/PHP-CRUD-Anwendung" target=”_blank” class="self-center hover:underline hover:underline-offset-4">GitHub</a>
+            <footer class="flex flex-col bg-slate-700 h-20 mt-auto justify-center">
+                <a href="https://github.com/stanislaw-ch/PHP-CRUD-Anwendung" target=”_blank” class="self-center hover:underline hover:underline-offset-4 text-white">GitHub</a>
             </footer>
             <script src="/assets/js/main.js"></script>
             </body>

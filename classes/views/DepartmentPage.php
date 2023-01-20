@@ -53,7 +53,7 @@ class DepartmentPage extends Modules{
         $data = $this->department->getDepartments();
 
         $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
                 <ul>
                     <li class="flex content-center h-10 text-white bg-slate-700">

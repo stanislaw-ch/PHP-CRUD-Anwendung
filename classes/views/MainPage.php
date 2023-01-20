@@ -25,12 +25,13 @@ class MainPage extends Modules{
         $data = $this->department->getDepartments();
 
         $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
+            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
                 <ul class="">
                     <li class="flex content-center h-10 text-white bg-slate-700">
                         <span class="flex self-center justify-center w-8">#</span>
-                        <span class="flex self-center justify-center flex-1">Abteilung</span>
+                        <span class="flex self-center basis-20 grow pl-2">Abteilung</span>
+                        <span class="flex self-center justify-center basis-20 ">Anz. MA</span>
                     </li>
         ';
 
@@ -38,7 +39,8 @@ class MainPage extends Modules{
             $html .= '
                     <li class="flex h-10 border-b border-gray-400 border-dashed">
                         <span class="flex self-center justify-center w-8">' . ++$i . '</span>
-                        <span class="flex self-center pl-2">' . $item['name'] .  '</span>
+                        <span class="flex self-center basis-20 grow pl-2">' . $item['name'] .  '</span>
+                        <span class="flex self-center justify-center basis-20 ">' .$item['count'] .  '</span>
                     </li>';
         }
 
@@ -55,7 +57,7 @@ class MainPage extends Modules{
                     w-full xl:w-4/6 
                     mx-auto 
                     mb-5 
-                    p-7 sm:p-5
+                    p-5 pb-10 md:p-7 md:pb-10
                     bg-white 
                     shadow-lg shadow-black-500/50
                     ">

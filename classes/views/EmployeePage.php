@@ -61,7 +61,7 @@ class EmployeePage extends Modules{
                     w-full xl:w-4/6  
                     mx-auto 
                     mb-5 
-                    p-7 sm:p-5
+                    p-5 pb-10 md:p-7 md:pb-10
                     bg-white 
                     shadow-lg shadow-black-500/50
                 ">

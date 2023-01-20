@@ -4,11 +4,14 @@ require_once "utils.php";
 
 class DBApi
 {
-    public function getAll($table): array
+    public function getDepartments($table): array
     {
         $results = [];
         try {
-            $query = "SELECT * FROM $table ORDER BY id ASC";
+            $query = "SELECT $table.id, name, COUNT(e.department_id) AS 'count' FROM $table 
+                            LEFT JOIN employees e ON e.department_id = $table.id
+                            GROUP BY $table.name
+            ";
             $result = DBConfig::connect()->query($query);
 
             for ($results = array(); $row = $result->fetch_assoc(); $results[] = $row) ;
@@ -24,8 +27,8 @@ class DBApi
         try {
             $query = "SELECT $table.id, firstname, lastname, salary, gender, name 
                     FROM $table 
-                    LEFT JOIN departments d on d.id = $table.department_id 
-                    LEFT JOIN genders g on g.id = $table.gender_id 
+                    LEFT JOIN departments d ON d.id = $table.department_id 
+                    LEFT JOIN genders g ON g.id = $table.gender_id 
                     GROUP BY $table.id";
             $result = DBConfig::connect()->query($query);
 
@@ -42,7 +45,7 @@ class DBApi
         $results = [];
         try {
             $query = "SELECT $table.id, gender FROM $table 
-                        LEFT JOIN employees e on e.gender_id = $table.id 
+                        LEFT JOIN employees e ON e.gender_id = $table.id 
                         GROUP BY $table.id";
             $result = DBConfig::connect()->query($query);
 
@@ -129,7 +132,7 @@ class DBApi
     {
         try {
             $query = "SELECT $table.id, firstname, lastname, salary, gender, gender_id, department_id FROM $table 
-                        JOIN genders g on g.id = $table.gender_id                  
+                        JOIN genders g ON g.id = $table.gender_id                  
                         AND $table.id = $id
                         GROUP BY $table.id";
             return DBConfig::connect()->query($query)->fetch_assoc();

@@ -28,7 +28,7 @@ abstract class GlobalClass
 
     public function getAllDepartments(): array
     {
-        return $this->api->getAll($this->tableName);
+        return $this->api->getDepartments($this->tableName);
     }
 
     public function getAllEmployees(): array

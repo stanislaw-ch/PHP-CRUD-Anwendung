@@ -1,5 +1,4 @@
 <?php
-
 require_once "service/DBApi.php";
 require_once "classes/Department.php";
 require_once "classes/views/MainPage.php";

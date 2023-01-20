@@ -5,7 +5,7 @@ function getSanitized($data): string
 {
     $data = trim($data);
     $data = stripslashes($data);
-    (int) $data && $data = preg_replace('/\,/', '.', $data);;
+    (int) $data && $data = preg_replace('/,/', '.', $data);
     return htmlspecialchars($data);
 }
 
@@ -92,25 +92,25 @@ function getContent(
     $values,
     $errors,
     $id
-): MainPage|EmployeePage|DepartmentPage
+)
 {
     switch ($action) {
         case 'create' . ucfirst(rtrim($viewType, 's')):
             [$values, $errors] = isValid($values, $errors);
 
-            if (empty($errors)) {
+            if (empty($errors)) {// TODO: check if exists
                 $object->create($values);
                 return new $objectPage($api);
             } else {
                 return new $objectPage($api, $errors, $id, $values);
             }
         case 'delete' . ucfirst(rtrim($viewType, 's')):
-            $object->delete($id);
+            $object->delete($id);// TODO: check if exists
             return new $objectPage($api);
         case 'update' . ucfirst(rtrim($viewType, 's')):
             [$values, $errors] = isValid($values, $errors);
 
-            if (empty($errors)) {
+            if (empty($errors)) {// TODO: check if exists
                 $object->update($values, $id);
                 return new $objectPage($api);
             } else {
