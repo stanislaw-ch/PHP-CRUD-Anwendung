@@ -24,7 +24,7 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent(): string
+    public function getContent(): void
     {
         $html = $this->getHeader();
         $html .= $this->getMenu();
@@ -32,7 +32,7 @@ abstract class Modules {
         $html .= $this->getMiddle();
         $html .= $this->getFooter();
 
-        return $html;
+        echo $html;
     }
 
     protected function getHeader(): string
@@ -77,7 +77,7 @@ abstract class Modules {
                   <ul class="flex justify-center">
                      <li>
                         <a 
-                            href="?view=home"
+                            href="/"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -89,7 +89,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?view=employees&action=employees"
+                            href="/employees"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -101,7 +101,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?view=departments&action=departments"
+                            href="/departments"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 

@@ -14,13 +14,13 @@ class ErrorPage {
         return "CRUD-Anwendung Error page";
     }
 
-    public function getContent(): string
+    public function getContent(): void
     {
         $html = $this->getHeader();
         $html .= $this->getMiddle($this->error);
         $html .= $this->getFooter();
 
-        return $html;
+        echo $html;
     }
 
     private function getHeader(): string
