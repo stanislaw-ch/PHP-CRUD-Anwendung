@@ -12,10 +12,10 @@ abstract class Modules {
     protected string $isActiveDepartment;
     protected string $activeClass;
 
-    public function __construct($api){
-        $this->department = new Department($api);
-        $this->employee = new Employee($api);
-        $this->gender = new Gender($api);
+    public function __construct(){
+        $this->department = new Department();
+        $this->employee = new Employee();
+        $this->gender = new Gender();
 
         $this->activeClass = 'border-b-2 border-black';
 
@@ -24,8 +24,12 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent(): void
+    public function getContent($params): void
     {
+
+        echo '<pre>';
+        var_dump($params);
+        echo '</pre>';
         $html = $this->getHeader();
         $html .= $this->getMenu();
         $html .= $this->getTop();
