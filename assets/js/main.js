@@ -24,8 +24,9 @@ function addEventToButtons() {
 function actionHandler(e) {
     const id = e.target.dataset.id;
     const view = e.target.dataset.view;
+    const action = e.target.dataset.action;
     console.log(e.target.id)
-    window.location.href = 'index.php?view=' + view + '&action=' + e.target.id + '&id=' + id;
+    window.location.href = '/' + view + (action ? '?action=' + action + '&': '?') + 'id=' + id;
 }
 
 addEventToButtons();
