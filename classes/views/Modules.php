@@ -12,10 +12,10 @@ abstract class Modules {
     protected string $isActiveDepartment;
     protected string $activeClass;
 
-    public function __construct($api){
-        $this->department = new Department($api);
-        $this->employee = new Employee($api);
-        $this->gender = new Gender($api);
+    public function __construct(){
+        $this->department = new Department();
+        $this->employee = new Employee();
+        $this->gender = new Gender();
 
         $this->activeClass = 'border-b-2 border-black';
 
@@ -24,15 +24,19 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent(): string
+    public function getContent($params): void
     {
+
+        echo '<pre>';
+        var_dump($params);
+        echo '</pre>';
         $html = $this->getHeader();
         $html .= $this->getMenu();
         $html .= $this->getTop();
         $html .= $this->getMiddle();
         $html .= $this->getFooter();
 
-        return $html;
+        echo $html;
     }
 
     protected function getHeader(): string
@@ -77,7 +81,7 @@ abstract class Modules {
                   <ul class="flex justify-center">
                      <li>
                         <a 
-                            href="?view=home"
+                            href="/"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -89,7 +93,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?view=employees&action=employees"
+                            href="/employees"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 
@@ -101,7 +105,7 @@ abstract class Modules {
                     </li>
                     <li>
                         <a 
-                            href="?view=departments&action=departments"
+                            href="/departments"
                             class="
                                 py-3.5 px-6 inline-block
                                 hover:bg-gray-300 font-medium 

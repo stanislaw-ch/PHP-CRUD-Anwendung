@@ -93,7 +93,7 @@ class DBApi
         }
     }
 
-    public function update($table, $values, $id): void
+    public function update($table, $id, $values): void
     {
         try {
             $query = "UPDATE $table SET ";

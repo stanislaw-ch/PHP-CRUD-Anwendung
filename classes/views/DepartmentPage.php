@@ -5,13 +5,25 @@ class DepartmentPage extends Modules{
     private string $id;
     protected array $errors;
     protected array $values;
+    protected string $action;
+    private string $name;
 
-    public function __construct($api, $errors=[], $id = '', $values=[]){
-        parent::__construct($api);
-        $this->id = $id;
-        $this->errors = $errors;
+    public function __construct($values=[]){
+        parent::__construct();
+        $this->id = $values['id'] ?? '';
+//        $this->errors = $errors;
         $this->values = $values;
+//        echo '<pre>';
+//        var_dump($_REQUEST);
+//
+//        echo '</pre>';
 
+        $this->action = $_REQUEST['action'] ?? '';
+        $this->name = $_REQUEST['name'] ?? '';
+
+//        echo '<pre>';
+//        var_dump($this->action);
+//        echo '</pre>';
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
@@ -36,7 +48,7 @@ class DepartmentPage extends Modules{
     {
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="index.php?view=departments" method="post">';
+                <form class="flex flex-col box-border" action="/departments" method="post">';
 
         $html .= $this->getInput($this->id, $this->values);
         $html .= $this->getButtons($this->id);
@@ -51,6 +63,25 @@ class DepartmentPage extends Modules{
     public function showDepartmentsTable(): string
     {
         $data = $this->department->getDepartments();
+
+        if ($this->action === 'delete') {
+            $this->department->delete($this->id);
+            header("Location: /departments");
+            exit;
+        }
+
+        if ($this->action === 'create') {
+            $this->department->create(["name" => $this->name]);
+            header("Location: /departments");
+            exit;
+        }
+
+        if ($this->action === 'update') {
+            $this->department->update($this->id, ["name" => $this->name]);
+            header("Location: /departments");
+            exit;
+        }
+
 
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
@@ -89,6 +120,7 @@ class DepartmentPage extends Modules{
                             name="action"
                             data-id="' . $item['id'] . '"
                             data-view="departments"
+                            data-action="delete"
                         >Delete
                         </button>
                     </li>';
@@ -117,16 +149,16 @@ class DepartmentPage extends Modules{
             }
             $html .= 'value="'. $name . '">';
             $html .= '<input type="hidden" name="id" value="' . $idDep . '">';
-        } elseif (strlen($id) === 0 && count($values) !== 0) {
+        } elseif (strlen($id) === 0 && count($values) > 1) {
             $html .= 'value="'. $values['name'] . '">';
-        } elseif (strlen($id) !== 0 && count($values) !== 0) {
+        } elseif (strlen($id) !== 0 && count($values) > 1) {
             $html .= 'value="'. $this->department->getById($id)['name'] . '">';
             $html .= '<input type="hidden" name="id" value="' . $this->department->getById($id)['id'] . '">';
         } else {
             $html .= '>';
         }
 
-        $html .= $this->isError($this->errors,'name');
+//        $html .= $this->isError($this->errors,'name');
 
         return $html;
     }
@@ -136,12 +168,16 @@ class DepartmentPage extends Modules{
         $html = '';
 
         if (strlen($id) !== 0) {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateDepartment">Update
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="update">Update
                         </button>';
         } else {
-            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createDepartment">Create
+            $html .= '<button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="create">Create
                         </button>';
         }
         return $html;
+    }
+
+    private function deleteByID($id) {
+        $this->department->delete($id);
     }
 }

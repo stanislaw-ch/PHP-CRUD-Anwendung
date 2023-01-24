@@ -6,8 +6,8 @@ abstract class GlobalClass
     private DBApi $api;
     private string $tableName;
 
-    protected function __construct(string $tableName, DBApi $api){
-        $this->api = $api;
+    protected function __construct(string $tableName){
+        $this->api = new DBApi();
         $this->tableName = $tableName;
     }
 
@@ -18,6 +18,8 @@ abstract class GlobalClass
 
     public function update($id, $values): void
     {
+        print_r($id);
+        print_r($values);
         $this->api->update($this->tableName, $id, $values);
     }
 

@@ -2,8 +2,8 @@
 require_once "GlobalClass.php";
 
 class Department extends GlobalClass {
-    public function __construct($api){
-        parent::__construct("departments", $api);
+    public function __construct(){
+        parent::__construct("departments");
     }
 
     public function getDepartments(): array
