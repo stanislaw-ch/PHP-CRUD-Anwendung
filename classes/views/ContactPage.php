@@ -24,15 +24,15 @@ class ContactPage extends Modules
 
     public function execute(array $params = []): void
     {
-        $this->action = $params['action'] ?? '';
-        $this->name = $params['name'] ?? '';
-        $this->id = $params['id'] ?? '';
-
-        var_dump($this->action);
-        var_dump($this->name);
-        var_dump($this->id);
-
-        require_once 'templates/contact.phtml';
+//        $this->action = $params['action'] ?? '';
+//        $this->name = $params['name'] ?? '';
+//        $this->id = $params['id'] ?? '';
+//
+//        var_dump($this->action);
+//        var_dump($this->name);
+//        var_dump($this->id);
+//
+//        require_once 'templates/departments.phtml';
     }
 
     protected function getTitle()

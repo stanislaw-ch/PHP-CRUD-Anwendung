@@ -8,18 +8,13 @@ class DepartmentPage extends Modules{
     protected string $action;
     private string $name;
 
-    public function __construct($values=[]){
+    public function __construct(){
         parent::__construct();
-        $this->id = $values['id'] ?? '';
+        $this->id = '';
 //        $this->errors = $errors;
-        $this->values = $values;
-//        echo '<pre>';
-//        var_dump($_REQUEST);
-//
-//        echo '</pre>';
-
-        $this->action = $_REQUEST['action'] ?? '';
-        $this->name = $_REQUEST['name'] ?? '';
+//        $this->values = [];
+        $this->action = '';
+        $this->name = '';
 
 //        echo '<pre>';
 //        var_dump($this->action);
@@ -27,6 +22,19 @@ class DepartmentPage extends Modules{
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
+    }
+
+    public function execute(array $params = []): void
+    {
+        $this->action = $params['action'] ?? '';
+        $this->name = $params['name'] ?? '';
+        $this->id = $params['id'] ?? '';
+
+        var_dump($this->action);
+        var_dump($this->name);
+        var_dump($this->id);
+
+        require_once 'templates/departments.phtml';
     }
 
     public function getTitle(): string

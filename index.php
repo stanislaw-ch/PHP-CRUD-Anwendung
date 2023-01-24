@@ -50,8 +50,8 @@ $router = new Router();
 
 $router->get('/', MainPage::class . '::getContent');
 $router->get('/employees', EmployeePage::class . '::getContent');
-$router->get('/departments', DepartmentPage::class . '::getContent');
-$router->post('/departments', DepartmentPage::class . '::getContent');
+$router->get('/departments', DepartmentPage::class . '::execute');
+$router->post('/departments', DepartmentPage::class . '::execute');
 $router->get('/contact', ContactPage::class . '::execute');
 $router->post('/contact', ContactPage::class . '::execute');
 
