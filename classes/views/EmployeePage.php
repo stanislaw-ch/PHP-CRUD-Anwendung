@@ -6,11 +6,15 @@ class EmployeePage extends Modules{
     protected array $errors;
     protected array $values;
 
-    public function __construct($api, $errors=[], $id = false, $values=[]){
-        parent::__construct($api);
-        $this->id = $id;
-        $this->errors = $errors;
+    public function __construct($values=[]){
+        parent::__construct();
+        $this->id = $values['id'] ?? '';
+        $this->errors = [];
         $this->values = $values;
+//        echo '<pre>';
+//        var_dump($this->values);
+//        echo '</pre>';
+
 
         $this->isActiveMain = '';
         $this->isActiveEmployee = $this->activeClass;
@@ -195,11 +199,11 @@ class EmployeePage extends Modules{
             $genders = $this->employee->getEmployeeById($id)[$type];
         }
 
-        if (strlen($id) !== 0 && count($values) === 0){
+        if (strlen($id) !== 0 && count($values) === 1){
             $html .= $this->getGendersRadio($genders);
-        } elseif (strlen($id) === 0 && count($values) !== 0) {
+        } elseif (strlen($id) === 0 && count($values) > 1) {
             $html .= $this->getGendersRadio($values[$type]);
-        } elseif (strlen($id) !== 0 && count($values) !== 0) {
+        } elseif (strlen($id) !== 0 && count($values) > 1) {
             $html .= $this->getGendersRadio($values[$type]);
         } else {
             $html .= $values[$type] ?? "<input type='hidden' name='gender_id'>";
@@ -268,11 +272,11 @@ class EmployeePage extends Modules{
             $value = $this->employee->getEmployeeById($id)[$type];
         }
 
-        if (strlen($id) !== 0 && count($values) === 0){
+        if (strlen($id) !== 0 && count($values) === 1){
             $html .= 'value="'. $value . '">';
-        } elseif (strlen($id) === 0 && count($values) !== 0) {
+        } elseif (strlen($id) === 0 && count($values) > 1) {
             $html .= 'value="'. $values[$type] . '">';
-        } elseif (strlen($id) !== 0 && count($values) !== 0) {
+        } elseif (strlen($id) !== 0 && count($values) > 1) {
             $html .= 'value="' . $values[$type] . '">';
         } else {
             $html .=   '>';
