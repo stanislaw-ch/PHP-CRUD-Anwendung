@@ -1,9 +1,11 @@
 <?php
-require_once "classes/Department.php";
-require_once "classes/Employee.php";
-require_once "classes/Gender.php";
 
-abstract class Modules {
+require_once "src/classes/Department.php";
+require_once "src/classes/Employee.php";
+require_once "src/classes/Gender.php";
+
+abstract class Modules
+{
     protected Department $department;
     protected Employee $employee;
     protected Gender $gender;
@@ -12,7 +14,8 @@ abstract class Modules {
     protected string $isActiveDepartment;
     protected string $activeClass;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->department = new Department();
         $this->employee = new Employee();
         $this->gender = new Gender();
@@ -24,7 +27,7 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent($params): void
+    public function getContent(): void
     {
         $sr["title"] = $this->getTitle();
         $sr["isActiveMain"] = $this->isActiveMain;
@@ -36,14 +39,15 @@ abstract class Modules {
     }
 
     abstract protected function getTitle();
+
     abstract protected function getMiddle();
 
     protected function isError($errors, $errorName): string
     {
         $html = '';
 
-        if (isset($errors[$errorName])){
-            $html .= '<span class="text-red-600 -mt-4 mb-3">'. $errors[$errorName] .'</span>';
+        if (isset($errors[$errorName])) {
+            $html .= '<span class="text-red-600 -mt-4 mb-3">' . $errors[$errorName] . '</span>';
         }
 
         return $html;
@@ -51,7 +55,7 @@ abstract class Modules {
 
     protected function getTemplate($name): array|bool|string
     {
-        return file_get_contents("tmpl/" . $name . ".tpl");
+        return file_get_contents("src/tmpl/" . $name . ".tpl");
     }
 
     protected function getReplaceContent($sr, $content): array|string

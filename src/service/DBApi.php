@@ -1,4 +1,5 @@
 <?php
+
 require_once "DBConfig.php";
 require_once "utils.php";
 
@@ -77,7 +78,7 @@ class DBApi
             DBConfig::connect()->query($query);
         } catch (Exception $error) {
             $message = $table === 'employees'
-                ? $values['firstname'] . ' ' . $values['lastname'] .' ist schon vorhanden'
+                ? $values['firstname'] . ' ' . $values['lastname'] . ' ist schon vorhanden'
                 : $values['name'] . ' ist schon vorhanden';
             onError($error, $message);
         }
@@ -108,7 +109,7 @@ class DBApi
             DBConfig::connect()->query($query);
         } catch (Exception $error) {
             $message = $table === 'employees'
-                ? $values['firstname'] . ' ' . $values['lastname'] .' ist schon vorhanden'
+                ? $values['firstname'] . ' ' . $values['lastname'] . ' ist schon vorhanden'
                 : $values['name'] . ' ist schon vorhanden';
             onError($error, $message);
         }

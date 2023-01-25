@@ -1,7 +1,9 @@
 <?php
-require_once "classes/views/Modules.php";
 
-class NotFoundPage extends Modules {
+require_once "src/classes/views/Modules.php";
+
+class NotFoundPage extends Modules
+{
     public function getTitle(): string
     {
         return "Page not found";

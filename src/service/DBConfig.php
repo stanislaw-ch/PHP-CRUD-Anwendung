@@ -1,4 +1,5 @@
 <?php
+
 require_once "config.php";
 require_once "utils.php";
 
@@ -11,7 +12,7 @@ class DBConfig
      */
     public static function connect(): object
     {
-        if (!isset(self::$dbh)){
+        if (!isset(self::$dbh)) {
             try {
                 self::$dbh = new mysqli(
                     DB_SERVER,

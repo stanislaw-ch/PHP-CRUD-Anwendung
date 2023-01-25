@@ -17,11 +17,11 @@
                    class="py-3.5 px-6 inline-block hover:bg-gray-300 font-medium %isActiveMain%">Home</a>
             </li>
             <li>
-                <a href="/employees"
+                <a href="employees"
                    class="py-3.5 px-6 inline-block hover:bg-gray-300 font-medium %isActiveEmployee%">Mitarbeiter</a>
             </li>
             <li>
-                <a href="/departments"
+                <a href="departments"
                    class="py-3.5 px-6 inline-block hover:bg-gray-300 font-medium %isActiveDepartment%">Abteilungen</a>
             </li>
         </ul>
@@ -34,6 +34,6 @@
     <a href="https://github.com/stanislaw-ch/PHP-CRUD-Anwendung" target=”_blank”
        class="self-center hover:underline hover:underline-offset-4 text-white">GitHub</a>
 </footer>
-<script src="/assets/js/main.js"></script>
+<script src="/src/assets/js/main.js"></script>
 </body>
 </html>

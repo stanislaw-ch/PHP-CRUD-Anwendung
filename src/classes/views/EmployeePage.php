@@ -1,14 +1,17 @@
 <?php
-require_once "classes/views/Modules.php";
 
-class EmployeePage extends Modules{
+require_once "src/classes/views/Modules.php";
+
+class EmployeePage extends Modules
+{
     private string $id;
     private array $errors;
     private array $values;
     private array $params;
     private string $action;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->id = '';
         $this->errors = [];
@@ -88,7 +91,7 @@ class EmployeePage extends Modules{
         $employees = $this->employee->getAllEmployees();
         $html = '';
 
-        foreach ($employees as $i=>$employee) {
+        foreach ($employees as $i => $employee) {
             $html .= '
                     <li class="flex h-10 border-b border-gray-400 border-dashed">
                         <span class="
@@ -100,24 +103,24 @@ class EmployeePage extends Modules{
                             pl-2 
                             basis-40 
                             hidden md:flex
-                        ">' . $employee['firstname'] .  '</span>
+                        ">' . $employee['firstname'] . '</span>
                         <span class="
                             flex self-center 
                             pl-2 
                             basis-40
-                        ">' . $employee['lastname'] .  '</span>
+                        ">' . $employee['lastname'] . '</span>
                         <span class="
                             flex self-center 
                             pl-2 
                             basis-40 
                             hidden lg:flex
-                        ">' . $employee['gender'] .  '</span>
+                        ">' . $employee['gender'] . '</span>
                         <span class=" 
                             flex self-center 
                             pl-2  
                             basis-40  
                             hidden sm:flex
-                        ">' . $employee['salary'] .  '</span>
+                        ">' . $employee['salary'] . '</span>
                         <div class="
                             flex self-center 
                             sm:justify-start
@@ -125,7 +128,7 @@ class EmployeePage extends Modules{
                             basis-40 md:basis-80
                             pl-2
                         ">
-                            <span class="mr-auto hidden sm:flex">' . $employee['name'] .  '</span>
+                            <span class="mr-auto hidden sm:flex">' . $employee['name'] . '</span>
                             <button
                                 id="showUpdateEmployee"
                                 class="
@@ -160,7 +163,7 @@ class EmployeePage extends Modules{
 
     private function getInput($label, $type): string
     {
-        $html =  '<label for="' . $type . '" class="block text-md font-medium">' . $label . '</label>
+        $html = '<label for="' . $type . '" class="block text-md font-medium">' . $label . '</label>
                     <input
                             id="$type" type="text"
                             name="' . $type . '"
@@ -168,7 +171,7 @@ class EmployeePage extends Modules{
                             placeholder="' . $label . '"';
 
         $html .= $this->getInputValue($this->id, $this->params, $type);
-        $html .= $this->isError($this->errors,$type);
+        $html .= $this->isError($this->errors, $type);
 
         return $html;
     }
@@ -176,14 +179,14 @@ class EmployeePage extends Modules{
     private function getGenderRadio($id, $values): string
     {
         $type = 'gender_id';
-        $html ='<label for="gender" class="block text-md font-medium">Geschlecht</label>';
+        $html = '<label for="gender" class="block text-md font-medium">Geschlecht</label>';
         $genders = '';
 
         if ($this->employee->getEmployeeById($id)) {
             $genders = $this->employee->getEmployeeById($id)[$type];
         }
 
-        if (strlen($id) !== 0 && count($values) === 1){
+        if (strlen($id) !== 0 && count($values) === 1) {
             $html .= $this->getGendersRadio($genders);
         } elseif (strlen($id) === 0 && count($values) > 1) {
             $html .= $this->getGendersRadio($values[$type]);
@@ -202,7 +205,7 @@ class EmployeePage extends Modules{
     {
         $departments = $this->department->getDepartments();
 
-        $html ='<label for="department" class="block text-md mb-5 font-medium">Abteilung</label>
+        $html = '<label for="department" class="block text-md mb-5 font-medium">Abteilung</label>
                     <select 
                             name="department_id" 
                             class="border-b-2 border-black mb-5 h-8 focus:outline-none"
@@ -210,7 +213,7 @@ class EmployeePage extends Modules{
         ';
 
         foreach ($departments as $department) {
-            $html .= '<option value="'. $department['id'] . '"';
+            $html .= '<option value="' . $department['id'] . '"';
             $departmentId = '';
 
             if ($this->employee->getEmployeeById($this->id)) {
@@ -236,7 +239,7 @@ class EmployeePage extends Modules{
             $employeeId = $this->employee->getEmployeeById($id)['id'];
         }
 
-        if (strlen($id) !== 0){
+        if (strlen($id) !== 0) {
             $html .= '</select>
                     <input type="hidden" name="id" value="' . $employeeId . '">
                     <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="update">Update
@@ -256,14 +259,14 @@ class EmployeePage extends Modules{
             $value = $this->employee->getEmployeeById($id)[$type];
         }
 
-        if (strlen($id) !== 0 && count($values) === 1){
-            $html .= 'value="'. $value . '">';
+        if (strlen($id) !== 0 && count($values) === 1) {
+            $html .= 'value="' . $value . '">';
         } elseif (strlen($id) === 0 && count($values) > 1) {
-            $html .= 'value="'. $values[$type] . '">';
+            $html .= 'value="' . $values[$type] . '">';
         } elseif (strlen($id) !== 0 && count($values) > 1) {
             $html .= 'value="' . $values[$type] . '">';
         } else {
-            $html .=   '>';
+            $html .= '>';
         }
 
         return $html;

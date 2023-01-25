@@ -1,5 +1,6 @@
 <?php
-require_once "service/DBApi.php";
+
+require_once "src/service/DBApi.php";
 
 class Router
 {
@@ -49,7 +50,6 @@ class Router
                 $callback = $handler['handler'];
             }
         }
-
 
 
         if (is_string($callback)) {

@@ -1,12 +1,14 @@
 <?php
-require_once "service/DBApi.php";
+
+require_once "src/service/DBApi.php";
 
 abstract class GlobalClass
 {
     private DBApi $api;
     private string $tableName;
 
-    protected function __construct(string $tableName){
+    protected function __construct(string $tableName)
+    {
         $this->api = new DBApi();
         $this->tableName = $tableName;
     }

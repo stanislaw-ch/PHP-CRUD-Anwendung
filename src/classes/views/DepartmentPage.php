@@ -1,21 +1,24 @@
 <?php
-require_once "classes/views/Modules.php";
 
-class DepartmentPage extends Modules{
+require_once "src/classes/views/Modules.php";
+
+class DepartmentPage extends Modules
+{
     private string $id;
     private array $errors;
     private array $values;
     private array $params;
     private string $action;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->id = '';
         $this->errors = [];
         $this->values = [];
         $this->params = [];
         $this->action = '';
-        
+
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
@@ -83,11 +86,11 @@ class DepartmentPage extends Modules{
         $data = $this->department->getDepartments();
         $html = '';
 
-        foreach ($data as $i=>$item) {
+        foreach ($data as $i => $item) {
             $html .= '
                     <li class="flex h-10 border-b border-gray-400 border-dashed">
                         <span class="flex self-center justify-center w-8">' . ++$i . '</span>
-                        <span class="flex self-center ppl-2">' . $item['name'] .  '</span>
+                        <span class="flex self-center ppl-2">' . $item['name'] . '</span>
                         <button
                             id="showUpdateDepartment"
                             class="
@@ -136,18 +139,18 @@ class DepartmentPage extends Modules{
                 $name = $this->department->getById($id)['name'];
                 $idDep = $this->department->getById($id)['id'];
             }
-            $html .= 'value="'. $name . '">';
+            $html .= 'value="' . $name . '">';
             $html .= '<input type="hidden" name="id" value="' . $idDep . '">';
         } elseif (strlen($id) === 0 && count($values) > 1) {
-            $html .= 'value="'. $values['name'] . '">';
+            $html .= 'value="' . $values['name'] . '">';
         } elseif (strlen($id) !== 0 && count($values) > 1) {
-            $html .= 'value="'. $this->department->getById($id)['name'] . '">';
+            $html .= 'value="' . $this->department->getById($id)['name'] . '">';
             $html .= '<input type="hidden" name="id" value="' . $this->department->getById($id)['id'] . '">';
         } else {
             $html .= '>';
         }
 
-//        $html .= $this->isError($this->errors,'name');
+        $html .= $this->isError($this->errors, 'name');
 
         return $html;
     }
@@ -166,7 +169,4 @@ class DepartmentPage extends Modules{
         return $html;
     }
 
-    private function deleteByID($id) {
-        $this->department->delete($id);
-    }
 }
