@@ -1,7 +1,7 @@
 # "PHP-CRUD-Anwendung"
 Die praktische Aufgabe für OOP PHP Anwendung
 
-Weblink: https://php-crud.na4u.ru/index.php
+Weblink: https://php-crud.na4u.ru
 
 ## Table of contents
 - Die Aufgabe
