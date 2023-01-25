@@ -10,7 +10,7 @@ class DBApi
         try {
             $query = "SELECT $table.id, name, COUNT(e.department_id) AS 'count' FROM $table 
                             LEFT JOIN employees e ON e.department_id = $table.id
-                            GROUP BY $table.name
+                            GROUP BY $table.id
             ";
             $result = DBConfig::connect()->query($query);
 

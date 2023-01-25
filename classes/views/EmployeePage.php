@@ -3,22 +3,57 @@ require_once "classes/views/Modules.php";
 
 class EmployeePage extends Modules{
     private string $id;
-    protected array $errors;
-    protected array $values;
+    private array $errors;
+    private array $values;
+    private array $params;
+    private string $action;
 
-    public function __construct($values=[]){
+    public function __construct(){
         parent::__construct();
-        $this->id = $values['id'] ?? '';
+        $this->id = '';
         $this->errors = [];
-        $this->values = $values;
-//        echo '<pre>';
-//        var_dump($this->values);
-//        echo '</pre>';
-
+        $this->values = [];
+        $this->params = [];
+        $this->action = '';
 
         $this->isActiveMain = '';
         $this->isActiveEmployee = $this->activeClass;
         $this->isActiveDepartment = '';
+    }
+
+    public function execute(array $params = []): void
+    {
+        $this->action = $params['action'] ?? '';
+        $this->id = $params['id'] ?? '';
+        $this->params = $params;
+
+        $this->getContent();
+    }
+
+    private function actionHandler($action)
+    {
+        $paramFields = ['firstname', 'lastname', 'gender_id', 'salary', 'department_id'];
+
+        switch ($action) {
+            case 'create':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->employee->create(getFieldsToSend($paramFields, $this->params));
+                    header("Location: /employees");
+                }
+                break;
+            case 'update':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->employee->update($this->id, getFieldsToSend($paramFields, $this->params));
+                    header("Location: /employees");
+                }
+                break;
+            case 'delete':
+                $this->employee->delete($this->id);
+                header("Location: /employees");
+                break;
+        }
     }
 
     public function getTitle(): string
@@ -38,13 +73,15 @@ class EmployeePage extends Modules{
 
     private function showEmployeeForm(): string
     {
+        $this->actionHandler($this->action);
+
         $html =  '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="index.php?view=employees" method="post">';
+                <form class="flex flex-col box-border" action="/employees" method="post">';
 
         $html .= $this->getInput('Vorname', 'firstname');
         $html .= $this->getInput('Nachname', 'lastname');
-        $html .= $this->getGenderRadio($this->id, $this->values);
+        $html .= $this->getGenderRadio($this->id, $this->params);
         $html .= $this->getInput('Gehalt', 'salary');
         $html .= $this->getDepartmentsSelect();
         $html .= $this->getButtons($this->id);
@@ -183,7 +220,7 @@ class EmployeePage extends Modules{
                             class="border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
                             placeholder="' . $label . '"';
 
-        $html .= $this->getInputValue($this->id, $this->values, $type);
+        $html .= $this->getInputValue($this->id, $this->params, $type);
         $html .= $this->isError($this->errors,$type);
 
         return $html;
@@ -255,10 +292,10 @@ class EmployeePage extends Modules{
         if (strlen($id) !== 0){
             $html .= '</select>
                     <input type="hidden" name="id" value="' . $employeeId . '">
-                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="updateEmployee">Update
+                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="update">Update
                     </button>';
         } else $html .= '</select>
-                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="createEmployee">Create
+                    <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="create">Create
                     </button>';
         return $html;
     }

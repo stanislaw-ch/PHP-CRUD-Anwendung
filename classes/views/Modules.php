@@ -24,12 +24,8 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent($params): void
+    public function getContent(): void
     {
-
-        echo '<pre>';
-        var_dump($params);
-        echo '</pre>';
         $html = $this->getHeader();
         $html .= $this->getMenu();
         $html .= $this->getTop();

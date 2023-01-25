@@ -3,22 +3,19 @@ require_once "classes/views/Modules.php";
 
 class DepartmentPage extends Modules{
     private string $id;
-    protected array $errors;
-    protected array $values;
-    protected string $action;
-    private string $name;
+    private array $errors;
+    private array $values;
+    private array $params;
+    private string $action;
 
     public function __construct(){
         parent::__construct();
         $this->id = '';
-//        $this->errors = $errors;
-//        $this->values = [];
+        $this->errors = [];
+        $this->values = [];
+        $this->params = [];
         $this->action = '';
-        $this->name = '';
 
-//        echo '<pre>';
-//        var_dump($this->action);
-//        echo '</pre>';
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
@@ -27,14 +24,36 @@ class DepartmentPage extends Modules{
     public function execute(array $params = []): void
     {
         $this->action = $params['action'] ?? '';
-        $this->name = $params['name'] ?? '';
         $this->id = $params['id'] ?? '';
+        $this->params = $params;
 
-        var_dump($this->action);
-        var_dump($this->name);
-        var_dump($this->id);
+        $this->getContent();
+    }
 
-        require_once 'templates/departments.phtml';
+    private function actionHandler($action)
+    {
+        $paramFields = ['name'];
+
+        switch ($action) {
+            case 'create':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->department->create(getFieldsToSend($paramFields, $this->params));
+                    header("Location: /departments");
+                }
+                break;
+            case 'update':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->department->update($this->id, getFieldsToSend($paramFields, $this->params));
+                    header("Location: /departments");
+                }
+                break;
+            case 'delete':
+                $this->department->delete($this->id);
+                header("Location: /departments");
+                break;
+        }
     }
 
     public function getTitle(): string
@@ -52,8 +71,10 @@ class DepartmentPage extends Modules{
         return $this->showDepartmentsTable();
     }
 
-    private function showDepartmentForm(): string
+    public function showDepartmentForm(): string
     {
+        $this->actionHandler($this->action);
+
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
                 <form class="flex flex-col box-border" action="/departments" method="post">';
@@ -71,25 +92,6 @@ class DepartmentPage extends Modules{
     public function showDepartmentsTable(): string
     {
         $data = $this->department->getDepartments();
-
-        if ($this->action === 'delete') {
-            $this->department->delete($this->id);
-            header("Location: /departments");
-            exit;
-        }
-
-        if ($this->action === 'create') {
-            $this->department->create(["name" => $this->name]);
-            header("Location: /departments");
-            exit;
-        }
-
-        if ($this->action === 'update') {
-            $this->department->update($this->id, ["name" => $this->name]);
-            header("Location: /departments");
-            exit;
-        }
-
 
         $html = '
             <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
@@ -166,7 +168,7 @@ class DepartmentPage extends Modules{
             $html .= '>';
         }
 
-//        $html .= $this->isError($this->errors,'name');
+        $html .= $this->isError($this->errors,'name');
 
         return $html;
     }
@@ -183,9 +185,5 @@ class DepartmentPage extends Modules{
                         </button>';
         }
         return $html;
-    }
-
-    private function deleteByID($id) {
-        $this->department->delete($id);
     }
 }
