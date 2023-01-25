@@ -201,6 +201,7 @@ class EmployeePage extends Modules{
                                 name="action"
                                 data-id="' . $employee['id'] . '"
                                 data-view="employees"
+                                data-action="delete"
                             >Delete
                             </button>
                         </div>
