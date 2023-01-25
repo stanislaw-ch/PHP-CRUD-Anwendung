@@ -3,30 +3,57 @@ require_once "classes/views/Modules.php";
 
 class DepartmentPage extends Modules{
     private string $id;
-    protected array $errors;
-    protected array $values;
-    protected string $action;
-    private string $name;
+    private array $errors;
+    private array $values;
+    private array $params;
+    private string $action;
 
-    public function __construct($values=[]){
+    public function __construct(){
         parent::__construct();
-        $this->id = $values['id'] ?? '';
-//        $this->errors = $errors;
-        $this->values = $values;
-//        echo '<pre>';
-//        var_dump($_REQUEST);
-//
-//        echo '</pre>';
-
-        $this->action = $_REQUEST['action'] ?? '';
-        $this->name = $_REQUEST['name'] ?? '';
-
-//        echo '<pre>';
-//        var_dump($this->action);
-//        echo '</pre>';
+        $this->id = '';
+        $this->errors = [];
+        $this->values = [];
+        $this->params = [];
+        $this->action = '';
+        
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
+    }
+
+    public function execute(array $params = []): void
+    {
+        $this->action = $params['action'] ?? '';
+        $this->id = $params['id'] ?? '';
+        $this->params = $params;
+
+        $this->getContent();
+    }
+
+    private function actionHandler($action)
+    {
+        $paramFields = ['name'];
+
+        switch ($action) {
+            case 'create':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->department->create(getFieldsToSend($paramFields, $this->params));
+                    header("Location: /departments");
+                }
+                break;
+            case 'update':
+                [$this->values, $this->errors] = isValid($this->params, $this->errors);;
+                if (empty($this->errors)) {// TODO: check if exists
+                    $this->department->update($this->id, getFieldsToSend($paramFields, $this->params));
+                    header("Location: /departments");
+                }
+                break;
+            case 'delete':
+                $this->department->delete($this->id);
+                header("Location: /departments");
+                break;
+        }
     }
 
     public function getTitle(): string
@@ -34,28 +61,19 @@ class DepartmentPage extends Modules{
         return "CRUD-Anwendung Department page";
     }
 
-    protected function getTop(): string
-    {
-        return $this->showDepartmentForm();
-    }
-
     protected function getMiddle(): string
     {
-        return $this->showDepartmentsTable();
+        $sr['createForm'] = $this->showDepartmentForm();
+        $sr['table'] = $this->showDepartmentsTable();
+
+        return $this->getReplaceTemplate($sr, "departmentsPage");
     }
 
-    private function showDepartmentForm(): string
+    public function showDepartmentForm(): string
     {
-        $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="/departments" method="post">';
-
-        $html .= $this->getInput($this->id, $this->values);
+        $this->actionHandler($this->action);
+        $html = $this->getInput($this->id, $this->values);
         $html .= $this->getButtons($this->id);
-
-        $html .= '      </form>
-            </div>
-        ';
 
         return $html;
     }
@@ -63,35 +81,7 @@ class DepartmentPage extends Modules{
     public function showDepartmentsTable(): string
     {
         $data = $this->department->getDepartments();
-
-        if ($this->action === 'delete') {
-            $this->department->delete($this->id);
-            header("Location: /departments");
-            exit;
-        }
-
-        if ($this->action === 'create') {
-            $this->department->create(["name" => $this->name]);
-            header("Location: /departments");
-            exit;
-        }
-
-        if ($this->action === 'update') {
-            $this->department->update($this->id, ["name" => $this->name]);
-            header("Location: /departments");
-            exit;
-        }
-
-
-        $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
-                <ul>
-                    <li class="flex content-center h-10 text-white bg-slate-700">
-                        <span class="flex self-center justify-center w-8">#</span>
-                        <span class="flex self-center justify-center flex-1">Abteilung</span>
-                    </li>
-        ';
+        $html = '';
 
         foreach ($data as $i=>$item) {
             $html .= '
@@ -126,7 +116,6 @@ class DepartmentPage extends Modules{
                     </li>';
         }
 
-        $html .= '</ul></div>';
         return $html;
     }
 

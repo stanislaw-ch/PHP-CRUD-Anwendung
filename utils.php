@@ -77,48 +77,11 @@ function onError($error, $errorMessage = 'Fehler bei der Datenbankverbindung!'):
     echo $errorPage->getContent();
 }
 
-function getValuesWithoutID($post): array
+function getFieldsToSend($paramFields,$params): array
 {
-    if (count($post) > 1) array_pop($post);
-    return $post;
-}
-
-function getContent(
-    $api,
-    $action,
-    $object,
-    $objectPage,
-    $viewType,
-    $values,
-    $errors,
-    $id
-)
-{
-    switch ($action) {
-        case 'create' . ucfirst(rtrim($viewType, 's')):
-            [$values, $errors] = isValid($values, $errors);
-
-            if (empty($errors)) {// TODO: check if exists
-                $object->create($values);
-                return new $objectPage($api);
-            } else {
-                return new $objectPage($api, $errors, $id, $values);
-            }
-        case 'delete' . ucfirst(rtrim($viewType, 's')):
-            $object->delete($id);// TODO: check if exists
-            return new $objectPage($api);
-        case 'update' . ucfirst(rtrim($viewType, 's')):
-            [$values, $errors] = isValid($values, $errors);
-
-            if (empty($errors)) {// TODO: check if exists
-                $object->update($values, $id);
-                return new $objectPage($api);
-            } else {
-                return new $objectPage($api, $errors, $id, $values);
-            }
-        case 'showUpdate' . ucfirst(rtrim($viewType, 's')):
-            return new $objectPage($api, $errors, $id);
-        case $viewType:
-            return new $objectPage($api);
+    $fieldsToSend = [];
+    foreach ($paramFields as $field) {
+        $fieldsToSend[$field] = $params[$field];
     }
+    return $fieldsToSend;
 }
