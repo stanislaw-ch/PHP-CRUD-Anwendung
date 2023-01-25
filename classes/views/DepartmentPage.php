@@ -7,7 +7,6 @@ class DepartmentPage extends Modules{
     private array $values;
     private array $params;
     private string $action;
-    private $departmentInfo;
 
     public function __construct(){
         parent::__construct();
@@ -16,7 +15,6 @@ class DepartmentPage extends Modules{
         $this->values = [];
         $this->params = [];
         $this->action = '';
-        $this->departmentInfo = $this->department->getDepartments();
 
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';

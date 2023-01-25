@@ -8,7 +8,7 @@
     <h2 class="mb-5 text-center text-lg">Mitarbeiter</h2>
     <ul>
         <li class="flex content-center h-10 text-white bg-slate-700">
-                        <span class="flex self-center justify-center w-8">#</span>
+            <span class="flex self-center justify-center w-8">#</span>
             <span class="flex self-center basis-40 pl-2 hidden md:flex">Vorname</span>
             <span class="flex self-center basis-40 pl-2">Nachname</span>
             <span class="flex self-center basis-40 pl-2 hidden lg:flex">Geschlecht</span>
