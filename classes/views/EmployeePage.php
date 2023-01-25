@@ -61,34 +61,24 @@ class EmployeePage extends Modules{
         return "CRUD-Anwendung Employee page";
     }
 
-    protected function getTop(): string
-    {
-        return $this->showEmployeeForm();
-    }
-
     protected function getMiddle(): string
     {
-        return $this->showEmployeesTable();
+        $sr['createForm'] = $this->showEmployeeForm();
+        $sr['table'] = $this->showEmployeesTable();
+
+        return $this->getReplaceTemplate($sr, "employeesPage");
     }
 
     private function showEmployeeForm(): string
     {
         $this->actionHandler($this->action);
 
-        $html =  '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="/employees" method="post">';
-
-        $html .= $this->getInput('Vorname', 'firstname');
+        $html = $this->getInput('Vorname', 'firstname');
         $html .= $this->getInput('Nachname', 'lastname');
         $html .= $this->getGenderRadio($this->id, $this->params);
         $html .= $this->getInput('Gehalt', 'salary');
         $html .= $this->getDepartmentsSelect();
         $html .= $this->getButtons($this->id);
-
-        $html .= '       </form>
-            </div>
-        ';
 
         return $html;
     }
@@ -96,50 +86,7 @@ class EmployeePage extends Modules{
     public function showEmployeesTable(): string
     {
         $employees = $this->employee->getAllEmployees();
-
-        $html = '
-            <div class="
-                    w-full xl:w-4/6  
-                    mx-auto 
-                    mb-5 
-                    p-5 pb-10 md:p-7 md:pb-10
-                    bg-white 
-                    shadow-lg shadow-black-500/50
-                ">
-                <h2 class="mb-5 text-center text-lg">Mitarbeiter</h2>
-                <ul>
-                    <li class="flex content-center h-10 text-white bg-slate-700">
-                        <span class="
-                            flex self-center justify-center
-                            w-8
-                            ">#</span>
-                        <span class="
-                            flex self-center 
-                            basis-40 pl-2 
-                            hidden md:flex
-                        ">Vorname</span>
-                        <span class="
-                            flex self-center  
-                            basis-40 pl-2
-                        ">Nachname</span>
-                        <span class="
-                            flex self-center  
-                            basis-40 pl-2
-                            hidden lg:flex
-                        ">Geschlecht</span>
-                        <span class=" 
-                            flex self-center  
-                            basis-40 pl-2
-                            hidden sm:flex
-                        ">Gehalt</span>
-                        <span class="
-                            flex self-center  
-                            grow pl-2
-                            text-transparent sm:text-white
-                            basis-40 md:basis-80 
-                        ">Abteilung</span>
-                    </li>
-        ';
+        $html = '';
 
         foreach ($employees as $i=>$employee) {
             $html .= '
@@ -208,7 +155,6 @@ class EmployeePage extends Modules{
                     </li>';
         }
 
-        $html .= '</ul></div>';
         return $html;
     }
 

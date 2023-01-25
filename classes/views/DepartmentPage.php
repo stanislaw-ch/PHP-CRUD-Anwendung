@@ -7,6 +7,7 @@ class DepartmentPage extends Modules{
     private array $values;
     private array $params;
     private string $action;
+    private $departmentInfo;
 
     public function __construct(){
         parent::__construct();
@@ -15,6 +16,7 @@ class DepartmentPage extends Modules{
         $this->values = [];
         $this->params = [];
         $this->action = '';
+        $this->departmentInfo = $this->department->getDepartments();
 
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
@@ -61,30 +63,20 @@ class DepartmentPage extends Modules{
         return "CRUD-Anwendung Department page";
     }
 
-    protected function getTop(): string
-    {
-        return $this->showDepartmentForm();
-    }
-
     protected function getMiddle(): string
     {
-        return $this->showDepartmentsTable();
+        $sr['createForm'] = $this->showDepartmentForm();
+        $sr['table'] = $this->showDepartmentsTable();
+
+        return $this->getReplaceTemplate($sr, "departmentsPage");
     }
 
     public function showDepartmentForm(): string
     {
         $this->actionHandler($this->action);
 
-        $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <form class="flex flex-col box-border" action="/departments" method="post">';
-
-        $html .= $this->getInput($this->id, $this->values);
+        $html = $this->getInput($this->id, $this->values);
         $html .= $this->getButtons($this->id);
-
-        $html .= '      </form>
-            </div>
-        ';
 
         return $html;
     }
@@ -92,16 +84,7 @@ class DepartmentPage extends Modules{
     public function showDepartmentsTable(): string
     {
         $data = $this->department->getDepartments();
-
-        $html = '
-            <div class="md:w-96 sm:w-96 w-full mx-auto p-7 pb-10 mb-5 bg-white shadow-lg shadow-black-500/50">
-                <h2 class="mb-5 text-center text-lg">Abteilungen</h2>
-                <ul>
-                    <li class="flex content-center h-10 text-white bg-slate-700">
-                        <span class="flex self-center justify-center w-8">#</span>
-                        <span class="flex self-center justify-center flex-1">Abteilung</span>
-                    </li>
-        ';
+        $html = '';
 
         foreach ($data as $i=>$item) {
             $html .= '
@@ -136,7 +119,6 @@ class DepartmentPage extends Modules{
                     </li>';
         }
 
-        $html .= '</ul></div>';
         return $html;
     }
 
