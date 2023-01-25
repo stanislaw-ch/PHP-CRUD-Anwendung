@@ -24,7 +24,7 @@ abstract class Modules {
         $this->isActiveDepartment = '';
     }
 
-    public function getContent(): void
+    public function getContent($params): void
     {
         $sr["title"] = $this->getTitle();
         $sr["isActiveMain"] = $this->isActiveMain;

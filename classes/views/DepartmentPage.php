@@ -15,7 +15,7 @@ class DepartmentPage extends Modules{
         $this->values = [];
         $this->params = [];
         $this->action = '';
-
+        
         $this->isActiveMain = '';
         $this->isActiveEmployee = '';
         $this->isActiveDepartment = $this->activeClass;
@@ -72,7 +72,6 @@ class DepartmentPage extends Modules{
     public function showDepartmentForm(): string
     {
         $this->actionHandler($this->action);
-
         $html = $this->getInput($this->id, $this->values);
         $html .= $this->getButtons($this->id);
 
@@ -148,7 +147,7 @@ class DepartmentPage extends Modules{
             $html .= '>';
         }
 
-        $html .= $this->isError($this->errors,'name');
+//        $html .= $this->isError($this->errors,'name');
 
         return $html;
     }
@@ -165,5 +164,9 @@ class DepartmentPage extends Modules{
                         </button>';
         }
         return $html;
+    }
+
+    private function deleteByID($id) {
+        $this->department->delete($id);
     }
 }
