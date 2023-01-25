@@ -20,8 +20,6 @@ abstract class GlobalClass
 
     public function update($id, $values): void
     {
-        print_r($id);
-        print_r($values);
         $this->api->update($this->tableName, $id, $values);
     }
 
