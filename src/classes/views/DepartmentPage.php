@@ -40,19 +40,22 @@ class DepartmentPage extends Modules
         switch ($action) {
             case 'create':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
-                if (empty($this->errors)) {// TODO: check if exists
+                if (empty($this->errors)) {
+                    // TODO: check if exists
                     $this->department->create(getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }
                 break;
             case 'update':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
-                if (empty($this->errors)) {// TODO: check if exists
+                if (empty($this->errors)) {
+                    // TODO: check if exists
                     $this->department->update($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }
                 break;
             case 'delete':
+                // TODO: check if exists
                 $this->department->delete($this->id);
                 header("Location: /departments");
                 break;
