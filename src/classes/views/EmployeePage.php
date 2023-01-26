@@ -41,14 +41,14 @@ class EmployeePage extends Modules
             case 'create':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
-                    $this->employee->create(getFieldsToSend($paramFields, $this->params));
-                    header("Location: /employees");
+                    $this->employee->createEmployee(getFieldsToSend($paramFields, $this->params));
+//                    header("Location: /employees");
                 }
                 break;
             case 'update':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
-                    $this->employee->update($this->id, getFieldsToSend($paramFields, $this->params));
+                    $this->employee->updateEmployee($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /employees");
                 }
                 break;

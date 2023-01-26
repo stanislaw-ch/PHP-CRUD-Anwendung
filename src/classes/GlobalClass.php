@@ -13,14 +13,34 @@ abstract class GlobalClass
         $this->tableName = $tableName;
     }
 
-    public function create(array $newValues): void
+//    public function create(array $newValues): void
+//    {
+//        $this->api->create($this->tableName, $newValues);
+//    }
+
+    public function createDepartment(array $newValues): void
     {
-        $this->api->create($this->tableName, $newValues);
+        $this->api->createDepartment($this->tableName, $newValues);
     }
 
-    public function update($id, $values): void
+    public function createEmployee(array $newValues): void
     {
-        $this->api->update($this->tableName, $id, $values);
+        $this->api->createEmployee($this->tableName, $newValues);
+    }
+
+//    public function update($id, $values): void
+//    {
+//        $this->api->update($this->tableName, $id, $values);
+//    }
+
+    public function updateDepartment($id, $values): void
+    {
+        $this->api->updateDepartment($this->tableName, $id, $values);
+    }
+
+    public function updateEmployee($id, $values): void
+    {
+        $this->api->updateEmployee($this->tableName, $id, $values);
     }
 
     public function delete($id): void
