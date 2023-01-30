@@ -50,6 +50,9 @@ class DepartmentPage extends Modules
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {
                     // TODO: check if exists
+                    print_r($_GET);
+                    print_r($_POST);
+
                     $this->department->updateDepartment($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }
@@ -91,34 +94,17 @@ class DepartmentPage extends Modules
 
         foreach ($data as $i => $item) {
             $html .= '
-                    <li class="flex h-10 border-b border-gray-400 border-dashed">
-                        <span class="flex self-center justify-center w-8">' . ++$i . '</span>
-                        <span class="flex self-center ppl-2">' . $item['name'] . '</span>
-                        <button
-                            id="showUpdateDepartment"
-                            class="
-                                w-12 mr-1 ml-auto
-                                bg-white hover:underline text-sm
+                    <li class="
+                            row-department   
+                            flex h-10 border-b border-gray-400 border-dashed
+                            hover:cursor-pointer
+                            hover:border-solid hover:border-black
                             "
-                            type="button"
-                            name="action"
-                            data-id="' . $item['id'] . '"
-                            data-view="departments"
-                        >Update
-                        </button>
-                        <button
-                            id="deleteDepartment"
-                            class="
-                                w-12 mr-1
-                                bg-white hover:underline text-sm
-                            "
-                            type="button"
-                            name="action"
-                            data-id="' . $item['id'] . '"
-                            data-view="departments"
-                            data-action="delete"
-                        >Delete
-                        </button>
+                    >
+                        <span id="index" class="flex self-center justify-center w-8">' . ++$i . '</span>
+                        <span id="name" class="flex self-center grow pl-2">' . $item['name'] . '</span>
+                        <span id="amount-employees" class="flex self-center justify-center basis-20">' . $item['count'] . '</span>
+                        <input type="hidden" name="id" value="' . $item['id'] . '"/>
                     </li>';
         }
 

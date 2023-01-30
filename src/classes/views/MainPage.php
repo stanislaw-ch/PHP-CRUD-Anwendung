@@ -27,7 +27,7 @@ class MainPage extends Modules
                     <li class="flex h-10 border-b border-gray-400 border-dashed">
                         <span class="flex self-center justify-center w-8">' . ++$i . '</span>
                         <span class="flex self-center basis-20 grow pl-2">' . $item['name'] . '</span>
-                        <span class="flex self-center justify-center basis-20 ">' . $item['count'] . '</span>
+                        <span class="flex self-center justify-center basis-20">' . $item['count'] . '</span>
                     </li>';
         }
 

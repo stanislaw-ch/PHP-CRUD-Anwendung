@@ -1,40 +1,45 @@
-function addEventToButtons() {
-    const updateButtonsDep = document.querySelectorAll('#showUpdateDepartment');
-    const deleteButtonsDep = document.querySelectorAll('#deleteDepartment');
-    const updateButtonsEmp = document.querySelectorAll('#showUpdateEmployee');
-    const deleteButtonsEmp = document.querySelectorAll('#deleteEmployee');
-
-    updateButtonsDep.forEach((button) => {
-        button.addEventListener('click', actionHandler);
-    })
-
-    deleteButtonsDep.forEach((button) => {
-        button.addEventListener('click', actionHandler);
-    })
-
-    updateButtonsEmp.forEach((button) => {
-        button.addEventListener('click', actionHandler);
-    })
-
-    deleteButtonsEmp.forEach((button) => {
-        button.addEventListener('click', actionHandler);
-    })
-}
-
-function actionHandler(e) {
-    const id = e.target.dataset.id;
-    const view = e.target.dataset.view;
-    const action = e.target.dataset.action;
-
-    window.location.href = '/' + view + (action ? '?action=' + action + '&': '?') + 'id=' + id;
-}
+import {addEventToButtons} from "./eventButtons.js";
+import {errorFadeout} from "./errorFadeout.js";
 
 addEventToButtons();
+errorFadeout();
 
-const errorMessage = document.querySelector('#error-message');
+const departmentsRows = document.querySelectorAll('.row-department');
 
-errorMessage && setTimeout(function(){
-    errorMessage.remove();
-}, 2000);
+departmentsRows.forEach((row) => row.addEventListener('click', () => {
+    const getDepartmentTemplate = document.querySelector("#departmentRow");
+    const departmentForm = getDepartmentTemplate.content.cloneNode(true);
+
+    const index = row.querySelector('#index').innerText;
+    const department = row.querySelector('#name').innerText;
+    const amountEmployees = row.querySelector('#amount-employees').innerText;
+
+    departmentForm.querySelector('#index').innerText = index;
+    departmentForm.querySelector('#name').value = department;
+
+    const id = row.querySelector('input[name="id"]').value;
+
+    row.parentElement.insertBefore(departmentForm, row.nextElementSibling)
+    row.classList.add("hidden");
+
+    document.querySelector('#form input').focus();
+
+    const form = document.querySelector('#form');
+    form.querySelector('input[name="id"]').value = id;
+    form.addEventListener('focusout', function(event) {
+        const isClickInside = form.contains(event.relatedTarget);
+        if (isClickInside) {
+            form.querySelector('input[name="action"]').value = 'delete';
+            form.submit();
+        }
+        else {
+            row.classList.remove("hidden");
+            form.remove();
+        }
+    });
+}))
+
+
+
 
 

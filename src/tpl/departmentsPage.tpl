@@ -10,6 +10,7 @@
         <li class="flex content-center h-10 text-white bg-slate-700">
             <span class="flex self-center justify-center w-8">#</span>
             <span class="flex self-center justify-center flex-1">Abteilung</span>
+            <span class="flex self-center justify-center basis-20">Anz. MA</span>
         </li>
         %table%
     </ul>

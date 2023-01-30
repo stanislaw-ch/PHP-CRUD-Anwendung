@@ -55,7 +55,7 @@ abstract class Modules
 
     protected function getTemplate($name): array|bool|string
     {
-        return file_get_contents("src/tmpl/" . $name . ".tpl");
+        return file_get_contents("src/tpl/" . $name . ".tpl");
     }
 
     protected function getReplaceContent($sr, $content): array|string
