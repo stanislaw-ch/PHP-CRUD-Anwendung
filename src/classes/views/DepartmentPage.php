@@ -50,9 +50,6 @@ class DepartmentPage extends Modules
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {
                     // TODO: check if exists
-                    print_r($_GET);
-                    print_r($_POST);
-
                     $this->department->updateDepartment($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }

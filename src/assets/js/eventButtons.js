@@ -26,5 +26,5 @@ function actionHandler(e) {
     const view = e.target.dataset.view;
     const action = e.target.dataset.action;
 
-    // window.location.href = '/' + view + (action ? '?action=' + action + '&': '?') + 'id=' + id;
+    window.location.href = '/' + view + (action ? '?action=' + action + '&': '?') + 'id=' + id;
 }
