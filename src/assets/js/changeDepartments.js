@@ -1,9 +1,15 @@
 export function changeDepartments() {
+    //TODO: refactoring!!!
     const departmentsRows = document.querySelectorAll('.row-department');
 
-    const tipMessage = document.querySelector('#tip-department');
-    if (tipMessage && sessionStorage.getItem(`is-tip-department-show`) === null) {
-        tipMessage.classList.remove('hidden')
+    const getTipMessageTemplate = document.querySelector("#tip-message");
+    const tipMessage = getTipMessageTemplate.content.cloneNode(true);
+    const rootMessage = document.querySelector('#departments-list');
+    if (rootMessage) {
+        if (!sessionStorage.getItem(`is-tip-department-show`) || sessionStorage.getItem(`is-tip-department-show`) === 'false') {
+            sessionStorage.setItem(`is-tip-department-show`, 'false');
+            rootMessage.appendChild(tipMessage);
+        }
     }
 
     departmentsRows.forEach((row) => row.addEventListener('click', (event) => {
@@ -22,12 +28,11 @@ export function changeDepartments() {
             document.querySelector('#form-department').remove();
         }
 
-        const getDepartmentTemplate = document.querySelector("#departmentRowForm");
+        const getDepartmentTemplate = document.querySelector("#department-row-form");
         const departmentForm = getDepartmentTemplate.content.cloneNode(true);
 
         const index = row.querySelector('#index').innerText;
         const department = row.querySelector('#name').innerText;
-        const amountEmployees = row.querySelector('#amount-employees').innerText;
 
         departmentForm.querySelector('#index').innerText = index;
         departmentForm.querySelector('#name').value = department;
@@ -47,9 +52,9 @@ export function changeDepartments() {
             form.submit();
         })
 
-        if (tipMessage && sessionStorage.getItem(`is-tip-show`) === null) {
+        if (sessionStorage.getItem(`is-tip-department-show`) === 'false') {
             sessionStorage.setItem(`is-tip-department-show`, 'true');
-            tipMessage.classList.add('hidden')
+            document.querySelector('#tip-message-wrapper').remove();
         }
     }))
 }

@@ -36,7 +36,7 @@
 </footer>
 <script type="module" src="/src/assets/js/main.js"></script>
 
-<template id="departmentRowForm">
+<template id="department-row-form">
     <form action="departments" id="form-department" method="post" class="mb-0" data-id="">
         <li class="row-department flex h-10">
             <span id="index" class="flex self-center justify-center w-8">3</span>
@@ -60,7 +60,7 @@
     </form>
 </template>
 
-<template id="employeeRowForm">
+<template id="employee-row-form">
     <form action="employees" id="form-employee" method="post" class="relative mb-0" data-id="">
         <li class="row-department flex flex-col grow md:w-96 sm:w-96 w-full mx-auto p-7 mb-5  shadow-lg shadow-black-500/50">
             <span id="index" class="absolute left-0 top-2 flex self-center justify-center w-8">3</span>
@@ -110,10 +110,23 @@
     </form>
 </template>
 
-<template id="employeeGender">
+<template id="employee-gender">
     <div class="flex items-center">
         <input id="weiblich" type="radio" name="gender_id" value="1" class="mr-2">
         <label for="weiblich">weiblich</label>
+    </div>
+</template>
+
+<template id="tip-message">
+    <div id="tip-message-wrapper"
+         class="
+            absolute block bg-gray-200  px-2 rounded-sm -bottom-7 left-44 text-sm
+            after:content-[''] after:absolute
+            after:bottom-full after:left-2/4 after:-ml-12 after:border-8
+            after:border-solid after:border-b-gray-200 after:border-r-transparent
+            after:border-l-transparent after:border-t-transparent
+    ">
+        Click to change
     </div>
 </template>
 </body>
