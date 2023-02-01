@@ -38,7 +38,7 @@
 
 <template id="department-row-form">
     <form action="departments" id="form-department" method="post" class="mb-0" data-id="">
-        <li class="row-department flex h-10">
+        <div class="row-department flex h-10">
             <span id="index" class="flex self-center justify-center w-8">3</span>
             <input type="text"
                    name="name"
@@ -51,18 +51,18 @@
             <input type="hidden" name="action" value="update"/>
             <input type="hidden" name="id"/>
             <button
-                    id="deleteDepartment"
+                    id="delete"
                     class="ml-auto w-12 mr-1 bg-transperent hover:underline text-sm"
                     type="button"
             >Delete
             </button>
-        </li>
+        </div>
     </form>
 </template>
 
 <template id="employee-row-form">
     <form action="employees" id="form-employee" method="post" class="relative mb-0" data-id="">
-        <li class="row-department flex flex-col grow md:w-96 sm:w-96 w-full mx-auto p-7 mb-5  shadow-lg shadow-black-500/50">
+        <div class="row-department flex flex-col grow md:w-96 sm:w-96 w-full mx-auto p-7 mb-5  shadow-lg shadow-black-500/50">
             <span id="index" class="absolute left-0 top-2 flex self-center justify-center w-8">3</span>
             <label for="firstname" class="block text-md font-medium">Vorname</label>
             <input type="text"
@@ -106,7 +106,7 @@
                 >Delete
                 </button>
             </div>
-        </li>
+        </div>
     </form>
 </template>
 

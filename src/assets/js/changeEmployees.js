@@ -1,9 +1,13 @@
-import {showTipMessage, hideOnClickOutside, hideTipMessage} from "./utils.js";
+import {
+    showTipMessage,
+    hideOnClickOutside,
+    hideTipMessage,
+    hideFormOnNeighborClick,
+    submitOnButtonClick
+} from "./utils.js";
 
 export function changeEmployees() {
-    //TODO: refactoring!!!
     const employeesRows = document.querySelectorAll('.row-employee');
-
     showTipMessage('#employees-list', 'is-tip-employee-show');
 
     //TODO: get data from server
@@ -41,19 +45,7 @@ export function changeEmployees() {
 
     employeesRows.forEach((row) => row.addEventListener('click', (event) => {
         event.stopPropagation();
-
-        if (document.querySelector('#form-employee')) {
-            const index = document.querySelector('#form-employee').name;
-            const rows = document.querySelectorAll('.row-employee');
-
-            rows.forEach((row) => {
-                const rowToShow = row.querySelector('#index');
-                if (rowToShow.innerText === index) {
-                    rowToShow.parentElement.classList.remove("hidden")
-                }
-            })
-            document.querySelector('#form-employee').remove();
-        }
+        hideFormOnNeighborClick('#form-employee', '.row-employee');
 
         const employeeTemplate = document.querySelector("#employee-row-form");
         const employeeForm = employeeTemplate.content.cloneNode(true);
@@ -79,7 +71,7 @@ export function changeEmployees() {
         const departments = getDepartments();
         const rootSelect = employeeForm.querySelector('select');
 
-        genders.forEach((item, index) => {
+        genders.forEach((item) => {
             const gender = genderTemplate.content.cloneNode(true);
             gender.querySelector('input').value = item.value;
             gender.querySelector('input').id = item.value;
@@ -90,7 +82,8 @@ export function changeEmployees() {
 
             rootGender.appendChild(gender);
         })
-        departments.forEach((item, index) => {
+
+        departments.forEach((item) => {
             const option = document.createElement('option');
             option.value = item.value;
             option.innerText = item.label;
@@ -107,15 +100,8 @@ export function changeEmployees() {
         form.querySelector('input').focus();
         form.querySelector('input[name="id"]').value = id;
 
-        form.querySelector('#delete').addEventListener('click', () => {
-            form.querySelector('input[name="action"]').value = 'delete';
-            form.submit();
-        })
-        form.querySelector('#update').addEventListener('click', () => {
-            form.querySelector('input[name="action"]').value = 'update';
-            form.submit();
-        })
-
+        submitOnButtonClick(form, '#delete', 'delete');
+        submitOnButtonClick(form, '#update', 'update');
         hideTipMessage('#tip-message-wrapper', 'is-tip-employee-show');
     }))
 }
