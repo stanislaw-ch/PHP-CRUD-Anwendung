@@ -1,17 +1,12 @@
+import {getTipMessage} from "./utils.js";
+
 export function changeEmployees() {
     //TODO: refactoring!!!
     const employeesRows = document.querySelectorAll('.row-employee');
 
-    const getTipMessageTemplate = document.querySelector("#tip-message");
-    const tipMessage = getTipMessageTemplate.content.cloneNode(true);
-    const rootMessage = document.querySelector('#employees-list');
-    if (rootMessage) {
-        if (!sessionStorage.getItem(`is-tip-employee-show`) || sessionStorage.getItem(`is-tip-employee-show`) === 'false') {
-            sessionStorage.setItem(`is-tip-employee-show`, 'false');
-            rootMessage.appendChild(tipMessage);
-        }
-    }
+    getTipMessage('#employees-list', 'is-tip-employee-show');
 
+    //TODO: get data from server
     const getGenders = function () {
         const radioInputs = document.querySelectorAll('form input[type=radio]');
         const radioLabels = document.querySelectorAll('form input[type=radio] + label');
@@ -29,6 +24,7 @@ export function changeEmployees() {
         return genders;
     }
 
+    //TODO: get data from server
     const getDepartments = function () {
         const select = document.querySelector('form select');
         const options = document.querySelectorAll('form select > option');

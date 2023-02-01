@@ -1,16 +1,10 @@
+import {getTipMessage} from "./utils.js";
+
 export function changeDepartments() {
     //TODO: refactoring!!!
     const departmentsRows = document.querySelectorAll('.row-department');
 
-    const getTipMessageTemplate = document.querySelector("#tip-message");
-    const tipMessage = getTipMessageTemplate.content.cloneNode(true);
-    const rootMessage = document.querySelector('#departments-list');
-    if (rootMessage) {
-        if (!sessionStorage.getItem(`is-tip-department-show`) || sessionStorage.getItem(`is-tip-department-show`) === 'false') {
-            sessionStorage.setItem(`is-tip-department-show`, 'false');
-            rootMessage.appendChild(tipMessage);
-        }
-    }
+    getTipMessage('#departments-list', 'is-tip-department-show');
 
     departmentsRows.forEach((row) => row.addEventListener('click', (event) => {
         event.stopPropagation();
