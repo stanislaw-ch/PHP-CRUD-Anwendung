@@ -1,10 +1,10 @@
-import {getTipMessage} from "./utils.js";
+import {showTipMessage, hideOnClickOutside, hideTipMessage} from "./utils.js";
 
 export function changeEmployees() {
     //TODO: refactoring!!!
     const employeesRows = document.querySelectorAll('.row-employee');
 
-    getTipMessage('#employees-list', 'is-tip-employee-show');
+    showTipMessage('#employees-list', 'is-tip-employee-show');
 
     //TODO: get data from server
     const getGenders = function () {
@@ -116,29 +116,8 @@ export function changeEmployees() {
             form.submit();
         })
 
-        if (sessionStorage.getItem(`is-tip-employee-show`) === 'false') {
-            sessionStorage.setItem(`is-tip-employee-show`, 'true');
-            document.querySelector('#tip-message-wrapper').remove();
-        }
+        hideTipMessage('#tip-message-wrapper', 'is-tip-employee-show');
     }))
-
-    document.addEventListener('click', function (event) {
-        const form = document.querySelector('#form-employee');
-        if (form) {
-            let isClickInside = form.contains(event.target);
-
-            if (!isClickInside) {
-                const index = form.dataset.id;
-                const rows = document.querySelectorAll('.row-employee');
-
-                rows.forEach((row) => {
-                    const rowToShow = row.querySelector('#index');
-                    if (rowToShow.innerText === index) {
-                        rowToShow.parentElement.classList.remove("hidden")
-                    }
-                })
-                form.remove();
-            }
-        }
-    });
 }
+
+hideOnClickOutside('#form-employee', '.row-employee');

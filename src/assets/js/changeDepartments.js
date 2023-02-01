@@ -1,10 +1,10 @@
-import {getTipMessage} from "./utils.js";
+import {showTipMessage, hideOnClickOutside, hideTipMessage} from "./utils.js";
 
 export function changeDepartments() {
     //TODO: refactoring!!!
     const departmentsRows = document.querySelectorAll('.row-department');
 
-    getTipMessage('#departments-list', 'is-tip-department-show');
+    showTipMessage('#departments-list', 'is-tip-department-show');
 
     departmentsRows.forEach((row) => row.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -46,29 +46,8 @@ export function changeDepartments() {
             form.submit();
         })
 
-        if (sessionStorage.getItem(`is-tip-department-show`) === 'false') {
-            sessionStorage.setItem(`is-tip-department-show`, 'true');
-            document.querySelector('#tip-message-wrapper').remove();
-        }
+        hideTipMessage('#tip-message-wrapper', 'is-tip-department-show');
     }))
 }
 
-document.addEventListener('click', function (event) {
-    const form = document.querySelector('#form-department');
-    if (form) {
-        let isClickInside = form.contains(event.target);
-
-        if (!isClickInside) {
-            const index = form.dataset.id;
-            const rows = document.querySelectorAll('.row-department');
-
-            rows.forEach((row) => {
-                const rowToShow = row.querySelector('#index');
-                if (rowToShow.innerText === index) {
-                    rowToShow.parentElement.classList.remove("hidden")
-                }
-            })
-            form.remove();
-        }
-    }
-});
+hideOnClickOutside('#form-department', '.row-department');
