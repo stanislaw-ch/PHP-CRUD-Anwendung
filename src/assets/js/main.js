@@ -1,15 +1,12 @@
 import {errorFadeout} from "./errorFadeout.js";
 import {changeDepartments} from "./changeDepartments.js";
-import {addEventToButtons} from "./eventButtons.js";
 
-addEventToButtons();
 errorFadeout();
 changeDepartments();
 
 //TODO: refactoring!!!
 
 const employeesRows = document.querySelectorAll('.row-employee');
-
 const tipMessage = document.querySelector('#tip-employee');
 if (tipMessage && sessionStorage.getItem(`is-tip-employee-show`) === null) {
     tipMessage.classList.remove('hidden')
@@ -46,7 +43,22 @@ const getDepartments = function () {
     return departments;
 }
 
-employeesRows.forEach((row) => row.addEventListener('click', () => {
+employeesRows.forEach((row) => row.addEventListener('click', (event) => {
+    event.stopPropagation();
+
+    if (document.querySelector('#form-employee')) {
+        const index = document.querySelector('#form-employee').name;
+        const rows = document.querySelectorAll('.row-employee');
+
+        rows.forEach((row) => {
+            const rowToShow = row.querySelector('#index');
+            if (rowToShow.innerText === index) {
+                rowToShow.parentElement.classList.remove("hidden")
+            }
+        })
+        document.querySelector('#form-employee').remove();
+    }
+
     const employeeTemplate = document.querySelector("#employeeRowForm");
     const employeeForm = employeeTemplate.content.cloneNode(true);
 
@@ -56,28 +68,32 @@ employeesRows.forEach((row) => row.addEventListener('click', () => {
     const labelGender = row.querySelector('#gender').innerText;
     const salary = row.querySelector('#salary').innerText;
     const department = row.querySelector('#department').innerText;
+    const id = row.querySelector('input[name="id"]').value;
 
     employeeForm.querySelector('#index').innerText = index;
     employeeForm.querySelector('#firstname').value = firstname;
     employeeForm.querySelector('#lastname').value = lastname;
+    employeeForm.querySelector('form').dataset.id  = index;
+    employeeForm.querySelector('#salary').value = salary;
 
     const genders = getGenders();
     const genderTemplate = document.querySelector("#employeeGender");
     const rootGender = employeeForm.querySelector('#gender');
 
+    const departments = getDepartments();
+    const rootSelect = employeeForm.querySelector('select');
+
     genders.forEach((item, index) => {
         const gender = genderTemplate.content.cloneNode(true);
         gender.querySelector('input').value = item.value;
+        gender.querySelector('input').id = item.value;
         gender.querySelector('label').innerText = item.label;
+        gender.querySelector('label').htmlFor = item.value;
 
         labelGender === item.label ? gender.querySelector('input').checked = true : null;
 
         rootGender.appendChild(gender);
     })
-
-    const departments = getDepartments();
-    const rootSelect = employeeForm.querySelector('select');
-
     departments.forEach((item, index) => {
         const option = document.createElement('option');
         option.value = item.value;
@@ -88,43 +104,48 @@ employeesRows.forEach((row) => row.addEventListener('click', () => {
         rootSelect.appendChild(option);
     })
 
-    // employeeForm.querySelector('#gender').value = gender;
-    employeeForm.querySelector('#salary').value = salary;
-    // employeeForm.querySelector('#department').value = department;
-
-    const id = row.querySelector('input[name="id"]').value;
-
     row.parentElement.insertBefore(employeeForm, row.nextElementSibling)
     row.classList.add("hidden");
 
     const form = document.querySelector('#form-employee');
-
-    document.querySelector('#form-employee input').focus();
-
+    form.querySelector('input').focus();
     form.querySelector('input[name="id"]').value = id;
-    form.addEventListener('focusout', function(event) {
-        const isClickInside = form.contains(event.relatedTarget);
-        if (isClickInside) {
-            form.querySelector('#delete').addEventListener('click', () => {
-                form.querySelector('input[name="action"]').value = 'delete';
-                form.submit();
-            })
-            form.querySelector('#update').addEventListener('click', () => {
-                form.querySelector('input[name="action"]').value = 'update';
-                form.submit();
-            })
-        }
-        else {
-            row.classList.remove("hidden");
-            form.remove();
-        }
-    });
+
+    form.querySelector('#delete').addEventListener('click', () => {
+        form.querySelector('input[name="action"]').value = 'delete';
+        form.submit();
+    })
+    form.querySelector('#update').addEventListener('click', () => {
+        form.querySelector('input[name="action"]').value = 'update';
+        form.submit();
+    })
 
     if (tipMessage && sessionStorage.getItem(`is-tip-show`) === null) {
         sessionStorage.setItem(`is-tip-employee-show`, 'true');
         tipMessage.classList.add('hidden')
     }
 }))
+
+document.addEventListener('click', function (event) {
+        const form = document.querySelector('#form-employee');
+    if (form) {
+        let isClickInside = form.contains(event.target);
+
+        if (!isClickInside) {
+            const index = form.name;
+            const rows = document.querySelectorAll('.row-employee');
+
+            rows.forEach((row) => {
+                const rowToShow = row.querySelector('#index');
+                if (rowToShow.innerText === index) {
+                    rowToShow.parentElement.classList.remove("hidden")
+                }
+            })
+            form.remove();
+        }
+    }
+});
+
 
 
 

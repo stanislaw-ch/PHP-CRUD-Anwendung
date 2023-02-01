@@ -48,8 +48,6 @@ class EmployeePage extends Modules
             case 'update':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
-                    print_r($_REQUEST);
-
                     $this->employee->updateEmployee($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /employees");
                 }

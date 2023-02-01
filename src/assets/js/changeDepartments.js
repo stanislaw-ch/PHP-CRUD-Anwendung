@@ -4,9 +4,24 @@ export function changeDepartments() {
     const tipMessage = document.querySelector('#tip-department');
     if (tipMessage && sessionStorage.getItem(`is-tip-department-show`) === null) {
         tipMessage.classList.remove('hidden')
-    };
+    }
 
-    departmentsRows.forEach((row) => row.addEventListener('click', () => {
+    departmentsRows.forEach((row) => row.addEventListener('click', (event) => {
+        event.stopPropagation();
+
+        if (document.querySelector('#form-department')) {
+            const index = document.querySelector('#form-department').dataset.id;
+            const rows = document.querySelectorAll('.row-department');
+
+            rows.forEach((row) => {
+                const rowToShow = row.querySelector('#index');
+                if (rowToShow.innerText === index) {
+                    rowToShow.parentElement.classList.remove("hidden")
+                }
+            })
+            document.querySelector('#form-department').remove();
+        }
+
         const getDepartmentTemplate = document.querySelector("#departmentRowForm");
         const departmentForm = getDepartmentTemplate.content.cloneNode(true);
 
@@ -16,33 +31,45 @@ export function changeDepartments() {
 
         departmentForm.querySelector('#index').innerText = index;
         departmentForm.querySelector('#name').value = department;
+        departmentForm.querySelector('form').dataset.id = index;
 
         const id = row.querySelector('input[name="id"]').value;
 
         row.parentElement.insertBefore(departmentForm, row.nextElementSibling)
         row.classList.add("hidden");
 
-        document.querySelector('#form-department input').focus();
-
         const form = document.querySelector('#form-department');
+        document.querySelector('#form-department input').focus();
         form.querySelector('input[name="id"]').value = id;
-        form.addEventListener('focusout', function(event) {
-            const isClickInside = form.contains(event.relatedTarget);
-            if (isClickInside) {
-                form.querySelector('button').addEventListener('click', () => {
-                    form.querySelector('input[name="action"]').value = 'delete';
-                    form.submit();
-                })
-            }
-            else {
-                row.classList.remove("hidden");
-                form.remove();
-            }
-        });
+
+        form.querySelector('button').addEventListener('click', () => {
+            form.querySelector('input[name="action"]').value = 'delete';
+            form.submit();
+        })
 
         if (tipMessage && sessionStorage.getItem(`is-tip-show`) === null) {
             sessionStorage.setItem(`is-tip-department-show`, 'true');
             tipMessage.classList.add('hidden')
-        };
+        }
     }))
 }
+
+document.addEventListener('click', function (event) {
+    const form = document.querySelector('#form-department');
+    if (form) {
+        let isClickInside = form.contains(event.target);
+
+        if (!isClickInside) {
+            const index = form.dataset.id;
+            const rows = document.querySelectorAll('.row-department');
+
+            rows.forEach((row) => {
+                const rowToShow = row.querySelector('#index');
+                if (rowToShow.innerText === index) {
+                    rowToShow.parentElement.classList.remove("hidden")
+                }
+            })
+            form.remove();
+        }
+    }
+});

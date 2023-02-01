@@ -37,7 +37,7 @@
 <script type="module" src="/src/assets/js/main.js"></script>
 
 <template id="departmentRowForm">
-    <form action="departments" id="form-department" method="post" class="mb-0">
+    <form action="departments" id="form-department" method="post" class="mb-0" data-id="">
         <li class="row-department flex h-10">
             <span id="index" class="flex self-center justify-center w-8">3</span>
             <input type="text"
@@ -61,7 +61,7 @@
 </template>
 
 <template id="employeeRowForm">
-    <form action="employees" id="form-employee" method="post" class="relative mb-0 ">
+    <form action="employees" id="form-employee" method="post" class="relative mb-0" data-id="">
         <li class="row-department flex flex-col grow md:w-96 sm:w-96 w-full mx-auto p-7 mb-5  shadow-lg shadow-black-500/50">
             <span id="index" class="absolute left-0 top-2 flex self-center justify-center w-8">3</span>
             <label for="firstname" class="block text-md font-medium">Vorname</label>
