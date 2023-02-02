@@ -9,11 +9,11 @@ Weblink: https://php-crud.na4u.ru
 - Technologien
 
 ## Overview
-![image](https://user-images.githubusercontent.com/57729597/214665628-c2d2e487-57af-488c-ae58-f182f0376634.png)
+![image](https://user-images.githubusercontent.com/57729597/216296368-409ffec0-909d-4d61-b041-472d55306edf.png)
 ------
-![image](https://user-images.githubusercontent.com/57729597/214664801-c5350cf8-1e7f-4eba-bff3-60fffd26f028.png)
+![image](https://user-images.githubusercontent.com/57729597/216296787-cf9c8185-0664-4fdd-8c2d-f9b5e54134e5.png)
 ------
-![image](https://user-images.githubusercontent.com/57729597/214664872-ad692831-cc8f-468a-8760-b06938a89064.png)
+![image](https://user-images.githubusercontent.com/57729597/216297007-e2659101-4306-4a32-89c2-be93400fa9b2.png)
 ## Die Aufgabe
 
 Erstelle eine objektorientierte CRUD-Anwendung in der Mitarbeiter und Abteilungen enthalten sind.  
