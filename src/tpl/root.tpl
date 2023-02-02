@@ -38,31 +38,41 @@
 
 <template id="department-row-form">
     <form action="departments" id="form-department" method="post" class="mb-0" data-id="">
-        <div class="row-department flex h-10">
-            <span id="index" class="flex self-center justify-center w-8">3</span>
-            <input type="text"
-                   name="name"
-                   class="
-                        flex self-center [appearance:textfield]
-                        pl-2 mr-2 grow border-b-2 border-black focus:outline-none
-                        h-8 appearance-none"
-                   id="name"
-            />
+        <div class="row-department flex flex-col p-5 shadow-lg shadow-black-500/50">
+            <span id="index" class="hidden flex self-center justify-center w-8">3</span>
+            <div class="w-full">
+                <input type="text"
+                       name="name"
+                       class="
+                            flex w-full self-center [appearance:textfield]
+                            pl-2 grow border-b-2 border-black focus:outline-none
+                            h-8 appearance-none"
+                       id="name"
+                />
+            </div>
             <input type="hidden" name="action" value="update"/>
             <input type="hidden" name="id"/>
-            <button
-                    id="delete"
-                    class="ml-auto w-12 mr-1 bg-transperent hover:underline text-sm"
-                    type="button"
-            >Delete
-            </button>
+
+            <div class="flex w-full justify-end order-4">
+                <button
+                        id="update"
+                        class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
+                        type="button"
+                >Update
+                <button
+                        id="delete"
+                        class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
+                        type="button"
+                >Delete
+                </button>
+            </div>
         </div>
     </form>
 </template>
 
 <template id="employee-row-form">
     <form action="employees" id="form-employee" method="post" class="box-border relative mb-0" data-id="">
-        <div class="row-department flex flex-col sm:flex-row w-full flex-wrap mx-auto p-7 mb-5 shadow-lg shadow-black-500/50">
+        <div class="row-department flex flex-col sm:flex-row w-full flex-wrap mx-auto p-7 shadow-lg shadow-black-500/50">
             <span id="index" class="hidden absolute left-0 top-7 flex self-center justify-center w-8">3</span>
             <div class="flex flex-col sm:flex-row sm:order-1 grow sm:w-1/3">
                 <div class="mr-2 w-full">

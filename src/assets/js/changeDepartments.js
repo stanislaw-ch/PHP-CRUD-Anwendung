@@ -33,6 +33,7 @@ export function changeDepartments() {
         document.querySelector('#form-department input').focus();
         form.querySelector('input[name="id"]').value = id;
 
+        submitOnButtonClick(form, '#update', 'update');
         submitOnButtonClick(form, '#delete', 'delete');
         hideTipMessage('#tip-message-wrapper', 'is-tip-department-show');
     }))
