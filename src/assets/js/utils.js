@@ -1,0 +1,62 @@
+export function showTipMessage(elector, sessionName) {
+    const getTipMessageTemplate = document.querySelector("#tip-message");
+    const tipMessage = getTipMessageTemplate.content.cloneNode(true);
+    const rootMessage = document.querySelector(elector);
+    if (rootMessage) {
+        if (!sessionStorage.getItem(sessionName) || sessionStorage.getItem(sessionName) === 'false') {
+            sessionStorage.setItem(sessionName, 'false');
+            rootMessage.appendChild(tipMessage);
+        }
+    }
+}
+
+export function hideTipMessage(elector, sessionName) {
+    if (sessionStorage.getItem(sessionName) === 'false') {
+        sessionStorage.setItem(sessionName, 'true');
+        document.querySelector(elector).remove();
+    }
+}
+
+export function hideOnClickOutside(formSelector, rowSelector) {
+    document.addEventListener('click', function (event) {
+        const form = document.querySelector(formSelector);
+        if (form) {
+            let isClickInside = form.contains(event.target);
+
+            if (!isClickInside) {
+                const index = form.dataset.id;
+                const rows = document.querySelectorAll(rowSelector);
+
+                rows.forEach((row) => {
+                    const rowToShow = row.querySelector('#index');
+                    if (rowToShow.innerText === index) {
+                        rowToShow.parentElement.classList.remove("hidden")
+                    }
+                })
+                form.remove();
+            }
+        }
+    });
+}
+
+export function hideFormOnNeighborClick(formSelector, rowSelector) {
+    if (document.querySelector(formSelector)) {
+        const index = document.querySelector(formSelector).dataset.id;
+        const rows = document.querySelectorAll(rowSelector);
+
+        rows.forEach((row) => {
+            const rowToShow = row.querySelector('#index');
+            if (rowToShow.innerText === index) {
+                rowToShow.parentElement.classList.remove("hidden")
+            }
+        })
+        document.querySelector(formSelector).remove();
+    }
+}
+
+export function submitOnButtonClick(nodeElem, selector, action) {
+    nodeElem.querySelector(selector).addEventListener('click', () => {
+        nodeElem.querySelector('input[name="action"]').value = action;
+        nodeElem.submit();
+    })
+}

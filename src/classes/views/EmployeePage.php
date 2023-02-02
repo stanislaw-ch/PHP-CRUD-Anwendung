@@ -42,7 +42,7 @@ class EmployeePage extends Modules
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
                     $this->employee->createEmployee(getFieldsToSend($paramFields, $this->params));
-//                    header("Location: /employees");
+                    header("Location: /employees");
                 }
                 break;
             case 'update':
@@ -93,67 +93,48 @@ class EmployeePage extends Modules
 
         foreach ($employees as $i => $employee) {
             $html .= '
-                    <li class="flex h-10 border-b border-gray-400 border-dashed">
-                        <span class="
+                    <li class="
+                            hover:cursor-pointer hover:border-solid hover:border-black 
+                            row-employee flex h-10 border-b border-gray-400 border-dashed
+                        "
+                    >
+                        <span id="index" class="
                             flex self-center justify-center  
                             w-8
                         ">' . ++$i . '</span>
-                        <span class="
+                        <span id="firstname" class="
                             flex self-center 
-                            pl-2 
+                            pl-2 grow
                             basis-40 
-                            hidden md:flex
+                            hidden sm:flex
                         ">' . $employee['firstname'] . '</span>
-                        <span class="
+                        <span id="lastname" class="
                             flex self-center 
-                            pl-2 
+                            pl-2 grow
                             basis-40
                         ">' . $employee['lastname'] . '</span>
-                        <span class="
+                        <span id="gender" class="
                             flex self-center 
-                            pl-2 
+                            pl-2 grow
                             basis-40 
                             hidden lg:flex
                         ">' . $employee['gender'] . '</span>
-                        <span class=" 
+                        <span id="salary" class="
                             flex self-center 
-                            pl-2  
+                            pl-2  grow
                             basis-40  
                             hidden sm:flex
+                            
                         ">' . $employee['salary'] . '</span>
                         <div class="
                             flex self-center 
                             sm:justify-start
                             grow
-                            basis-40 md:basis-80
+                            basis-40 
                             pl-2
                         ">
-                            <span class="mr-auto hidden sm:flex">' . $employee['name'] . '</span>
-                            <button
-                                id="showUpdateEmployee"
-                                class="
-                                    w-12 mr-1 sm:ml-auto mr-auto
-                                    bg-white hover:underline text-sm
-                                "
-                                type="button"
-                                name="action"
-                                data-id="' . $employee['id'] . '"
-                                data-view="employees"
-                            >Update
-                            </button>
-                            <button
-                                id="deleteEmployee"
-                                class="
-                                    w-12 mr-1 
-                                    bg-white hover:underline text-sm
-                                "
-                                type="button"
-                                name="action"
-                                data-id="' . $employee['id'] . '"
-                                data-view="employees"
-                                data-action="delete"
-                            >Delete
-                            </button>
+                            <span id="department" class="">' . $employee['name'] . '</span>
+                            <input type="hidden" name="id" value="' . $employee['id'] . '"/>
                         </div>
                     </li>';
         }
@@ -205,7 +186,7 @@ class EmployeePage extends Modules
     {
         $departments = $this->department->getDepartments();
 
-        $html = '<label for="department" class="block text-md mb-5 font-medium">Abteilung</label>
+        $html = '<label for="department" class="block text-md font-medium">Abteilung</label>
                     <select 
                             name="department_id" 
                             class="border-b-2 border-black mb-5 h-8 focus:outline-none"
@@ -226,6 +207,7 @@ class EmployeePage extends Modules
 
             $html .= $department['name'] . '</option>';
         }
+            $html .= '</select>';
 
         return $html;
     }
@@ -240,11 +222,11 @@ class EmployeePage extends Modules
         }
 
         if (strlen($id) !== 0) {
-            $html .= '</select>
+            $html .= '
                     <input type="hidden" name="id" value="' . $employeeId . '">
                     <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="update">Update
                     </button>';
-        } else $html .= '</select>
+        } else $html .= '
                     <button class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4" type="submit" name="action" value="create">Create
                     </button>';
         return $html;
