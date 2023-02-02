@@ -61,48 +61,62 @@
 </template>
 
 <template id="employee-row-form">
-    <form action="employees" id="form-employee" method="post" class="relative mb-0" data-id="">
-        <div class="row-department flex flex-col grow md:w-96 sm:w-96 w-full mx-auto p-7 mb-5  shadow-lg shadow-black-500/50">
-            <span id="index" class="absolute left-0 top-2 flex self-center justify-center w-8">3</span>
-            <label for="firstname" class="block text-md font-medium">Vorname</label>
-            <input type="text"
-                   name="firstname"
-                   class="border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
-                   id="firstname"
-            />
-            <label for="lastname" class="block text-md font-medium">Nachname</label>
-            <input type="text"
-                   name="lastname"
-                   class="border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
-                   id="lastname"
-            />
-            <label class="block text-md font-medium">Geschlecht</label>
-            <input type="hidden" name="gender_id">
-            <div id="gender" class="flex mt-2 mb-5 justify-between">
-
+    <form action="employees" id="form-employee" method="post" class="box-border relative mb-0" data-id="">
+        <div class="row-department flex flex-col sm:flex-row w-full flex-wrap mx-auto p-7 mb-5 shadow-lg shadow-black-500/50">
+            <span id="index" class="hidden absolute left-0 top-7 flex self-center justify-center w-8">3</span>
+            <div class="flex flex-col sm:flex-row sm:order-1 grow sm:w-1/3">
+                <div class="mr-2 w-full">
+                    <label for="firstname" class=" text-md font-medium">Vorname</label>
+                    <input type="text"
+                           name="firstname"
+                           class="w-full border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
+                           id="firstname"
+                    />
+                </div>
+                <div class="mr-2 w-full">
+                    <label for="lastname" class=" text-md font-medium">Nachname</label>
+                    <input type="text"
+                           name="lastname"
+                           class="w-full border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
+                           id="lastname"
+                    />
+                </div>
             </div>
-            <label for="salary" class="block text-md font-medium">Gehalt</label>
-            <input type="text"
-                   name="salary"
-                   class="border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
-                   id="salary"
-            />
-            <label for="department" class="block text-md font-medium">Abteilung</label>
-            <select name="department_id" class="border-b-2 border-black mb-5 h-8 focus:outline-none">
-            </select>
+
+            <div class="flex flex-col w-full sm:order-3 sm:basis-72 sm:w-1/3">
+                <label class="block text-md font-medium">Geschlecht</label>
+                <input type="hidden" name="gender_id">
+                <div id="gender" class="flex mt-2 mb-5 sm:mb-0 justify-between"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:order-2 grow sm:w-1/3 ">
+                <div class="mr-2 w-full">
+                    <label for="salary" class=" text-md font-medium">Gehalt</label>
+                    <input type="text"
+                           name="salary"
+                           class="w-full border-b-2 border-black px-1 mb-5 h-8 focus:outline-none"
+                           id="salary"
+                    />
+                </div>
+                <div class="w-full mr-2">
+                    <label for="department" class="text-md font-medium">Abteilung</label>
+                    <select name="department_id" class="w-full border-b-2 border-black mb-5 h-8 focus:outline-none">
+                    </select>
+                </div>
+            </div>
             <input type="hidden" name="action"/>
             <input type="hidden" name="id"/>
 
-            <div class="flex w-full justify-end">
+            <div class="flex w-full justify-end order-4">
                 <button
                     id="update"
-                    class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
+                    class="w-20 h-7 mt-4 sm:mt-0 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
                     type="button"
                 >Update
                 <button
-                        id="delete"
-                        class="w-20 h-7 mt-4 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
-                        type="button"
+                    id="delete"
+                    class="w-20 h-7 mt-4 sm:mt-0 bg-white self-end font-medium uppercase hover:underline hover:underline-offset-4"
+                    type="button"
                 >Delete
                 </button>
             </div>
