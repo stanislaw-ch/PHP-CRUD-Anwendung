@@ -1,8 +1,14 @@
 <?php
-require_once "src/classes/views/MainPage.php";
-require_once "src/classes/views/EmployeePage.php";
-require_once "src/classes/views/DepartmentPage.php";
-require_once "src/classes/views/NotFoundPage.php";
+
+use views\DepartmentPage;
+use views\EmployeePage;
+use views\MainPage;
+use views\NotFoundPage;
+
+require_once "src/views/MainPage.php";
+require_once "src/views/EmployeePage.php";
+require_once "src/views/DepartmentPage.php";
+require_once "src/views/NotFoundPage.php";
 require_once "src/router/Router.php";
 require_once "utils.php";
 

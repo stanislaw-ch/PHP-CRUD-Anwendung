@@ -1,6 +1,8 @@
 <?php
 
-require_once "src/classes/views/Modules.php";
+namespace views;
+
+require_once "src/views/Modules.php";
 
 class EmployeePage extends Modules
 {
@@ -207,7 +209,7 @@ class EmployeePage extends Modules
 
             $html .= $department['name'] . '</option>';
         }
-            $html .= '</select>';
+        $html .= '</select>';
 
         return $html;
     }

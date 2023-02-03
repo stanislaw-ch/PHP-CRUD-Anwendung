@@ -1,6 +1,7 @@
 <?php
 
-require_once "src/classes/views/Modules.php";
+namespace views;
+require_once "src/views/Modules.php";
 
 class ErrorPage
 {
