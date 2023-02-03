@@ -2,7 +2,7 @@
 
 use views\ErrorPopup;
 
-require_once "src/classes/views/ErrorPopup.php";
+require_once "src/views/ErrorPopup.php";
 
 function getSanitized($data): string
 {
