@@ -1,6 +1,8 @@
 export function errorFadeout() {
-    const errorMessage = document.querySelector('#error-message');
-    errorMessage && setTimeout(function(){
-        errorMessage.remove();
+    const errorMessages = document.querySelectorAll('#error-message');
+    errorMessages && setTimeout(function(){
+        errorMessages.forEach((error) => {
+            error.remove();
+        })
     }, 4000);
 }
