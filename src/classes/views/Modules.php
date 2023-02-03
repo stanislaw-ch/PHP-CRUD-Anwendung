@@ -1,14 +1,14 @@
 <?php
 
-require_once "src/classes/Department.php";
-require_once "src/classes/Employee.php";
-require_once "src/classes/Gender.php";
+require_once "src/service/DepartmentModel.php";
+require_once "src/service/EmployeeModel.php";
+require_once "src/service/GenderModel.php";
 
 abstract class Modules
 {
-    protected Department $department;
-    protected Employee $employee;
-    protected Gender $gender;
+    protected DepartmentModel $department;
+    protected EmployeeModel $employee;
+    protected GenderModel $gender;
     protected string $isActiveMain;
     protected string $isActiveEmployee;
     protected string $isActiveDepartment;
@@ -16,9 +16,9 @@ abstract class Modules
 
     public function __construct()
     {
-        $this->department = new Department();
-        $this->employee = new Employee();
-        $this->gender = new Gender();
+        $this->department = new DepartmentModel();
+        $this->employee = new EmployeeModel();
+        $this->gender = new GenderModel();
 
         $this->activeClass = 'border-b-2 border-black';
 

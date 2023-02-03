@@ -1,6 +1,4 @@
 <?php
-require_once "src/service/DBApi.php";
-require_once "src/classes/Department.php";
 require_once "src/classes/views/MainPage.php";
 require_once "src/classes/views/EmployeePage.php";
 require_once "src/classes/views/DepartmentPage.php";

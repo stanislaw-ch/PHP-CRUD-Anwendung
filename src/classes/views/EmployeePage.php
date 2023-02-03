@@ -41,14 +41,14 @@ class EmployeePage extends Modules
             case 'create':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
-                    $this->employee->createEmployee(getFieldsToSend($paramFields, $this->params));
+                    $this->employee->create(getFieldsToSend($paramFields, $this->params));
                     header("Location: /employees");
                 }
                 break;
             case 'update':
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {// TODO: check if exists
-                    $this->employee->updateEmployee($this->id, getFieldsToSend($paramFields, $this->params));
+                    $this->employee->update($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /employees");
                 }
                 break;
@@ -88,7 +88,7 @@ class EmployeePage extends Modules
 
     public function showEmployeesTable(): string
     {
-        $employees = $this->employee->getAllEmployees();
+        $employees = $this->employee->getAll();
         $html = '';
 
         foreach ($employees as $i => $employee) {
@@ -163,8 +163,8 @@ class EmployeePage extends Modules
         $html = '<label for="gender" class="block text-md font-medium">Geschlecht</label>';
         $genders = '';
 
-        if ($this->employee->getEmployeeById($id)) {
-            $genders = $this->employee->getEmployeeById($id)[$type];
+        if ($this->employee->getById($id)) {
+            $genders = $this->employee->getById($id)[$type];
         }
 
         if (strlen($id) !== 0 && count($values) === 1) {
@@ -184,7 +184,7 @@ class EmployeePage extends Modules
 
     private function getDepartmentsSelect(): string
     {
-        $departments = $this->department->getDepartments();
+        $departments = $this->department->getAll();
 
         $html = '<label for="department" class="block text-md font-medium">Abteilung</label>
                     <select 
@@ -197,8 +197,8 @@ class EmployeePage extends Modules
             $html .= '<option value="' . $department['id'] . '"';
             $departmentId = '';
 
-            if ($this->employee->getEmployeeById($this->id)) {
-                $departmentId = $this->employee->getEmployeeById($this->id)['department_id'];
+            if ($this->employee->getById($this->id)) {
+                $departmentId = $this->employee->getById($this->id)['department_id'];
             }
 
             if (strlen($this->id) !== 0 && $department['id'] === $departmentId) {
@@ -217,8 +217,8 @@ class EmployeePage extends Modules
         $html = '';
         $employeeId = '';
 
-        if ($this->employee->getEmployeeById($id)) {
-            $employeeId = $this->employee->getEmployeeById($id)['id'];
+        if ($this->employee->getById($id)) {
+            $employeeId = $this->employee->getById($id)['id'];
         }
 
         if (strlen($id) !== 0) {
@@ -237,8 +237,8 @@ class EmployeePage extends Modules
         $html = '';
         $value = '';
 
-        if ($this->employee->getEmployeeById($id)) {
-            $value = $this->employee->getEmployeeById($id)[$type];
+        if ($this->employee->getById($id)) {
+            $value = $this->employee->getById($id)[$type];
         }
 
         if (strlen($id) !== 0 && count($values) === 1) {
@@ -266,7 +266,7 @@ class EmployeePage extends Modules
             $value = $GenderType['Female'];
         }
 
-        $genders = $this->gender->getGenders();
+        $genders = $this->gender->getAll();
 
         $html = "<div class='flex mt-2 mb-5 justify-between'>";
         foreach ($genders as $gender) {

@@ -19,7 +19,7 @@ class MainPage extends Modules
 
     private function showDepartmentsPreView(): string
     {
-        $data = $this->department->getDepartments();
+        $data = $this->department->getAll();
         $html = '';
 
         foreach ($data as $i => $item) {
@@ -36,7 +36,7 @@ class MainPage extends Modules
 
     private function showEmployeesPreView(): string
     {
-        $data = $this->employee->getEmployees();
+        $data = $this->employee->getAll();
         $html = '';
 
         foreach ($data as $i => $item) {

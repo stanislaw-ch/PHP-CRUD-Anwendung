@@ -3,7 +3,7 @@
 require_once "config.php";
 require_once "utils.php";
 
-class DBConfig
+class Database
 {
     private static object $dbh;
 

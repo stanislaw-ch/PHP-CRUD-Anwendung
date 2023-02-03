@@ -1,6 +1,6 @@
-drop database if exists firma;
-create database firma;
-use firma;
+drop database if exists firma_1;
+create database firma_1;
+use firma_1;
 drop table employees;
 drop table departments;
 drop table genders;

@@ -42,7 +42,7 @@ class DepartmentPage extends Modules
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {
                     // TODO: check if exists
-                    $this->department->createDepartment(getFieldsToSend($paramFields, $this->params));
+                    $this->department->create(getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }
                 break;
@@ -50,7 +50,7 @@ class DepartmentPage extends Modules
                 [$this->values, $this->errors] = isValid($this->params, $this->errors);;
                 if (empty($this->errors)) {
                     // TODO: check if exists
-                    $this->department->updateDepartment($this->id, getFieldsToSend($paramFields, $this->params));
+                    $this->department->update($this->id, getFieldsToSend($paramFields, $this->params));
                     header("Location: /departments");
                 }
                 break;
@@ -86,7 +86,7 @@ class DepartmentPage extends Modules
 
     public function showDepartmentsTable(): string
     {
-        $data = $this->department->getDepartments();
+        $data = $this->department->getAll();
         $html = '';
 
         foreach ($data as $i => $item) {

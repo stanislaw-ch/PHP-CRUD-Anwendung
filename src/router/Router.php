@@ -1,7 +1,5 @@
 <?php
 
-require_once "src/service/DBApi.php";
-
 class Router
 {
     private array $handlers;
@@ -23,7 +21,7 @@ class Router
     {
         $parts = explode('::', $callback);
         $className = array_shift($parts);
-        $handler = new $className(new DBApi());
+        $handler = new $className();
 
         $method = array_shift($parts);
         $this->notFoundHandler = [$handler, $method];
