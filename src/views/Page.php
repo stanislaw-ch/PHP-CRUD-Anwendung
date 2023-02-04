@@ -1,15 +1,9 @@
 <?php
-
-namespace views;
-use DepartmentModel;
-use EmployeeModel;
-use GenderModel;
-
 require_once "src/service/DepartmentModel.php";
 require_once "src/service/EmployeeModel.php";
 require_once "src/service/GenderModel.php";
 
-abstract class Modules
+abstract class Page
 {
     protected DepartmentModel $department;
     protected EmployeeModel $employee;

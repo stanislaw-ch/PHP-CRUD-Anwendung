@@ -1,7 +1,5 @@
 <?php
-
-namespace views;
-require_once "src/views/Modules.php";
+require_once "src/views/Page.php";
 
 class ErrorPopup
 {

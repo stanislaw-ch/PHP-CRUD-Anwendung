@@ -1,7 +1,4 @@
 <?php
-
-use views\ErrorPopup;
-
 require_once "src/views/ErrorPopup.php";
 
 function getSanitized($data): string

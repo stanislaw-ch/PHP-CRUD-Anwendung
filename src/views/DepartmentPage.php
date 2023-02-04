@@ -1,10 +1,7 @@
 <?php
+require_once "src/views/Page.php";
 
-namespace views;
-
-require_once "src/views/Modules.php";
-
-class DepartmentPage extends Modules
+class DepartmentPage extends Page
 {
     private string $id;
     private array $errors;

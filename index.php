@@ -1,10 +1,4 @@
 <?php
-
-use views\DepartmentPage;
-use views\EmployeePage;
-use views\MainPage;
-use views\NotFoundPage;
-
 require_once "src/views/MainPage.php";
 require_once "src/views/EmployeePage.php";
 require_once "src/views/DepartmentPage.php";

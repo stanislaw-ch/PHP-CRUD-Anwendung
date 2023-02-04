@@ -1,10 +1,7 @@
 <?php
+require_once "src/views/Page.php";
 
-namespace views;
-
-require_once "src/views/Modules.php";
-
-class NotFoundPage extends Modules
+class NotFoundPage extends Page
 {
     public function getTitle(): string
     {

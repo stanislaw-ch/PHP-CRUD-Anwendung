@@ -1,10 +1,7 @@
 <?php
+require_once "src/views/Page.php";
 
-namespace views;
-
-require_once "src/views/Modules.php";
-
-class MainPage extends Modules
+class MainPage extends Page
 {
     public function getTitle(): string
     {
