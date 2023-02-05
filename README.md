@@ -52,6 +52,7 @@ Zwischenaufgaben:
 ## Technologien
 The stack used for this project was:
 - PHP
+- SQL
 - JavaScript
 - HTML
 - Tailwindcss
